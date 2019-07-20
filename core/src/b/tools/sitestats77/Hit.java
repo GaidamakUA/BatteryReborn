@@ -1,22 +1,22 @@
 package b.tools.sitestats77;
 
-import java.io.*;
+import java.io.Serializable;
 
 public class Hit implements Serializable, Comparable {
-  protected URLStats url;
-  protected UserStats user;
-  protected long time;
-  protected String referer;
-  protected String params;
-  protected String locale;
-  protected String browser;
+    protected URLStats url;
+    protected UserStats user;
+    protected long time;
+    protected String referer;
+    protected String params;
+    protected String locale;
+    protected String browser;
 
-  protected Hit(URLStats url, UserStats user) {
-    referer="";
-    browser="";
-    this.url=url;
-    this.user=user;
-    time=System.currentTimeMillis();
+    protected Hit(URLStats url, UserStats user) {
+        referer = "";
+        browser = "";
+        this.url = url;
+        this.user = user;
+        time = System.currentTimeMillis();
 //    params=r.getQueryString();
 //    locale=r.getLocale().toString().toLowerCase();
 //    for (Enumeration e=r.getHeaderNames(); e.hasMoreElements();) {
@@ -32,9 +32,9 @@ public class Hit implements Serializable, Comparable {
 //        }
 //      }
 //    }
-  }
+    }
 
-  public int compareTo(Object o) throws ClassCastException {
-    return (int)((time-((Hit)o).time)/100);
-  }
+    public int compareTo(Object o) throws ClassCastException {
+        return (int) ((time - ((Hit) o).time) / 100);
+    }
 }
