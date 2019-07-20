@@ -37,7 +37,7 @@ public class WorldLoader {
         lvl = world.trueLevel();
         this.world = world;
         g = world.g;
-        btr = g.btr;
+        btr = g.battery;
         loadPart1(oldPlayer);
         loadMain();
         specialMonsters();
@@ -72,13 +72,13 @@ public class WorldLoader {
             scr.init(scr.w, scr.h);
             scr.b = buf;
             if (!oldPlayer) {
-                g.btr.player = new Player(btr.kbd, world, 0, 3, 0, new PlayerExtras());
-                g.btr.logger.log("newgame " + U77.sprecision(g.btr.time.time));
+                g.battery.player = new Player(btr.kbd, world, 0, 3, 0, new PlayerExtras());
+                g.battery.logger.log("newgame " + U77.sprecision(g.battery.time.time));
             } else {
-                Player p = g.btr.player;
-                g.btr.player = new Player(btr.kbd, world, p.getScores(), p.lifes,
+                Player p = g.battery.player;
+                g.battery.player = new Player(btr.kbd, world, p.getScores(), p.lifes,
                         p.getCoins(), p.extras);
-                g.btr.logger.log("newlife " + U77.sprecision(g.btr.time.time));
+                g.battery.logger.log("newlife " + U77.sprecision(g.battery.time.time));
             }
         }
     }

@@ -31,7 +31,7 @@ public class World {
     public World(Gfx gfx) {
         nextId = 0;
         g = gfx;
-        btr = gfx.btr;
+        btr = gfx.battery;
         lvl = 1;
         new WorldLoader(this, false);
     }

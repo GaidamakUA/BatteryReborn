@@ -8,10 +8,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class SpriteLoader {
-    private Gfx g;
+    private Gfx gfx;
 
     protected SpriteLoader(Gfx gfx) {
-        g = gfx;
+        this.gfx = gfx;
     }
 
     protected final void load() {
@@ -101,11 +101,11 @@ public class SpriteLoader {
     }
 
     private final void addCyanBricks() {
-        Set<String> sprites = (Set<String>) g.sprites.keySet();
+        Set<String> sprites = (Set<String>) gfx.sprites.keySet();
         Set<Sprite> toAdd = new HashSet();
         for (String name : sprites) {
             if (name.startsWith("brick")) {
-                Sprite s = g.getSprite(name);
+                Sprite s = gfx.getSprite(name);
                 BufGfx b = new BufGfx(s);
                 b.replaceColor(0xffff0000, 0xff800000);
                 b = new BufGfx(s, true);
@@ -116,13 +116,13 @@ public class SpriteLoader {
             }
         }
         for (Sprite sprite : toAdd) {
-            g.sprites.put(sprite.name(), sprite);
+            gfx.sprites.put(sprite.name(), sprite);
         }
     }
 
     private final void addSpriteUnitedSimmetricaly(String name, int w) {
         BufGfx b = new BufGfx(w * 2, w * 2);
-        Sprite sp = new Sprite(g.btr, name + ".png", w, w);
+        Sprite sp = new Sprite(name + ".png", w, w);
         b.draw(sp, 0, 0);
         new BufGfx(sp).flipHorizontal();
         b.draw(sp, w, 0);
@@ -131,7 +131,7 @@ public class SpriteLoader {
         new BufGfx(sp).flipHorizontal();
         b.draw(sp, 0, w);
         Sprite s = new Sprite(name, b);
-        g.putSprite(s);
+        gfx.putSprite(s);
     }
 
     private final void initMonsters() {
@@ -141,7 +141,7 @@ public class SpriteLoader {
         addSprite("plane", 38, 47);
         addSprite("immune", 38, 47);
         addSprite("enplane", 51, 28);
-        Sprite heli = new Sprite(g.btr, "heli.png", 49, 43);
+        Sprite heli = new Sprite("heli.png", 49, 43);
         putSprite("heli", heli);
         Sprite heliLeft = new Sprite("heliLeft", heli, false);
         new BufGfx(heliLeft).flipHorizontal();
@@ -175,7 +175,7 @@ public class SpriteLoader {
 
     private final void addSpritePlusFlip(String name, String file, int w, int h,
                                          String flip) {
-        Sprite left = new Sprite(g.btr, file, w, h);
+        Sprite left = new Sprite(file, w, h);
         putSprite(name, left);
         Sprite right = new Sprite(flip, left, true);
         new BufGfx(right).flipHorizontal();
@@ -189,14 +189,14 @@ public class SpriteLoader {
     }
 
     private final Sprite addSprite(String name) {
-        Sprite s = new Sprite(g.btr, name + ".png",
+        Sprite s = new Sprite(name + ".png",
                 Config.squareSize, Config.squareSize);
         putSprite(name, s);
         return s;
     }
 
     private final Sprite addSprite(String name, String fname) {
-        Sprite s = new Sprite(g.btr, fname + ".png",
+        Sprite s = new Sprite(fname + ".png",
                 Config.squareSize, Config.squareSize);
         putSprite(name, s);
         return s;
@@ -207,7 +207,7 @@ public class SpriteLoader {
      * flipped verticaly
      */
     private final void addSprite4Dir(String name, int size) {
-        Sprite sprite = new Sprite(g.btr, name + ".png", size, size);
+        Sprite sprite = new Sprite(name + ".png", size, size);
         putSprite(name + "0", sprite);
 
         Sprite s = new Sprite(name + "1", sprite, false);
@@ -226,7 +226,7 @@ public class SpriteLoader {
     }
 
     private final void addSprite4Dir(String name, int width, int height) {
-        Sprite sprite = new Sprite(g.btr, name + ".png", width, height);
+        Sprite sprite = new Sprite(name + ".png", width, height);
         putSprite(name + "0", sprite);
 
         Sprite s = new Sprite(name + "1", sprite, false);
@@ -249,7 +249,7 @@ public class SpriteLoader {
     }
 
     private final void addSpriteRot(String name) {
-        Sprite s = new Sprite(g.btr, name + ".png", Config.squareSize,
+        Sprite s = new Sprite(name + ".png", Config.squareSize,
                 Config.squareSize);
         putSprite(name + "|", s);
         s = new Sprite(name + "-", s, false);
@@ -262,13 +262,13 @@ public class SpriteLoader {
     }
 
     private final Sprite addSprite(String name, int w, int h) {
-        Sprite s = new Sprite(g.btr, name + ".png", w, h);
+        Sprite s = new Sprite(name + ".png", w, h);
         putSprite(name, s);
         return s;
     }
 
     private final void putSprite(String name, Sprite s) {
         s.setName(name);
-        g.putSprite(s);
+        gfx.putSprite(s);
     }
 }

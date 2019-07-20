@@ -242,6 +242,6 @@ public abstract class Monster extends Drawable implements Changeable {
     }
 
     protected double time() {
-        return world.g.btr.time.time;
+        return world.g.battery.time.time;
     }
 }

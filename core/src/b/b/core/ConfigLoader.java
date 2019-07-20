@@ -149,10 +149,6 @@ public class ConfigLoader {
      * @return null on error
      */
     private final String getParam(String name) {
-        String res = btr.getParameter(name);
-        if (res == null || res.equals("")) {
-            throw new RuntimeException("error getting " + name + " parameter");
-        }
-        return res;
+        throw new RuntimeException("error getting " + name + " parameter");
     }
 }

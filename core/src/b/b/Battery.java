@@ -8,18 +8,21 @@ import b.b.gfx.Intro;
 import b.b.monsters.Monster;
 import b.b.monsters.Player;
 import b.b.monsters.bosses.Boss2AI;
-import b.gfx.GfxApplet;
 import b.gfx.Screen;
-import b.util.*;
+import b.util.P;
+import b.util.Pair;
+import b.util.Time77;
+import b.util.U77;
+import com.badlogic.gdx.graphics.Color;
+import com.blogspot.androidgaidamak.BatteryGame;
 
 import java.applet.AudioClip;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class Battery extends GfxApplet implements Runnable {
+public class Battery extends BatteryGame {
     /*for gfx need*/
     public static Random r = new Random();
     public World world;
@@ -70,17 +73,16 @@ public class Battery extends GfxApplet implements Runnable {
         justStarted = true;
         timers = new ArrayList<Pair>();
         name = "anonymous";
-        try {
-            name = getParameter("name");
-            if (!NickAndPassValidator.valide(name)) {
-                name = "anonimous";
-            }
-        } catch (Exception e) {
-            name = "anonymous";
-        }
+        // TODO implement it another way
+//        try {
+//            name = getParameter("name");
+//            if (!NickAndPassValidator.valide(name)) {
+//                name = "anonimous";
+//            }
+//        } catch (Exception e) {
+//            name = "anonymous";
+//        }
         things = new HashMap<String, Object>();
-        enableEvents(AWTEvent.KEY_EVENT_MASK);
-        enableEvents(AWTEvent.MOUSE_EVENT_MASK);
         time = new Time77();
         logger = new Logger(this);
         logger.log("name " + name + " ");
@@ -115,19 +117,20 @@ public class Battery extends GfxApplet implements Runnable {
         }
     }
 
-    public void stop() {
-        super.stop();
+    @Override
+    public void dispose() {
+        super.dispose();
         if (audio != null) audio.stop();
         kbd.stop();
     }
 
-    public synchronized void paint(Graphics g) {
+    @Override
+    public void paint() {
         try {
             if (!initialized) {
-                loadingScreen(g);
+                loadingScreen();
             } else {
                 if (thread != null) {
-                    gfx.M.newPixels();
                     while (time.step()) {
                         step();
                     }
@@ -147,19 +150,18 @@ public class Battery extends GfxApplet implements Runnable {
         }
     }
 
-    private void loadingScreen(Graphics g) {
+    private void loadingScreen() {
         if (loadingScreenFirstTime) {
             loadingScreenFirstTime = false;
             loadingScreenY = 92;
-            g.setColor(Color.black);
-            g.fillRect(0, 0, getWidth(), getHeight());
+            shapeRenderer.setColor(Color.BLACK);
+            shapeRenderer.rect(0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
         }
-        g.setColor(new Color(128, 128, 64));
-        g.setFont(new Font("Fixedsys", Font.BOLD, 10));
-        g.drawString("BATTERY " + U77.ssprecision(Config.version, 2), 10, 20);
-        g.drawString("http:" + P.bs + "btrgame.com", 10, 42);
-        g.drawString("\2512009 M77 & enter.dreams", 10, 56);
-        g.drawString("Loading.......", 10, 78);
+        font.setColor(new Color(0x808040FF));
+        font.draw(batch, "BATTERY " + U77.ssprecision(Config.version, 2), 10, 20);
+        font.draw(batch, "http:" + P.bs + "btrgame.com", 10, 42);
+        font.draw(batch, "\2512009 M77 & enter.dreams", 10, 56);
+        font.draw(batch, "Loading.......", 10, 78);
         if (loading == null || loading.equals("core")) {
             loading = "core";
             prevLoading = "core";
@@ -168,8 +170,7 @@ public class Battery extends GfxApplet implements Runnable {
             loadingScreenY += 14;
             prevLoading = loading;
         }
-        g.drawString(loading, 20, loadingScreenY);
-        repaint();
+        font.draw(batch, loading, 20, loadingScreenY);
     }
 
     private void step() {
@@ -286,5 +287,9 @@ public class Battery extends GfxApplet implements Runnable {
             }
         }
         super.exception(e);
+    }
+
+    public World getSize() {
+        return world;
     }
 }

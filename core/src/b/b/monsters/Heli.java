@@ -33,7 +33,7 @@ public class Heli extends Monster {
     public void draw() {
         super.draw();
         Sprite blades = world.g.getSprite("heli_blades" +
-                U77.rem((int) (world.g.btr.time.time *
+                U77.rem((int) (world.g.battery.time.time *
                         Config.Monsters.Heli.bladesK), 4));
         int shift = (int) blades.hh;
         if (dir == 3) {

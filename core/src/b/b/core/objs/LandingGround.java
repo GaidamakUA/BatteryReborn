@@ -15,7 +15,7 @@ public class LandingGround extends ChanSquare {
         super(world.g.getSprite("landingground"), (x + 1) * Config.squareSize,
                 (y + 1) * Config.squareSize, world.g.getSprite("landingground").w,
                 world.g.getSprite("landingground").h, world, false, 0);
-        btr = world.g.btr;
+        btr = world.g.battery;
     }
 
     protected void changeSprite() {

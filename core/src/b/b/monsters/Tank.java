@@ -29,7 +29,7 @@ public class Tank extends Monster {
     }
 
     public void draw() {
-        tankGfx.draw(gfx.btr.world);
+        tankGfx.draw(gfx.battery.world);
     }
 
     protected boolean onSquare(Square o) {

@@ -1,16 +1,15 @@
 package b.b.core;
 
 import b.b.Battery;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-public class Keyboard77 implements KeyListener, MouseListener {
+public class Keyboard77 {
     private Battery bat;
     private Logger logger;
 
@@ -40,8 +39,30 @@ public class Keyboard77 implements KeyListener, MouseListener {
         y = 0;
         exX = 0;
         exY = 0;
-        bat.addKeyListener(this);
-        bat.addMouseListener(this);
+        Gdx.input.setInputProcessor(new InputAdapter() {
+            @Override
+            public boolean keyDown(int keycode) {
+                keyPressed(keyCodeToString(keycode));
+                return true;
+            }
+
+            @Override
+            public boolean keyUp(int keycode) {
+                downKeys.remove(keyCodeToString(keycode));
+                return true;
+            }
+
+            @Override
+            public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+                currentMouse.add("mouse " + screenX + " " + screenY);
+                return true;
+            }
+
+            @Override
+            public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+                return mouse.size() > 0;
+            }
+        });
         logger = btr.logger;
         f1 = true;
     }
@@ -79,20 +100,8 @@ public class Keyboard77 implements KeyListener, MouseListener {
         y = exY;
     }
 
-    synchronized public void keyPressed(KeyEvent ke) {
-        keyPressed(keyEventToString(ke));
-    }
-
-    synchronized public boolean mouseClicked() {
-        return mouse.size() > 0;
-    }
-
     private void keyPressed(String key) {
         downKeys.add(key);
-    }
-
-    synchronized public void keyReleased(KeyEvent ke) {
-        downKeys.remove(keyEventToString(ke));
     }
 
     synchronized public boolean up() {
@@ -127,41 +136,23 @@ public class Keyboard77 implements KeyListener, MouseListener {
         return !keys.isEmpty() || !mouse.isEmpty();
     }
 
-    synchronized public void mousePressed(MouseEvent e) {
-        currentMouse.add("mouse " + e.getX() + " " + e.getY());
-    }
-
-    synchronized public void mouseClicked(MouseEvent e) {
-    }
-
-    synchronized public void keyTyped(KeyEvent ke) {
-    }
-
-    synchronized public void mouseEntered(MouseEvent e) {
-    }
-
-    synchronized public void mouseExited(MouseEvent e) {
-    }
-
-    synchronized public void mouseReleased(MouseEvent e) {
-    }
-
-    private static String keyEventToString(KeyEvent ke) {
-        int code = ke.getKeyCode();
+    private static String keyCodeToString(int keyCode) {
+        int code = keyCode;
         switch (code) {
-            case KeyEvent.VK_UP:
+            case Input.Keys.UP:
                 return "up";
-            case KeyEvent.VK_DOWN:
+            case Input.Keys.DOWN:
                 return "down";
-            case KeyEvent.VK_LEFT:
+            case Input.Keys.LEFT:
                 return "left";
-            case KeyEvent.VK_RIGHT:
+            case Input.Keys.RIGHT:
                 return "right";
-            case KeyEvent.VK_CONTROL:
+            case Input.Keys.CONTROL_LEFT:
+            case Input.Keys.CONTROL_RIGHT:
                 return "ctrl";
-            case KeyEvent.VK_SPACE:
+            case Input.Keys.SPACE:
                 return "space";
-            case 112:
+            case Input.Keys.F1:
                 return "f1";
         }
         return "another";

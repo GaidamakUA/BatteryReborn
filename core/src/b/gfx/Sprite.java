@@ -1,10 +1,10 @@
 package b.gfx;
 
 import b.util.U77;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Pixmap;
 
-import java.applet.Applet;
-import java.awt.*;
-import java.awt.image.PixelGrabber;
+import java.nio.ByteBuffer;
 
 public class Sprite {
     private String name;
@@ -15,16 +15,19 @@ public class Sprite {
     public double hw;
     public double hh;
 
-    public Sprite(Applet a, String filename, int width, int height) {
+    public Sprite(String filename, int width, int height) {
         try {
             name = filename.substring(0, filename.indexOf('.'));
             setWH(width, height);
-            Image img = a.getImage(a.getDocumentBase(), filename);
-            b = new int[w * h];
-            PixelGrabber pg = new PixelGrabber(img, 0, 0, w, h, b, 0, w);
-            pg.grabPixels();
-            if (pg.status() == 192) {
-                throw new RuntimeException("error loading " + filename + " sprite");
+
+            Pixmap pixmap = new Pixmap(Gdx.files.internal(filename));
+            ByteBuffer nativeData = pixmap.getPixels();
+            byte[] managedData = new byte[nativeData.remaining()];
+            nativeData.get(managedData);
+            pixmap.dispose();
+            b = new int[managedData.length];
+            for (int i = 0; i < managedData.length; i++) {
+                b[i] = managedData[i];
             }
         } catch (Exception e) {
             U77.throwException(e);
@@ -55,21 +58,6 @@ public class Sprite {
 
     public final String name() {
         return name;
-    }
-
-    public void tile(int xZoom, int yZoom) {
-        int newW = w * xZoom;
-        int newH = h * yZoom;
-        int[] p = new int[newH * newW];
-        for (int y = 0; y < yZoom; y++) {
-            for (int x = 0; x < xZoom; x++) {
-                for (int line = 0; line < h; line++) {
-                    System.arraycopy(b, line * w, p, (y * h + line) * newW + (x * w), w);
-                }
-            }
-        }
-        b = p;
-        setWH(newW, newH);
     }
 
     public String toString() {

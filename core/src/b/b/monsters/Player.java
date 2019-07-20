@@ -80,7 +80,7 @@ public class Player extends Monster {
     protected void justDied() {
         super.justDied();
         lifes--;
-        Battery btr = world.g.btr;
+        Battery btr = world.g.battery;
         btr.timeWhenLevelCompleted = time();
         btr.logger.log("gameover " + U77.sprecision(time()));
         if (lifes == 0) {

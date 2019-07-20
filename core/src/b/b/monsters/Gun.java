@@ -41,7 +41,7 @@ public class Gun {
             } else {
                 x = mon.xStart() - shift;
             }
-            Bullet bullet = new Bullet(bulletSpeed, x, y, dir, world, world.g.btr.screen,
+            Bullet bullet = new Bullet(bulletSpeed, x, y, dir, world, world.g.battery.screen,
                     owner);
             world.objsToAdd.add(bullet);
             lastShotTime = mon.time();

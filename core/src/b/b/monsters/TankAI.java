@@ -35,11 +35,11 @@ public class TankAI {
         timeWhenStand = -9999;
         timeWhenMoved = -9999;
         stays = false;
-        p = world.g.btr.player;
+        p = world.g.battery.player;
     }
 
     private final double time() {
-        return world.g.btr.time.time;
+        return world.g.battery.time.time;
     }
 
     protected static final int opposite(int dir) {
