@@ -14,6 +14,7 @@ import b.util.Pair;
 import b.util.Time77;
 import b.util.U77;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.blogspot.androidgaidamak.BatteryGame;
 
 import java.applet.AudioClip;
@@ -149,17 +150,20 @@ public class Battery extends BatteryGame {
     }
 
     private void loadingScreen() {
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         if (loadingScreenFirstTime) {
             loadingScreenFirstTime = false;
             loadingScreenY = 92;
             shapeRenderer.setColor(Color.BLACK);
             shapeRenderer.rect(0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
         }
+        shapeRenderer.end();
+        batch.begin();
         font.setColor(new Color(0x808040FF));
-        font.draw(batch, "BATTERY " + U77.ssprecision(Config.version, 2), 10, 20);
-        font.draw(batch, "http:" + P.bs + "btrgame.com", 10, 42);
-        font.draw(batch, "\2512009 M77 & enter.dreams", 10, 56);
-        font.draw(batch, "Loading.......", 10, 78);
+        drawText("BATTERY " + U77.ssprecision(Config.version, 2), 10, 20);
+        drawText("http:" + P.bs + "btrgame.com", 10, 42);
+        drawText("\2512009 M77 & enter.dreams", 10, 56);
+        drawText("Loading.......", 10, 78);
         if (loading == null || loading.equals("core")) {
             loading = "core";
             prevLoading = "core";
@@ -169,6 +173,13 @@ public class Battery extends BatteryGame {
             prevLoading = loading;
         }
         font.draw(batch, loading, 20, loadingScreenY);
+        batch.end();
+    }
+
+    private void drawText(String text, int x, int yTop) {
+        // Transforming font coordinates from AWT to LibGDX
+        int fontY = VIEWPORT_HEIGHT - yTop + FONT_SIZE;
+        font.draw(batch, text, x, fontY);
     }
 
     private void step() {

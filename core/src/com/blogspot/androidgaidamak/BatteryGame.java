@@ -2,6 +2,7 @@ package com.blogspot.androidgaidamak;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -10,8 +11,9 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class BatteryGame extends ApplicationAdapter {
-	public static final int VIEWPORT_WIDTH = 800;
-	public static final int VIEWPORT_HEIGHT = 480;
+	public static final int VIEWPORT_WIDTH = 510;
+	public static final int VIEWPORT_HEIGHT = 510;
+	public static final int FONT_SIZE = 10;
 	protected SpriteBatch batch;
 	protected ShapeRenderer shapeRenderer;
 	protected BitmapFont font;
@@ -26,8 +28,6 @@ public class BatteryGame extends ApplicationAdapter {
 
 	protected void initialize() {
 	}
-
-	;
 
 	public void init() {
 		exception = false;
@@ -54,7 +54,8 @@ public class BatteryGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fixedsys-ligatures.ttf"));
 		FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-		parameter.size = 10;
+		parameter.size = FONT_SIZE;
+		parameter.color = Color.WHITE;
 		font = generator.generateFont(parameter);
 		shapeRenderer = new ShapeRenderer();
 		initialize();
@@ -71,11 +72,7 @@ public class BatteryGame extends ApplicationAdapter {
 		// coordinate system specified by the camera.
 		batch.setProjectionMatrix(camera.combined);
 
-		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-		batch.begin();
 		paint();
-		batch.end();
-		shapeRenderer.end();
 	}
 
 	@Override
