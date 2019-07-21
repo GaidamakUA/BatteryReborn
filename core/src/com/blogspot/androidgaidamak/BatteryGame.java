@@ -22,7 +22,6 @@ public class BatteryGame extends ApplicationAdapter {
 	protected volatile boolean initialized;
 	protected volatile boolean initInProgress;
 
-	protected volatile Thread thread;
 	private OrthographicCamera camera;
 
 	protected void initialize() {
@@ -35,7 +34,6 @@ public class BatteryGame extends ApplicationAdapter {
 		firstException = null;
 		initialized = false;
 		initInProgress = false;
-		thread = null;
 	}
 
 	public void paint() {

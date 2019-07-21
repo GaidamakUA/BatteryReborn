@@ -130,19 +130,17 @@ public class Battery extends BatteryGame {
             if (!initialized) {
                 loadingScreen();
             } else {
-                if (thread != null) {
-                    while (time.step()) {
-                        step();
-                    }
-                    time.nextFrame();
-                    if (intro != null) {
-                        intro.draw(time.time);
-                    } else {
-                        gfx.drawAll();
-                    }
-                    Shop.draw(this);
-                    gfx.updateScreen();
+                while (time.step()) {
+                    step();
                 }
+                time.nextFrame();
+                if (intro != null) {
+                    intro.draw(time.time);
+                } else {
+                    gfx.drawAll();
+                }
+                Shop.draw(this);
+                gfx.updateScreen();
             }
             Thread.sleep(2);
         } catch (Exception e) {
@@ -287,9 +285,5 @@ public class Battery extends BatteryGame {
             }
         }
         super.exception(e);
-    }
-
-    public World getSize() {
-        return world;
     }
 }

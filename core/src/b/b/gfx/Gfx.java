@@ -9,6 +9,7 @@ import b.b.monsters.Player;
 import b.b.monsters.bosses.Boss2AI;
 import b.gfx.*;
 import b.util.U77;
+import com.blogspot.androidgaidamak.BatteryGame;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,8 +27,8 @@ public class Gfx {
 
     public Gfx(Battery battery) {
         this.battery = battery;
-        w = this.battery.getSize().width;
-        h = this.battery.getSize().height;
+        w = BatteryGame.VIEWPORT_WIDTH;
+        h = BatteryGame.VIEWPORT_HEIGHT;
         b = new BufGfx(new int[w * h], w, h);
         font = new b.gfx.Font77(0xffffffff, 0xff000000, b);
         console = new Console(font);
