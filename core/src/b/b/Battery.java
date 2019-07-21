@@ -304,9 +304,11 @@ public class Battery extends BatteryGame {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         for (int i = 0; i < VIEWPORT_WIDTH; i++) {
             for (int j = 0; j < VIEWPORT_HEIGHT; j++) {
-                siftwareRendererColor.set(pixels[i + j * VIEWPORT_HEIGHT]);
+                int argbColor = pixels[i + j * VIEWPORT_HEIGHT];
+                Color.argb8888ToColor(siftwareRendererColor, argbColor);
                 shapeRenderer.setColor(siftwareRendererColor);
-                shapeRenderer.rect(i, j, 1, 1);
+                int fixedYCoordinate = VIEWPORT_HEIGHT - j - 1;
+                shapeRenderer.rect(i, fixedYCoordinate, 1, 1);
             }
         }
         shapeRenderer.end();
