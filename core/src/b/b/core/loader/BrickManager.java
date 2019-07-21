@@ -128,7 +128,7 @@ public class BrickManager {
                     if (o instanceof Square) {
                         String name = ((Square) o).sprite.name();
                         if (name.startsWith("brick")) {
-                            int c = s.b[offset];
+                            int c = s.pixels[offset];
                             if (c != -8355776/*0xff804040*/) {
                                 if (U77.rnd() < 0.5) {
                                     ((Square) o).sprite = g.getSprite("c_" + name);

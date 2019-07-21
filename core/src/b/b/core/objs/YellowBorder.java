@@ -38,7 +38,7 @@ public class YellowBorder extends Square {
     }
 
     public void draw2(int[] to, Sprite sprite) {
-        int[] buf = sprite.b;
+        int[] buf = sprite.pixels;
         int offset = 0;
         int yyy = U77.rem((int) y, sprite.h);
         for (int yy = 0; yy < 30; yy++) {

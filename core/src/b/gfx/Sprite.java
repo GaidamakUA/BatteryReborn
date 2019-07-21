@@ -2,6 +2,7 @@ package b.gfx;
 
 import b.util.U77;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 
 import java.nio.ByteBuffer;
@@ -9,7 +10,7 @@ import java.nio.ByteBuffer;
 public class Sprite {
     private String name;
 
-    public int[] b;
+    public int[] pixels;
     public int w;
     public int h;
     public double hw;
@@ -25,13 +26,22 @@ public class Sprite {
             byte[] managedData = new byte[nativeData.remaining()];
             nativeData.get(managedData);
             pixmap.dispose();
-            b = new int[managedData.length];
-            for (int i = 0; i < managedData.length; i++) {
-                b[i] = managedData[i];
-            }
+            pixels = createPixelArrayFromBytes(width, height, managedData);
         } catch (Exception e) {
             U77.throwException(e);
         }
+    }
+
+    static int[] createPixelArrayFromBytes(int width, int height, byte[] managedData) {
+        int[] pixels = new int[width * height];
+        for (int i = 0; i < pixels.length; i++) {
+            byte r = managedData[i * 3];
+            byte g = managedData[i * 3 + 1];
+            byte b = managedData[i * 3 + 2];
+            byte a = (byte) 255;
+            pixels[i] = Color.toIntBits(r, g, b, a);
+        }
+        return pixels;
     }
 
     public Sprite(String name, Sprite sprite, boolean newBuf) {
@@ -41,8 +51,8 @@ public class Sprite {
     public Sprite(String name, BufGfx buf) {
         this.name = name;
         setWH(buf.w, buf.h);
-        b = new int[w * h];
-        System.arraycopy(buf.pixels, 0, b, 0, w * h);
+        pixels = new int[w * h];
+        System.arraycopy(buf.pixels, 0, pixels, 0, w * h);
     }
 
     public final void setWH(int width, int height) {

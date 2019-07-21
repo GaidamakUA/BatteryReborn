@@ -96,11 +96,13 @@ project(":ios") {
 project(":core") {
     apply plugin: "kotlin"
 
+    sourceSets.test.java.srcDirs = ["test/"]
 
     dependencies {
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        testImplementation "junit:junit:4.12"
     }
 }

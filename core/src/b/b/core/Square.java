@@ -56,7 +56,7 @@ public class Square extends Drawable {
         if (xxScreenBorder < xScreenBorder) xScreenBorder = xxScreenBorder;
         if (yyScreenBorder < yScreenBorder) yScreenBorder = yyScreenBorder;
         int[] b = this.b.pixels;
-        int[] p = sprite.b;
+        int[] p = sprite.pixels;
         if (Config.Gfx.dirtOn) {
             String sn = sprite.name();
             if (sn.startsWith("brick") ||
@@ -123,7 +123,7 @@ public class Square extends Drawable {
     }
 
     public void draw2(int[] to) {
-        int[] p = sprite.b;
+        int[] p = sprite.pixels;
         if (Config.Gfx.dirtOn) {
             String sn = sprite.name();
             if (sn.startsWith("brick") ||

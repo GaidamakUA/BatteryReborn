@@ -89,7 +89,7 @@ public class WorldLoader {
         Sprite sprite = g.getSprite("lvl" + lvl);
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
-                int c = sprite.b[offset++];
+                int c = sprite.pixels[offset++];
                 List<Drawable> list = map[y][x].objs;
                 if (c == 0xff0000ff) {
                     list.add(new Water(x, y, world));

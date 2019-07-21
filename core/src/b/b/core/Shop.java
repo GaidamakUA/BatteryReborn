@@ -57,7 +57,7 @@ public class Shop {
     public static final void draw(Battery btr) {
         if (on) {
             Gfx gfx = btr.gfx;
-            System.arraycopy(gfx.getSprite("shop").b, -y * 510, gfx.bufGfx.pixels, 0,
+            System.arraycopy(gfx.getSprite("shop").pixels, -y * 510, gfx.bufGfx.pixels, 0,
                     (510 + y) * 510);
             if (y == 0) {
                 gfx.bufGfx.drawTransp(gfx.getSprite("immune"), 174, 181);

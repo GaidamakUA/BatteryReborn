@@ -144,7 +144,7 @@ public class Gfx {
         int lvl = battery.world.trueLevel();
         if (lvl == 6) {
             Sprite map = getSprite("cosmos");
-            System.arraycopy(map.b, 0, bufGfx.pixels, 0, 510 * 510);
+            System.arraycopy(map.pixels, 0, bufGfx.pixels, 0, 510 * 510);
         }
         Water.prepareWatCur(battery);
         WorldSquare[][] map = battery.world.getMap();

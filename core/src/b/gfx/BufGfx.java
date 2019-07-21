@@ -24,7 +24,7 @@ public class BufGfx {
     }
 
     public BufGfx(Sprite sprite) {
-        pixels = sprite.b;
+        pixels = sprite.pixels;
         w = sprite.w;
         h = sprite.h;
     }
@@ -34,9 +34,9 @@ public class BufGfx {
         h = sprite.h;
         if (anotherbufferplease) {
             pixels = new int[w * h];
-            System.arraycopy(sprite.b, 0, pixels, 0, h * w);
+            System.arraycopy(sprite.pixels, 0, pixels, 0, h * w);
         } else {
-            pixels = sprite.b;
+            pixels = sprite.pixels;
         }
     }
 
@@ -44,7 +44,7 @@ public class BufGfx {
         w = sprite.w;
         h = sprite.h;
         pixels = buf;
-        System.arraycopy(sprite.b, 0, pixels, 0, h * w);
+        System.arraycopy(sprite.pixels, 0, pixels, 0, h * w);
     }
 
     public Effects effects() {
@@ -58,7 +58,7 @@ public class BufGfx {
     }
 
     public final void draw(Sprite sprite, int x, int y) {
-        draw(sprite.b, sprite.w, sprite.h, x, y);
+        draw(sprite.pixels, sprite.w, sprite.h, x, y);
     }
 
     public final void drawRangeCheck(BufGfx buf, int x, int y) {
@@ -66,15 +66,15 @@ public class BufGfx {
     }
 
     public final void drawTransp(Sprite sprite, int x, int y) {
-        drawTransp(sprite.b, sprite.w, sprite.h, x, y);
+        drawTransp(sprite.pixels, sprite.w, sprite.h, x, y);
     }
 
     public final void drawTranspShadow(Sprite sprite, int x, int y) {
-        drawTranspShadow(sprite.b, sprite.w, sprite.h, x, y);
+        drawTranspShadow(sprite.pixels, sprite.w, sprite.h, x, y);
     }
 
     public final void drawTranspRangeCheck(Sprite sprite, int x, int y) {
-        drawTranspRangeCheck(sprite.b, sprite.w, sprite.h, x, y);
+        drawTranspRangeCheck(sprite.pixels, sprite.w, sprite.h, x, y);
     }
 
     /**
@@ -82,27 +82,27 @@ public class BufGfx {
      */
     public final void drawTranspTrRangeCheck(Sprite sprite, int x, int y,
                                              double solid) {
-        drawTranspTrRangeCheck(sprite.b, sprite.w, sprite.h, x, y, solid);
+        drawTranspTrRangeCheck(sprite.pixels, sprite.w, sprite.h, x, y, solid);
     }
 
     public final void drawBlackRangeCheck(Sprite sprite, int x, int y) {
-        drawBlackRangeCheck(sprite.b, sprite.w, sprite.h, x, y);
+        drawBlackRangeCheck(sprite.pixels, sprite.w, sprite.h, x, y);
     }
 
     public final void drawTranspShadowRangeCheck(Sprite sprite, int x, int y) {
-        drawTranspShadowRangeCheck(sprite.b, sprite.w, sprite.h, x, y);
+        drawTranspShadowRangeCheck(sprite.pixels, sprite.w, sprite.h, x, y);
     }
 
     public final void drawTranspWhite(Sprite sprite, int x, int y) {
-        drawTranspWhite(sprite.b, sprite.w, sprite.h, x, y);
+        drawTranspWhite(sprite.pixels, sprite.w, sprite.h, x, y);
     }
 
     public final void drawTranspWhiteRangeCheck(Sprite sprite, int x, int y) {
-        drawTranspWhiteRangeCheck(sprite.b, sprite.w, sprite.h, x, y);
+        drawTranspWhiteRangeCheck(sprite.pixels, sprite.w, sprite.h, x, y);
     }
 
     public final void drawTranspBlackRangeCheck(Sprite sprite, int x, int y) {
-        drawTranspBlackRangeCheck(sprite.b, sprite.w, sprite.h, x, y);
+        drawTranspBlackRangeCheck(sprite.pixels, sprite.w, sprite.h, x, y);
     }
 
     public final void drawTranspWhiteRangeCheck(BufGfx buf, int x, int y) {
@@ -110,7 +110,7 @@ public class BufGfx {
     }
 
     public final void drawRangeCheck(Sprite sprite, int x, int y) {
-        drawRangeCheck(sprite.b, sprite.w, sprite.h, x, y);
+        drawRangeCheck(sprite.pixels, sprite.w, sprite.h, x, y);
     }
 
     public final void flipHorizontal() {
@@ -426,7 +426,7 @@ public class BufGfx {
     }
 
     public final void drawAtCenter(Sprite s) {
-        draw(s.b, s.w, s.h, (w - s.w) / 2, (h - s.h) / 2);
+        draw(s.pixels, s.w, s.h, (w - s.w) / 2, (h - s.h) / 2);
     }
 
     public final void line(int x0, int y0, int x1, int y1, int c) {

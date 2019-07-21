@@ -20,11 +20,11 @@ public class Water extends ChanSquare {
     public static void prepareWatCur(Battery btr) {
         Sprite watcur = btr.gfx.getSprite("watcur");
         Sprite water = btr.gfx.getSprite("water");
-        int b[] = watcur.b;
+        int b[] = watcur.pixels;
         final int width = water.w;
         final int height = water.h;
         final double time = btr.time.time;
-        System.arraycopy(water.b, 0, b, 0, width * height);
+        System.arraycopy(water.pixels, 0, b, 0, width * height);
 
         /* x waves */
         int[] line = new int[width];
