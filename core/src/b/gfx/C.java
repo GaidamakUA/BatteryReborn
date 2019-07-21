@@ -73,6 +73,9 @@ public class C {
     }
 
     public static final String string(int c) {
-        return "[" + ((c >> 24) & 0xFF) + " " + ((c >> 16) & 0xFF) + " " + ((c >> 8) & 0xFF) + " " + (c & 0xFF) + "]";
+        return "[" + Integer.toHexString((c >> 24) & 0xFF)
+                + " " + Integer.toHexString((c >> 16) & 0xFF)
+                + " " + Integer.toHexString((c >> 8) & 0xFF)
+                + " " + Integer.toHexString(c & 0xFF) + "]";
     }
 }

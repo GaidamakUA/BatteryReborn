@@ -35,13 +35,18 @@ public class Sprite {
     static int[] createPixelArrayFromBytes(int width, int height, byte[] managedData) {
         int[] pixels = new int[width * height];
         for (int i = 0; i < pixels.length; i++) {
-            byte r = managedData[i * 3];
-            byte g = managedData[i * 3 + 1];
-            byte b = managedData[i * 3 + 2];
-            byte a = (byte) 255;
-            pixels[i] = Color.toIntBits(r, g, b, a);
+            float r = unsignedToBytes(managedData[i * 3]) / 255f;
+            float g = unsignedToBytes(managedData[i * 3 + 1]) / 255f;
+            float b = unsignedToBytes(managedData[i * 3 + 2]) / 255f;
+            float a = 255 / 255f;
+            int colorInt = Color.argb8888(a, r, g, b);
+            pixels[i] = colorInt;
         }
         return pixels;
+    }
+
+    private static int unsignedToBytes(byte b) {
+        return b & 0xFF;
     }
 
     public Sprite(String name, Sprite sprite, boolean newBuf) {
