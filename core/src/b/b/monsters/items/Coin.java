@@ -29,7 +29,7 @@ public class Coin extends Item {
                 prevFrameTime = time;
             }
         }
-        world.g.b.drawTranspRangeCheck(sprite, xScreenStart(), yScreenStart());
+        world.g.bufGfx.drawTranspRangeCheck(sprite, xScreenStart(), yScreenStart());
     }
 
     public boolean onMonster(Monster m) {

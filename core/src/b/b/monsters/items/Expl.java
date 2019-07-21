@@ -17,8 +17,8 @@ public class Expl extends Item {
         lvl = 5;
         double speed = U77.rnd(maxSpeed * 0.4) + (maxSpeed * 0.6);
         double angle = U77.rnd(U77.dpi);
-        xSpeed = (Math.sin(angle) * speed + (xsp * 0.6)) * Time77.step;
-        ySpeed = (Math.cos(angle) * speed + (ysp * 0.6)) * Time77.step;
+        xSpeed = (Math.sin(angle) * speed + (xsp * 0.6)) * Time77.STEP;
+        ySpeed = (Math.cos(angle) * speed + (ysp * 0.6)) * Time77.STEP;
         move();
         move();
         move();
@@ -35,6 +35,6 @@ public class Expl extends Item {
     }
 
     public void draw(double perc) {
-        world.g.b.drawTranspRangeCheck(sprite, xScreenStart(), yScreenStart());
+        world.g.bufGfx.drawTranspRangeCheck(sprite, xScreenStart(), yScreenStart());
     }
 }

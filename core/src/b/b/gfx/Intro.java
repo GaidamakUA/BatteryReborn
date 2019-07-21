@@ -38,14 +38,14 @@ public class Intro {
         startTime = 666666666;
         this.gfx = gfx;
         logo = gfx.getSprite("battery");
-        xStart = gfx.b.w / 2 - (logo.w / 2) - waveHeight - 1;
-        yStart = gfx.b.h / 2 - (logo.h / 2) - waveHeight - 1;
+        xStart = gfx.bufGfx.w / 2 - (logo.w / 2) - waveHeight - 1;
+        yStart = gfx.bufGfx.h / 2 - (logo.h / 2) - waveHeight - 1;
         width = waveHeight * 2 + logo.w + 2;
         height = waveHeight * 2 + logo.h + 2;
-        waves = new Waves(gfx.b, xStart + waveHeight, yStart + waveHeight,
+        waves = new Waves(gfx.bufGfx, xStart + waveHeight, yStart + waveHeight,
                 logo.w + 1, logo.h + 1, waveLength, waveHeight, 4000);
-        appearing = new Appearing(gfx.b, xStart, yStart, width, height, true, false);
-        diagonals = new RunningDiagonals(gfx.b, xStart, yStart, xStart + width,
+        appearing = new Appearing(gfx.bufGfx, xStart, yStart, width, height, true, false);
+        diagonals = new RunningDiagonals(gfx.bufGfx, xStart, yStart, xStart + width,
                 yStart + height, diagonalLength);
     }
 
@@ -54,15 +54,15 @@ public class Intro {
             startTime = time;
         }
         if (time < 0) time = 0;
-        Arrays.fill(gfx.b.b, 0xff000000);
-        gfx.b.drawAtCenter(logo);
+        Arrays.fill(gfx.bufGfx.pixels, 0xff000000);
+        gfx.bufGfx.drawAtCenter(logo);
         double timeK = (time - startTime) / duration;
         waves.draw(time, U77.k(timeK, 0.1));
         appearing.draw(timeK);
         diagonals.draw(U77.k2(timeK, 0.25));
         if (timeK > 0.25 && timeK < 0.75) {
             Sprite s = gfx.getSprite("copy");
-            gfx.b.draw(s, gfx.w / 2 - (int) s.hw, gfx.h - 50);
+            gfx.bufGfx.draw(s, gfx.w / 2 - (int) s.hw, gfx.h - 50);
         }
     }
 }

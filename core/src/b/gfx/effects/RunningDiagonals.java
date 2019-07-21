@@ -15,7 +15,7 @@ public class RunningDiagonals {
     public RunningDiagonals(BufGfx buf, int xStart, int yStart, int xBorder,
                             int yBorder, int length) {
         b = buf;
-        p = buf.b;
+        p = buf.pixels;
         this.xStart = xStart;
         this.yStart = yStart;
         this.xBorder = xBorder;

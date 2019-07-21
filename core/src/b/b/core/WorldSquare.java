@@ -30,12 +30,12 @@ public class WorldSquare {
             for (Drawable d : objs) {
                 if (d instanceof Square) {
                     drawn = true;
-                    ((Square) d).draw2(buf.b);
+                    ((Square) d).draw2(buf.pixels);
                 }
             }
         }
         if (drawn) {
-            btr.gfx.b.drawRangeCheck(buf, x * 30, (y * 30) - btr.screen.camY());
+            btr.gfx.bufGfx.drawRangeCheck(buf, x * 30, (y * 30) - btr.screen.camY());
         } else {
             buf = new BufGfx(0, 0);
         }

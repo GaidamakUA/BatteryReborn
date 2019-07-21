@@ -16,7 +16,7 @@ public class TankGfx {
     }
 
     protected final void draw(World w) {
-        BufGfx b = w.g.b;
+        BufGfx b = w.g.bufGfx;
         drawCatters(b);
         t.sprite = w.g.getSprite("tank_base");
         int xShift = 0;
@@ -77,8 +77,8 @@ public class TankGfx {
         }
         if (t.afterDmg()) {
             if (t.afterWrongDmg()) {
-                b.drawTranspBlackRangeCheck(cater.b, cater.w, cater.h, xStart1, yStart1);
-                b.drawTranspBlackRangeCheck(cater.b, cater.w, cater.h, xStart2, yStart2);
+                b.drawTranspBlackRangeCheck(cater.pixels, cater.w, cater.h, xStart1, yStart1);
+                b.drawTranspBlackRangeCheck(cater.pixels, cater.w, cater.h, xStart2, yStart2);
             } else {
                 b.drawTranspWhiteRangeCheck(cater, xStart1, yStart1);
                 b.drawTranspWhiteRangeCheck(cater, xStart2, yStart2);

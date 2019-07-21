@@ -136,7 +136,7 @@ public class Font77 {
     }
 
     public void p(String s, int x, int y, BufGfx b) {
-        int[] t = b.b;
+        int[] t = b.pixels;
         int w = b.w;
         for (int i = 0; i < s.length(); i++) {
             m = font.get("" + s.charAt(i));
@@ -150,7 +150,7 @@ public class Font77 {
     }
 
     public void p(String s, int x, int y, int c, BufGfx b) {
-        int[] t = b.b;
+        int[] t = b.pixels;
         int w = b.w;
         int clr;
         for (int i = 0; i < s.length(); i++) {

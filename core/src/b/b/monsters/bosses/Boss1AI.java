@@ -112,7 +112,7 @@ public class Boss1AI extends InvisibleMonster implements ComplexAI {
     public void draw() {
         if (lastDraw != time()) {
             lastDraw = time();
-            BufGfx b = world.g.b;
+            BufGfx b = world.g.bufGfx;
             b.drawTranspRangeCheck(core, (int) (xScreenStart() - core.hw),
                     (int) (yScreenStart() - core.hh));
         }

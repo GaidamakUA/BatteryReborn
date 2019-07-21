@@ -33,7 +33,7 @@ public class Boss2Well extends MonsterPart {
 
     protected void drawFromBoss() {
         if (life > 0) {
-            BufGfx b = world.g.b;
+            BufGfx b = world.g.bufGfx;
             if (afterDmg() || life == 0) {
                 if (afterWrongDmg()) {
                     b.drawTranspBlackRangeCheck(sprite, xScreenStart(), yScreenStart());

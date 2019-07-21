@@ -23,13 +23,13 @@ public class Effects {
     public final void flipVertical() {
         int[] res = new int[b.h * b.w];
         for (int yy = 0; yy < b.h; yy++) {
-            System.arraycopy(b.b, b.w * yy, res, (b.h - 1) * b.w - (yy * b.w), b.w);
+            System.arraycopy(b.pixels, b.w * yy, res, (b.h - 1) * b.w - (yy * b.w), b.w);
         }
-        System.arraycopy(res, 0, b.b, 0, b.w * b.h);
+        System.arraycopy(res, 0, b.pixels, 0, b.w * b.h);
     }
 
     private final void hline(int x, int c, int color) {
-        int[] p = b.b;
+        int[] p = b.pixels;
         if (x >= 0 && x < b.w) {
             int index = x;
             for (int y = 0; y < b.h; y++) {
@@ -42,7 +42,7 @@ public class Effects {
     }
 
     public final void dark(int c, double dark) {
-        int[] p = b.b;
+        int[] p = b.pixels;
         int cc = C.dark(c, dark);
         for (int i = p.length - 1; i >= 0; i--) {
             if (p[i] == c) p[i] = cc;
@@ -50,7 +50,7 @@ public class Effects {
     }
 
     public final void change(int c0, int c1) {
-        int[] p = b.b;
+        int[] p = b.pixels;
         for (int i = p.length - 1; i >= 0; i--) {
             if (p[i] == c0) p[i] = c1;
         }
@@ -62,7 +62,7 @@ public class Effects {
 
     public final void dirt(int c, int randomSeed, double k) {
         Random r = new Random(randomSeed);
-        int[] p = b.b;
+        int[] p = b.pixels;
         double rest = 1 - k;
         for (int i = p.length - 1; i >= 0; i--) {
             if (p[i] == c) {
@@ -73,14 +73,14 @@ public class Effects {
 
     public final void dirt(int randomSeed) {
         Random r = new Random(randomSeed);
-        int[] p = b.b;
+        int[] p = b.pixels;
         for (int i = p.length - 1; i >= 0; i--) {
             p[i] = C.dark(p[i], r.nextDouble() * Config.Gfx.dirtK + Config.Gfx.restDirtK);
         }
     }
 
     public final void red(int c, double red) {//todo ispoljzovatj etot effekt onLandingGround
-        int[] p = b.b;
+        int[] p = b.pixels;
         int[] rgb = C.rgb(c);
         int cc = C.c((int) (red * 255), rgb[1], rgb[2]);
         for (int i = p.length - 1; i >= 0; i--) {
@@ -89,7 +89,7 @@ public class Effects {
     }
 
     public final void inv() {
-        int[] p = b.b;
+        int[] p = b.pixels;
         int c;
         for (int i = p.length - 1; i >= 0; i--) {
             c = p[i];

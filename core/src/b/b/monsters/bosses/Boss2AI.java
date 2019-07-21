@@ -129,7 +129,7 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
     public void draw() {
         if (!alreadyDrawn) {
             alreadyDrawn = true;
-            BufGfx b = world.g.b;
+            BufGfx b = world.g.bufGfx;
             Sprite mainCarcasSprite = world.g.getSprite("boss2_main_carcas");
             b.drawTranspRangeCheck(mainCarcasSprite, (int) (xScreenStart() -
                     mainCarcasSprite.hw), (int) (yScreenStart() - mainCarcasSprite.hh));
@@ -151,7 +151,7 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
     }
 
     private void verticals() {
-        BufGfx b = world.g.b;
+        BufGfx b = world.g.bufGfx;
         Sprite mainCarcasSprite = world.g.getSprite("boss2_main_carcas");
         Sprite vertCarcasSprite = world.g.getSprite("boss2_carcas_vert");
         b.drawRangeCheck(vertCarcasSprite, (int) (xScreenStart() - 25 - headShift),
@@ -166,7 +166,7 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
     }
 
     private void horizontal() {
-        BufGfx b = world.g.b;
+        BufGfx b = world.g.bufGfx;
         Sprite mainCarcasSprite = world.g.getSprite("boss2_main_carcas");
         b.drawRangeCheck(world.g.getSprite("boss2_carcas_horiz"),
                 (int) (xScreenStart() - mainCarcasSprite.hw + 6),

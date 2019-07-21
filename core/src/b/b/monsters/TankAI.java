@@ -68,7 +68,7 @@ public class TankAI {
                 distance = 0;
             }
             moveDir();
-            distance += Config.Monsters.Tank.speed * Time77.step;
+            distance += Config.Monsters.Tank.speed * Time77.STEP;
             if (onPlayerLine() && movedEnough()) {
                 turretDir = anotherDirToPlayer();
                 timeWhenStand = time();
@@ -111,7 +111,7 @@ public class TankAI {
     }
 
     private final void moveDir() {
-        double speed = Config.Monsters.Tank.speed * Time77.step;
+        double speed = Config.Monsters.Tank.speed * Time77.STEP;
         if (dir == 0) {
             tank.y -= speed;
         } else if (dir == 1) {

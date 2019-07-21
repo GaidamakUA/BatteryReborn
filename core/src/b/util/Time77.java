@@ -1,7 +1,7 @@
 package b.util;
 
 public class Time77 {
-    public static final int step = 3;
+    public static final int STEP = 3;
 
     private static final int maxFPS = 2500;
 
@@ -21,9 +21,9 @@ public class Time77 {
     }
 
     public boolean step() {
-        if (System.currentTimeMillis() - lastTime > step) {
-            time += step;
-            lastTime += step;
+        if (System.currentTimeMillis() - lastTime > STEP) {
+            time += STEP;
+            lastTime += STEP;
             return true;
         }
         return false;

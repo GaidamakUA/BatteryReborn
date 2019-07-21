@@ -83,8 +83,8 @@ public class Mover {
         checkMaxs();
         double xx = m.x;
         double yy = m.y;
-        m.x += xSpeed * Time77.step;
-        m.y += ySpeed * Time77.step;
+        m.x += xSpeed * Time77.STEP;
+        m.y += ySpeed * Time77.STEP;
         xx -= m.x;
         yy -= m.y;
         dist += Math.sqrt(xx * xx + (yy * yy));

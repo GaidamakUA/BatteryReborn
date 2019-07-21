@@ -33,7 +33,7 @@ public class YellowBorder extends Square {
                 (down && y >= Config.squareSize - 10) ||
                 (downLeft && x < 10 && y >= Config.squareSize - 10) ||
                 (left && x < 10)) {
-            b.b[offset] = buf[pix];
+            b.pixels[offset] = buf[pix];
         }
     }
 

@@ -30,7 +30,7 @@ public class Square extends Drawable {
                   World w, boolean isShape, int lvl) {
         super(x, y, width, height, isShape, lvl, w);
         sprite = s;
-        b = w.g.b;
+        b = w.g.bufGfx;
     }
 
     public void draw() {
@@ -55,7 +55,7 @@ public class Square extends Drawable {
         int yyScreenBorder = yScreenBorder();
         if (xxScreenBorder < xScreenBorder) xScreenBorder = xxScreenBorder;
         if (yyScreenBorder < yScreenBorder) yScreenBorder = yyScreenBorder;
-        int[] b = this.b.b;
+        int[] b = this.b.pixels;
         int[] p = sprite.b;
         if (Config.Gfx.dirtOn) {
             String sn = sprite.name();
@@ -65,13 +65,13 @@ public class Square extends Drawable {
                     sn.startsWith("c_brick")) {
                 BufGfx buf = new BufGfx(sprite, util);
                 buf.effects().dirt(id);
-                p = buf.b;
+                p = buf.pixels;
             } else if (sn.equals("ground") && Config.Gfx.dirtGround) {
                 new BufGfx(sprite, util).effects().dirt(0xffb5b5b5, id, Config.Gfx.groundDirtK);
                 p = util;
             } else if (sn.startsWith("border")) {
                 BufGfx buf = new BufGfx(sprite, util);
-                p = buf.b;
+                p = buf.pixels;
                 int offset = Config.squareSize * Config.squareSize - 1;
                 int c;
                 double yy = yStart() + Config.squareSize;
@@ -132,13 +132,13 @@ public class Square extends Drawable {
                     sn.startsWith("c_brick")) {
                 BufGfx buf = new BufGfx(sprite, util);
                 buf.effects().dirt(id);
-                p = buf.b;
+                p = buf.pixels;
             } else if (sn.equals("ground") && Config.Gfx.dirtGround) {
                 new BufGfx(sprite, util).effects().dirt(0xffb5b5b5, id, Config.Gfx.groundDirtK);
                 p = util;
             } else if (sn.startsWith("border")) {
                 BufGfx buf = new BufGfx(sprite, util);
-                p = buf.b;
+                p = buf.pixels;
                 int offset = Config.squareSize * Config.squareSize - 1;
                 int c;
                 double yy = yStart() + Config.squareSize;

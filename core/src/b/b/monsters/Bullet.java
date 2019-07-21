@@ -22,7 +22,7 @@ public class Bullet extends Monster {
     }
 
     public void draw() {
-        world.g.b.drawRangeCheck(sprite, xScreenStart(), yScreenStart());
+        world.g.bufGfx.drawRangeCheck(sprite, xScreenStart(), yScreenStart());
     }
 
     protected void move() {

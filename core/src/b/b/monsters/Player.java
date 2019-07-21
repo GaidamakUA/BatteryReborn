@@ -93,7 +93,7 @@ public class Player extends Monster {
     }
 
     public void draw() {
-        BufGfx b = world.g.b;
+        BufGfx b = world.g.bufGfx;
         if (extras.immortal(world.btr.time.time)) {
             b.drawTransp(world.g.getSprite("immune"), xScreenStart(), yScreenStart());
         } else super.draw();

@@ -37,10 +37,10 @@ public class Heli extends Monster {
                         Config.Monsters.Heli.bladesK), 4));
         int shift = (int) blades.hh;
         if (dir == 3) {
-            world.g.b.drawTranspTrRangeCheck(blades, xScreenStart(),
+            world.g.bufGfx.drawTranspTrRangeCheck(blades, xScreenStart(),
                     yScreenStart(), 0.7);
         } else {
-            world.g.b.drawTranspTrRangeCheck(blades, xScreenBorder() - blades.w,
+            world.g.bufGfx.drawTranspTrRangeCheck(blades, xScreenBorder() - blades.w,
                     yScreenStart(), 0.7);
         }
     }

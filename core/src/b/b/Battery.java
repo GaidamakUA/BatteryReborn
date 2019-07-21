@@ -38,6 +38,7 @@ public class Battery extends BatteryGame {
     private int loadingScreenY;
     /* Double - activation time; Action */
     public java.util.List<Pair> timers;
+    private final Color siftwareRendererColor = new Color();
 
     /* Mouse clicked (for the very begining) */
     public boolean activated;
@@ -207,7 +208,7 @@ public class Battery extends BatteryGame {
             if (time.time - timeWhenLevelLoaded >
                     Config.Intervals.nextLevelDelay) {
                 if ((time.time - timeWhenLevelCompleted >
-                        Config.Intervals.nextLevelDelay - (Time77.step * 2)) &&
+                        Config.Intervals.nextLevelDelay - (Time77.STEP * 2)) &&
                         (time.time - timeWhenLevelCompleted <
                                 Config.Intervals.nextLevelDelay) && (world != null)) {
                     if (player != null && player.life <= 0) {
@@ -247,7 +248,7 @@ public class Battery extends BatteryGame {
         if (activated) {
             if (justStarted && time.time - timeWhenLevelLoaded >
                     Config.Intervals.nextLevelDelay) justStarted = false;
-            screen.setCameraY(screen.cameraY() - Config.cameraSpeed * Time77.step, world);
+            screen.setCameraY(screen.cameraY() - Config.cameraSpeed * Time77.STEP, world);
             if (screen.camY() < Config.squareSize) {
                 screen.setCameraY(screen.cameraY(), world);
                 logger.log("lvlcompl " + U77.sprecision(time.time));
@@ -257,7 +258,7 @@ public class Battery extends BatteryGame {
                         Config.Intervals.nextLevelDelay) &&
                         (time.time - timeWhenLevelLoaded >=
                                 Config.Intervals.nextLevelDelay))) {
-                    screen.setCameraY(screen.cameraY() + (Config.cameraSpeed * Time77.step),
+                    screen.setCameraY(screen.cameraY() + (Config.cameraSpeed * Time77.STEP),
                             world);
                 } else {
                     actAll();
@@ -296,5 +297,18 @@ public class Battery extends BatteryGame {
             }
         }
         super.exception(e);
+    }
+
+    public void drawVideoBuffer(int[] pixels) {
+        // Low quality software renderer
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        for (int i = 0; i < VIEWPORT_WIDTH; i++) {
+            for (int j = 0; j < VIEWPORT_HEIGHT; j++) {
+                siftwareRendererColor.set(pixels[i + j * VIEWPORT_HEIGHT]);
+                shapeRenderer.setColor(siftwareRendererColor);
+                shapeRenderer.rect(i, j, 1, 1);
+            }
+        }
+        shapeRenderer.end();
     }
 }

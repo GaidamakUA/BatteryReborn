@@ -31,7 +31,7 @@ public class Appearing {
     public Appearing(BufGfx gfx, int xStart, int yStart, int width, int height,
                      boolean holes, boolean tiled) {
         g = gfx;
-        b = gfx.b;
+        b = gfx.pixels;
         w = width;
         h = height;
         this.holes = holes;

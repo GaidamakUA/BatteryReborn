@@ -17,7 +17,7 @@ import java.util.Map;
 public class Gfx {
     public int w;
     public int h;
-    public BufGfx b;
+    public BufGfx bufGfx;
     public Battery battery;
     public b.gfx.Font77 font;
     public Console console;
@@ -29,8 +29,8 @@ public class Gfx {
         this.battery = battery;
         w = BatteryGame.VIEWPORT_WIDTH;
         h = BatteryGame.VIEWPORT_HEIGHT;
-        b = new BufGfx(new int[w * h], w, h);
-        font = new b.gfx.Font77(0xffffffff, 0xff000000, b);
+        bufGfx = new BufGfx(new int[w * h], w, h);
+        font = new b.gfx.Font77(0xffffffff, 0xff000000, bufGfx);
         console = new Console(font);
         sprites = new HashMap<String, Sprite>();
         new SpriteLoader(this).load();
@@ -91,13 +91,13 @@ public class Gfx {
         percentBar(p.getCoins(), 0, 2, h - 47, "ic_coin");
         percentBar(p.life, p.maxLife, 2, h - 24, "ic_plane");
         for (int i = 0; i < p.lifes; i++) {
-            b.drawTransp(getSprite("ic_plane"), 106 + (i * 15), h - 24 + 3);
+            bufGfx.drawTransp(getSprite("ic_plane"), 106 + (i * 15), h - 24 + 3);
         }
         if (p.extras.immortalities > 0) {
-            b.rect(445, 445, 63, 63, 0xffffffff);
+            bufGfx.rect(445, 445, 63, 63, 0xffffffff);
             Sprite s = getSprite("immune");
-            b.rectShadow(446, 446, 61, 61, 0.5);
-            b.drawTransp(s, 458, 448);
+            bufGfx.rectShadow(446, 446, 61, 61, 0.5);
+            bufGfx.drawTransp(s, 458, 448);
             font.p("F1x" + p.extras.immortalities, 448, 492);
         }
     }
@@ -107,8 +107,8 @@ public class Gfx {
      */
     private final void percentBar(double units, double max, int x, int y,
                                   String icon) {
-        b.rect(x, y, (int) 100 + 4, 22, 0xff000000);
-        b.rect(x + 1, y + 1, (int) 100 + 2, 20, 0xffffffff);
+        bufGfx.rect(x, y, (int) 100 + 4, 22, 0xff000000);
+        bufGfx.rect(x + 1, y + 1, (int) 100 + 2, 20, 0xffffffff);
         if (max > 0) {/* lifebar */
             int c = 0xff006600;
             if (battery.player.afterDmg()) {
@@ -120,18 +120,18 @@ public class Gfx {
                     c = 0xffcc0000;
                 }
             }
-            b.filledRect(x + 2, y + 2, (int) (100 * (units / max)), 18, c);
-            b.filledRect(x + 2 + (int) (100 * (units / max)), y + 2, 100 - (int) (100 * (units / max)),
+            bufGfx.filledRect(x + 2, y + 2, (int) (100 * (units / max)), 18, c);
+            bufGfx.filledRect(x + 2 + (int) (100 * (units / max)), y + 2, 100 - (int) (100 * (units / max)),
                     18, 0xff000000);
         } else {
             if (icon.equals("ic_ammo") && battery.player.bullets < 20
                     && U77.rem(((int) battery.time.time) / 500, 3) < 2) {
-                b.filledRect(x + 2, y + 2, 100, 18, 0xffff0000);
+                bufGfx.filledRect(x + 2, y + 2, 100, 18, 0xffff0000);
             } else {
-                b.rectShadow(x + 2, y + 2, 100, 18, 0.5);
+                bufGfx.rectShadow(x + 2, y + 2, 100, 18, 0.5);
             }
         }
-        b.drawTransp(getSprite(icon), 6, y + 3);
+        bufGfx.drawTransp(getSprite(icon), 6, y + 3);
         String s = (max > 0) ? ("" + (int) units + "/" + (int) max) : ("" + (int) units);
         font.pCenter(s, (int) 100 / 2 + 4, y + 10);
     }
@@ -144,7 +144,7 @@ public class Gfx {
         int lvl = battery.world.trueLevel();
         if (lvl == 6) {
             Sprite map = getSprite("cosmos");
-            System.arraycopy(map.b, 0, b.b, 0, 510 * 510);
+            System.arraycopy(map.b, 0, bufGfx.pixels, 0, 510 * 510);
         }
         Water.prepareWatCur(battery);
         WorldSquare[][] map = battery.world.getMap();
@@ -180,5 +180,6 @@ public class Gfx {
         if (battery.exception && Config.debugMode) {
             font.p("ERROR", 3, 1);
         }
+        battery.drawVideoBuffer(bufGfx.pixels);
     }
 }

@@ -27,7 +27,7 @@ public class GunMonster extends MonsterPart {
 
     public void draw() {
         super.draw();
-        world.g.b.drawRangeCheck(world.g.getSprite("boss2_gun_part"), xScreenStart() - 1,
+        world.g.bufGfx.drawRangeCheck(world.g.getSprite("boss2_gun_part"), xScreenStart() - 1,
                 (int) (yScreenStart() + 23 + partY));
     }
 

@@ -38,7 +38,7 @@ public class Waves {
 
     private void xWave(double period, double k, double waveLength, boolean left,
                        double shft) {
-        int[] buf = b.b;
+        int[] buf = b.pixels;
         for (int x = xStart - waveHeight - 1; x < xStart + width + waveHeight; x++) {
             int shift;
             if (left) {
@@ -80,7 +80,7 @@ public class Waves {
 
     private void yWave(double period, double k, double waveLength, boolean left,
                        double shft) {
-        int[] buf = b.b;
+        int[] buf = b.pixels;
         for (int y = yStart - waveHeight - 1; y < yStart + height + waveHeight; y++) {
             int shift;
             if (left) {

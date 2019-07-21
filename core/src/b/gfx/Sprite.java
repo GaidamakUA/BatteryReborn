@@ -42,7 +42,7 @@ public class Sprite {
         this.name = name;
         setWH(buf.w, buf.h);
         b = new int[w * h];
-        System.arraycopy(buf.b, 0, b, 0, w * h);
+        System.arraycopy(buf.pixels, 0, b, 0, w * h);
     }
 
     public final void setWH(int width, int height) {

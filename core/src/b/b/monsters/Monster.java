@@ -103,7 +103,7 @@ public abstract class Monster extends Drawable implements Changeable {
     }
 
     public void draw() {
-        BufGfx b = world.g.b;
+        BufGfx b = world.g.bufGfx;
         if (afterDmg() || life == 0) {
             if (afterWrongDmg()) {
                 b.drawTranspBlackRangeCheck(sprite, xScreenStart(), yScreenStart());
