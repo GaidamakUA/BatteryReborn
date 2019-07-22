@@ -43,7 +43,7 @@ public class Gun {
             }
             Bullet bullet = new Bullet(bulletSpeed, x, y, dir, world, world.gfx.battery.screen,
                     owner);
-            world.objsToAdd.add(bullet);
+            world.objectsToAdd.add(bullet);
             lastShotTime = mon.time();
         }
     }

@@ -15,12 +15,12 @@ public class InvisibleCannon extends InvisibleMonster {
         this.dir = dir;
         btr = world.btr;
         lastShot = U77.rnd(Config.Monsters.Cannon.shotInterval) + btr.time.time;
-        world.objsToAddInTime.add(this);
+        world.objectsToAddInTime.add(this);
     }
 
     public void move() {
         if (lastShot + Config.Monsters.Cannon.shotInterval < btr.time.time) {
-            btr.world.objsToAdd.add(new CannonBall(x + Config.hSquareSize,
+            btr.world.objectsToAdd.add(new CannonBall(x + Config.hSquareSize,
                     y + Config.hSquareSize, dir, btr.world, btr.screen));
             lastShot = btr.time.time;
         }

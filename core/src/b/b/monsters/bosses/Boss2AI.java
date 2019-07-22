@@ -98,7 +98,7 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
     }
 
     private void addToWorld(MonsterPart part) {
-        world.objsToAdd.add(part);
+        world.objectsToAdd.add(part);
         world.addToMap(part);
     }
 
@@ -119,7 +119,7 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
     private void initGun(int shift) {
         GunMonster gun = new GunMonster(world, this, shift);
         gunMonsters.add(gun);
-        world.objsToAdd.add(gun);
+        world.objectsToAdd.add(gun);
         world.addToMap(gun);
     }
 
@@ -200,7 +200,7 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
                     GunMonster gun = gunMonsters.get(i);
                     if (gun.life > 0) {
                         gun.dmg(100, world.btr.player);
-                        world.objsToRemove.add(gun);
+                        world.objectsToRemove.add(gun);
                         world.removeFromMap(gun);
                     }
                 }
@@ -222,11 +222,11 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
             if (headRight.life <= 0 && headRight.life <= 0 &&
                     paneLeft.life <= 0 && paneRight.life <= 0) {
                 died = true;
-                world.objsToRemove.add(this);
-                world.objsToRemove.add(headLeft);
-                world.objsToRemove.add(headRight);
-                world.objsToRemove.add(paneLeft);
-                world.objsToRemove.add(paneRight);
+                world.objectsToRemove.add(this);
+                world.objectsToRemove.add(headLeft);
+                world.objectsToRemove.add(headRight);
+                world.objectsToRemove.add(paneLeft);
+                world.objectsToRemove.add(paneRight);
                 if (wellLeft != null) {
                     removeFromWorld(wellLeft);
                 }
@@ -234,7 +234,7 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
                     removeFromWorld(wellRight);
                 }
                 for (GunMonster gun : gunMonsters) {
-                    world.objsToRemove.add(gun);
+                    world.objectsToRemove.add(gun);
                 }
                 super.dmg(1, time(), world.btr.player);
                 world.btr.timers.add(new Pair(new Double(time() +
@@ -243,7 +243,7 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
                         btr.timeWhenLevelCompleted = btr.time.time;
                     }
                 }));
-                world.objsToAdd.add(new Explosion(x, y, world, this, 4));
+                world.objectsToAdd.add(new Explosion(x, y, world, this, 4));
             } else {
                 if (left) {
                     mover.left();
@@ -284,7 +284,7 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
     }
 
     private void removeFromWorld(Boss2Well well) {
-        world.objsToRemove.add(well);
+        world.objectsToRemove.add(well);
         world.removeFromMap(well);
         if (well.child != null) {
             removeFromWorld(well.child);
@@ -365,7 +365,7 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
         super.justDied();
         Random random = new Random(77);
         for (int i = 0; i < Config.Monsters.Boss2.rewardCoins; i++) {
-            world.objsToAdd.add(new Coin(x - 50 + random.nextInt(100),
+            world.objectsToAdd.add(new Coin(x - 50 + random.nextInt(100),
                     y - 50 + random.nextInt(100), world));
         }
     }

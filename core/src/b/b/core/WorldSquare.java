@@ -9,16 +9,15 @@ import java.util.List;
 
 public class WorldSquare {
     private Battery btr;
-    public int x;
-    public int y;
-    public List<Drawable> objs;
+    private final int x;
+    private final int y;
+    public final List<Drawable> objects = new ArrayList<Drawable>();
     private BufGfx buf;
 
     public WorldSquare(int x, int y, Battery b) {
         btr = b;
         this.x = x;
         this.y = y;
-        objs = new ArrayList<Drawable>();
         buf = null;
     }
 
@@ -26,8 +25,8 @@ public class WorldSquare {
         boolean drawn = false;
         if (buf == null || (buf != null && buf.w != 0)) {
             buf = new BufGfx(30, 30);
-            Collections.sort(objs);
-            for (Drawable d : objs) {
+            Collections.sort(objects);
+            for (Drawable d : objects) {
                 if (d instanceof Square) {
                     drawn = true;
                     ((Square) d).draw2(buf.pixels);

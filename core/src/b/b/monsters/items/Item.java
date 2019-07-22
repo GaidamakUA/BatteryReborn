@@ -21,7 +21,7 @@ public abstract class Item extends Monster {
 
     protected void justDied() {
         world.removeFromMap(this);
-        world.objsToRemove.add(this);
+        world.objectsToRemove.add(this);
     }
 
     public boolean onMonster(Monster m) {

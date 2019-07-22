@@ -32,7 +32,7 @@ public class Bullet extends Monster {
 
     protected void justDied() {
         world.removeFromMap(this);
-        world.objsToRemove.add(this);
+        world.objectsToRemove.add(this);
     }
 
     protected boolean onSquare(Square o) {

@@ -29,7 +29,7 @@ public class BrickManager {
     protected final void prepare() {
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
-                List<Drawable> objs = map[y][x].objs;
+                List<Drawable> objs = map[y][x].objects;
                 for (Drawable o : objs) {
                     if (o instanceof Square) {
                         if (((Square) o).sprite.name().startsWith("brick")) {
@@ -56,7 +56,7 @@ public class BrickManager {
                             isWall(y + 1, x - 1) || isWall(y + 1, x) || isWall(y + 1, x + 1)) {
                         YellowBorder border = new YellowBorder(gfx.getSprite("yellow_border"),
                                 x, y, world, false);
-                        map[y][x].objs.add(border);
+                        map[y][x].objects.add(border);
                         border.leftUp = isWall(y - 1, x - 1);
                         border.up = isWall(y - 1, x);
                         border.upRight = isWall(y - 1, x + 1);
@@ -73,7 +73,7 @@ public class BrickManager {
 
     private boolean isGround(int x, int y) {
         try {
-            List<Drawable> objs = map[y][x].objs;
+            List<Drawable> objs = map[y][x].objects;
             for (Drawable o : objs) {
                 if (o instanceof Square) {
                     String name = ((Square) o).sprite.name();
@@ -91,7 +91,7 @@ public class BrickManager {
 
     private boolean isWall(int y, int x) {
         if (x == -1 || y == -1 || x == w || y == h) return false;
-        for (Drawable d : map[y][x].objs) {
+        for (Drawable d : map[y][x].objects) {
             if (d instanceof Square) {
                 String name = ((Square) d).sprite.name();
                 if ((Config.Bcks.YellowBorder.warfloor && name.startsWith("warfloor"))
@@ -106,7 +106,7 @@ public class BrickManager {
     private void prepareWalls() {
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
-                List<Drawable> objs = map[y][x].objs;
+                List<Drawable> objs = map[y][x].objects;
                 for (Drawable o : objs) {
                     if (o instanceof Square) {
                         String name = ((Square) o).sprite.name();
@@ -123,7 +123,7 @@ public class BrickManager {
         int offset = 0;
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
-                List<Drawable> objs = map[y][x].objs;
+                List<Drawable> objs = map[y][x].objects;
                 for (Drawable o : objs) {
                     if (o instanceof Square) {
                         String name = ((Square) o).sprite.name();
@@ -400,7 +400,7 @@ public class BrickManager {
 
     private Square getSquare(int x, int y, String starts) {
         try {
-            List<Drawable> objs = map[y][x].objs;
+            List<Drawable> objs = map[y][x].objects;
             for (Drawable d : objs) {
                 if (d instanceof Square) {
                     if (((Square) d).sprite.name().startsWith(starts)) {
@@ -420,7 +420,7 @@ public class BrickManager {
 
     private boolean brickwall(int x, int y) {
         try {
-            List<Drawable> objs = map[y][x].objs;
+            List<Drawable> objs = map[y][x].objects;
             for (Drawable o : objs) {
                 if (o instanceof Square) {
                     String name = ((Square) o).sprite.name();
@@ -460,7 +460,7 @@ public class BrickManager {
 
     private boolean isSprite(int x, int y, String start) {
         try {
-            List<Drawable> objs = map[y][x].objs;
+            List<Drawable> objs = map[y][x].objects;
             for (Drawable o : objs) {
                 if (o instanceof Square) {
                     if (((Square) o).sprite.name().startsWith(start)) {
@@ -476,7 +476,7 @@ public class BrickManager {
 
     private boolean isSpriteEnds(int x, int y, String ends) {
         try {
-            List<Drawable> objs = map[y][x].objs;
+            List<Drawable> objs = map[y][x].objects;
             for (Drawable o : objs) {
                 if (o instanceof Square) {
                     if (((Square) o).sprite.name().endsWith(ends)) {
@@ -492,7 +492,7 @@ public class BrickManager {
 
     private boolean notBrick(int x, int y) {
         try {
-            List<Drawable> objs = map[y][x].objs;
+            List<Drawable> objs = map[y][x].objects;
             for (Drawable o : objs) {
                 if (o instanceof Square) {
                     if (((Square) o).sprite.name().startsWith("brick")) {

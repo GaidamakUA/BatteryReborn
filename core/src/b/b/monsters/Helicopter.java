@@ -60,11 +60,11 @@ public class Helicopter extends Monster {
         if (super.checkScreenCollision()) return true;
         if (xEnd() < 0) {
             if (dir != 1) {
-                world.objsToRemove.add(this);
+                world.objectsToRemove.add(this);
             }
         } else if (xStart() > screen.xEnd()) {
             if (dir != 3) {
-                world.objsToRemove.add(this);
+                world.objectsToRemove.add(this);
             }
         }
         return false;

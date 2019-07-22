@@ -58,10 +58,10 @@ public class WorldLoader {
             }
         }
         world.setMap(map);
-        world.objsToAdd = new ArrayList<Monster>();
-        world.activeObjs = new ArrayList<Monster>();
-        world.objsToRemove = new ArrayList<Monster>();
-        world.objsToAddInTime = new ArrayList<Monster>();
+        world.objectsToAdd = new ArrayList<Monster>();
+        world.activeObjects = new ArrayList<Monster>();
+        world.objectsToRemove = new ArrayList<Monster>();
+        world.objectsToAddInTime = new ArrayList<Monster>();
         world.notMonsters = new ArrayList<ChanSquare>();
         if (battery.player == null || battery.player.life <= 0) {
             Screen scr = battery.screen;
@@ -87,7 +87,7 @@ public class WorldLoader {
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
                 int c = sprite.pixels[offset++];
-                List<Drawable> list = map[y][x].objs;
+                List<Drawable> list = map[y][x].objects;
                 if (c == 0xff0000ff) {
                     list.add(new Water(x, y, world));
                 } else if (c == 0xffff0000 || c == 0xff808040) {
@@ -116,11 +116,11 @@ public class WorldLoader {
                     if (part == 0) {
                         list.add(new LandingGround(x, y, world));
                     } else if (part == 1) {
-                        list.add(getLG(map[y][x - 1].objs));
+                        list.add(getLG(map[y][x - 1].objects));
                     } else if (part == 2) {
-                        list.add(getLG(map[y - 1][x - 1].objs));
+                        list.add(getLG(map[y - 1][x - 1].objects));
                     } else {
-                        list.add(getLG(map[y - 1][x].objs));
+                        list.add(getLG(map[y - 1][x].objects));
                     }
                 } else if (c == 0xffff0080) {
                     list.add(background(x, y));
@@ -157,15 +157,15 @@ public class WorldLoader {
     }
 
     private int getLandingPart(int x, int y) {
-        if (x == 0 || !contains(map[y][x - 1].objs, "landingg")) {
+        if (x == 0 || !contains(map[y][x - 1].objects, "landingg")) {
             /*left*/
-            if (y == 0 || !contains(map[y - 1][x].objs, "landingg")) {
+            if (y == 0 || !contains(map[y - 1][x].objects, "landingg")) {
                 /*up*/
                 return 0;
             } else return 3;
         } else {
             /*right*/
-            if (y == 0 || !contains(map[y - 1][x].objs, "landingg")) {
+            if (y == 0 || !contains(map[y - 1][x].objects, "landingg")) {
                 /*up*/
                 return 1;
             } else return 2;
@@ -191,12 +191,12 @@ public class WorldLoader {
         int[] wcg = new int[8];
         for (int i = 0; i < 8; i++) wcg[i] = 0;
         if (x > 0) {
-            background(map[y - 1][x - 1].objs, wcg);
-            background(map[y][x - 1].objs, wcg);
+            background(map[y - 1][x - 1].objects, wcg);
+            background(map[y][x - 1].objects, wcg);
         } else if (x < h - 1) {
-            background(map[y - 1][x + 1].objs, wcg);
+            background(map[y - 1][x + 1].objects, wcg);
         }
-        background(map[y - 1][x].objs, wcg);
+        background(map[y - 1][x].objects, wcg);
         int max = U77.maxIndex(wcg);
         if (max == 0) {
             return new Square(gfx.getSprite("warfloor"), x, y, world, false, 0);
@@ -257,17 +257,17 @@ public class WorldLoader {
 
     private void enplane(int x, int y) {
         EnPlane enplane = new EnPlane(squareCenter(x), squareCenter(y), world);
-        world.objsToAddInTime.add(enplane);
+        world.objectsToAddInTime.add(enplane);
     }
 
     private void heli(int x, int y) {
         Helicopter helicopter = new Helicopter(squareCenter(x), squareCenter(y), world, 1);
-        world.objsToAddInTime.add(helicopter);
+        world.objectsToAddInTime.add(helicopter);
     }
 
     private void tank(int x, int y) {
         Tank tank = new Tank(squareCenter(x), squareCenter(y), world, 2);
-        world.objsToAddInTime.add(tank);
+        world.objectsToAddInTime.add(tank);
     }
 
     private void cannon(List list, int x, int y, int dir) {
@@ -278,17 +278,17 @@ public class WorldLoader {
 
     private void boss1(int x, int y) {
         Boss1AI boss = new Boss1AI(squareCenter(x), squareCenter(y), world);
-        world.objsToAddInTime.add(boss);
+        world.objectsToAddInTime.add(boss);
     }
 
     private void boss2(int x, int y) {
         Boss2AI boss = new Boss2AI(squareCenter(x), squareCenter(y), world);
-        world.objsToAddInTime.add(boss);
+        world.objectsToAddInTime.add(boss);
     }
 
     private void firstaid(int x, int y) {
         FirstAid fa = new FirstAid(squareCenter(x), squareCenter(y), world);
-        world.objsToAddInTime.add(fa);
+        world.objectsToAddInTime.add(fa);
     }
 
     private static double squareCenter(int square) {

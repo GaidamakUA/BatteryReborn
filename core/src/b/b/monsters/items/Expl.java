@@ -30,7 +30,7 @@ public class Expl extends Item {
         if (expl.k > 0 && U77.rnd() > 0.999) {
             int k = expl.k / 2;
             expl.k -= k;
-            world.objsToAdd.add(new Explosion(x, y, world, this, k));
+            world.objectsToAdd.add(new Explosion(x, y, world, this, k));
         }
     }
 

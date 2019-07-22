@@ -29,13 +29,6 @@ public class BatteryGame extends ApplicationAdapter {
 	protected void initialize() {
 	}
 
-	public void init() {
-		exception = false;
-		firstException = null;
-		initialized = false;
-		initInProgress = false;
-	}
-
 	public void paint() {
 	}
 

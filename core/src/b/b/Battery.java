@@ -60,7 +60,6 @@ public class Battery extends BatteryGame {
     /* for loading screen */
     private Intro intro = null;
     private double lastFpsLog;
-    public static String name;
     private AudioClip audio = null;
     private boolean loadingScreenFirstTime = true;
 
@@ -71,20 +70,9 @@ public class Battery extends BatteryGame {
         activated = false;
         justStarted = true;
         timers = new ArrayList<Pair>();
-        name = "anonymous";
-        // TODO implement it another way
-//        try {
-//            name = getParameter("name");
-//            if (!NickAndPassValidator.valide(name)) {
-//                name = "anonimous";
-//            }
-//        } catch (Exception e) {
-//            name = "anonymous";
-//        }
         things = new HashMap<String, Object>();
         time = new Time77();
         logger = new Logger(this);
-        logger.log("name " + name + " ");
         logger.log("scores 0 ");
         kbd = new Keyboard77(this);
         loading = "config";
@@ -110,7 +98,7 @@ public class Battery extends BatteryGame {
         } else {
             intro = null;
             world = new World(gfx);
-            world.activeObjs.add(player);
+            world.activeObjects.add(player);
             world.addToMap(player);
             screen.setCameraY(screen.cameraY(), world);
         }
@@ -230,7 +218,7 @@ public class Battery extends BatteryGame {
         }
     }
 
-    private final void serveTimers() {
+    private void serveTimers() {
         for (int i = 0; i < timers.size(); i++) {
             Pair p = timers.get(i);
             double t = (Double) p.o1;
@@ -241,7 +229,7 @@ public class Battery extends BatteryGame {
         }
     }
 
-    private final void step2() {
+    private void step2() {
         if (activated) {
             if (justStarted && time.time - timeWhenLevelLoaded >
                     Config.Intervals.nextLevelDelay) justStarted = false;
@@ -264,23 +252,23 @@ public class Battery extends BatteryGame {
         }
     }
 
-    private final void actAll() {
-        for (Monster a : world.activeObjs) a.act();
-        while (!world.objsToAdd.isEmpty()) {
-            world.activeObjs.addAll(world.objsToAdd);
-            ArrayList<Monster> objs = new ArrayList<Monster>(world.objsToAdd);
-            world.objsToAdd.clear();
+    private void actAll() {
+        for (Monster a : world.activeObjects) a.act();
+        while (!world.objectsToAdd.isEmpty()) {
+            world.activeObjects.addAll(world.objectsToAdd);
+            ArrayList<Monster> objs = new ArrayList<Monster>(world.objectsToAdd);
+            world.objectsToAdd.clear();
             for (Monster obj : objs) {
                 if (obj == null) throw
                         new RuntimeException("null object at Battery.actAll loop");
                 obj.act();
             }
         }
-        for (Monster a : world.objsToRemove) {
-            world.activeObjs.remove(a);
+        for (Monster a : world.objectsToRemove) {
+            world.activeObjects.remove(a);
             world.removeFromMap(a);
         }
-        world.objsToRemove.clear();
+        world.objectsToRemove.clear();
         for (ChanSquare cs : world.notMonsters) {
             cs.act();
         }

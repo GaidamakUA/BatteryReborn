@@ -139,7 +139,7 @@ public class Player extends Monster {
             Bullet bullet = new Bullet(Config.Monsters.Bullet.speed, x, yStart() -
                     Config.Monsters.Bullet.startShift, 0, world, screen, this);
             bullet.y -= bullet.hh;
-            world.objsToAdd.add(bullet);
+            world.objectsToAdd.add(bullet);
             lastShotTime = time();
         }
     }

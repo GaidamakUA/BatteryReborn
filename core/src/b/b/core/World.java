@@ -14,10 +14,10 @@ import java.util.*;
 public class World {
     public Gfx gfx;
     public Battery btr;
-    public List<Monster> objsToAdd;
-    public List<Monster> activeObjs;
-    public List<Monster> objsToRemove;
-    public List<Monster> objsToAddInTime;
+    public List<Monster> objectsToAdd;
+    public List<Monster> activeObjects;
+    public List<Monster> objectsToRemove;
+    public List<Monster> objectsToAddInTime;
     public List<ChanSquare> notMonsters;
     public int nextId;
 
@@ -53,7 +53,7 @@ public class World {
         player.x = (double) width / 2 * Config.squareSize;
         player.y = (height - 3) * Config.squareSize;
         screen.setCameraY(height * Config.squareSize - screen.h, this);
-        activeObjs.add(player);
+        activeObjects.add(player);
         addToMap(player);
     }
 
@@ -81,7 +81,7 @@ public class World {
         int xStart = (int) d.xStart() / Config.squareSize;
         for (int yy = (int) d.yStart() / Config.squareSize; yy < yBorder; yy++) {
             for (int xx = xStart; xx < xBorder; xx++) {
-                res.addAll(get(xx, yy).objs);
+                res.addAll(get(xx, yy).objects);
             }
         }
         return new ArrayList<Drawable>(res);
@@ -95,7 +95,7 @@ public class World {
         int xBorder = scr.getXBorder();
         for (int yy = scr.getStartY(); yy < yBorder; yy++) {
             for (int xx = xStart; xx < xBorder; xx++) {
-                List<Drawable> drawables = map[yy][xx].objs;
+                List<Drawable> drawables = map[yy][xx].objects;
                 for (Drawable d : drawables) {
                     if (d instanceof Changeable) {
                         res.add(d);
@@ -113,7 +113,7 @@ public class World {
         int xBorder = xMapBorder(obj);
         for (int y = yMapStart(obj); y < yBorder; y++) {
             for (int x = xMapStart(obj); x < xBorder; x++) {
-                List<Drawable> drawables = get(x, y).objs;
+                List<Drawable> drawables = get(x, y).objects;
                 for (int i = 0; i < drawables.size(); i++) {
                     if (drawables.get(i) == obj) {
                         drawables.remove(i);
@@ -128,7 +128,7 @@ public class World {
         int xBorder = xMapBorder(obj);
         for (int y = yMapStart(obj); y < yBorder; y++) {
             for (int x = xMapStart(obj); x < xBorder; x++) {
-                List<Drawable> objs = get(x, y).objs;
+                List<Drawable> objs = get(x, y).objects;
                 if (!objs.contains(obj)) {
                     objs.add(obj);
                 }
@@ -137,12 +137,12 @@ public class World {
     }
 
     public final void activateMonsters() {
-        for (int i = 0; i < objsToAddInTime.size(); i++) {
-            Monster m = objsToAddInTime.get(i);
+        for (int i = 0; i < objectsToAddInTime.size(); i++) {
+            Monster m = objectsToAddInTime.get(i);
             if (m.yEnd() + Config.activationDistance >= btr.screen.cameraY()) {
-                objsToAdd.add(m);
+                objectsToAdd.add(m);
                 addToMap(m);
-                objsToAddInTime.remove(i--);
+                objectsToAddInTime.remove(i--);
             }
         }
         int yStart = btr.screen.getStartY();
@@ -150,7 +150,7 @@ public class World {
         notMonsters.clear();
         for (int y = yStart; y < yBorder; y++) {
             for (int x = 0; x < width; x++) {
-                List<Drawable> list = map[y][x].objs;
+                List<Drawable> list = map[y][x].objects;
                 for (Drawable d : list) {
                     if (d instanceof ChanSquare && !notMonsters.contains(d)) {
                         notMonsters.add((ChanSquare) d);

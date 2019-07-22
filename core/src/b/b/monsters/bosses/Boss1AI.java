@@ -73,13 +73,13 @@ public class Boss1AI extends InvisibleMonster implements ComplexAI {
                 life / 5, this, 4);
         right = new MonsterPart(world, x + rightSprite.w - 1 + topSprite.hw, y, rightSprite,
                 life / 5, this, 4);
-        world.objsToAdd.add(bottom);
+        world.objectsToAdd.add(bottom);
         world.addToMap(bottom);
-        world.objsToAdd.add(top);
+        world.objectsToAdd.add(top);
         world.addToMap(top);
-        world.objsToAdd.add(left);
+        world.objectsToAdd.add(left);
         world.addToMap(left);
-        world.objsToAdd.add(right);
+        world.objectsToAdd.add(right);
         world.addToMap(right);
     }
 
@@ -129,7 +129,7 @@ public class Boss1AI extends InvisibleMonster implements ComplexAI {
                         btr.timeWhenLevelCompleted = btr.time.time;
                     }
                 }));
-                world.objsToAdd.add(new Explosion(x, y, world, this, 4));
+                world.objectsToAdd.add(new Explosion(x, y, world, this, 4));
             } else {
                 angle1 = U77.angle(angle1 + 0.01);
                 angle2 = U77.angle(angle2 - 0.015);
@@ -174,7 +174,7 @@ public class Boss1AI extends InvisibleMonster implements ComplexAI {
         super.justDied();
         Random random = new Random(77);
         for (int i = 0; i < Config.Monsters.Boss1.rewardCoins; i++) {
-            world.objsToAdd.add(new Coin(x - 50 + random.nextInt(100),
+            world.objectsToAdd.add(new Coin(x - 50 + random.nextInt(100),
                     y - 50 + random.nextInt(100), world));
         }
     }

@@ -52,17 +52,17 @@ public abstract class Monster extends Drawable implements Changeable {
             } else if (life > 0) {
                 world.addToMap(this);
             } else {
-                world.objsToRemove.add(this);
+                world.objectsToRemove.add(this);
             }
         }
     }
 
     protected void justDied() {
         world.removeFromMap(this);
-        world.objsToRemove.add(this);
-        world.objsToAdd.add(new Coin(x, y, world));
+        world.objectsToRemove.add(this);
+        world.objectsToAdd.add(new Coin(x, y, world));
         if (!outOfScreen()) {
-            world.objsToAdd.add(new Explosion(x, y, world, this));
+            world.objectsToAdd.add(new Explosion(x, y, world, this));
         }
     }
 
