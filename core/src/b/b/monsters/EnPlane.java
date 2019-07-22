@@ -10,7 +10,7 @@ public class EnPlane extends Monster {
     private double angle;
 
     public EnPlane(double x, double y, World world) {
-        super(world, x, y, world.g.getSprite("enplane"),
+        super(world, x, y, world.gfx.getSprite("enplane"),
                 Config.Monsters.EnPlane.life * Config.Damages.bullet);
         lvl = 5;
         final double speed = Config.Monsters.EnPlane.speed;

@@ -10,7 +10,7 @@ public class Shop {
 
     public static boolean on = false;
 
-    public static final void step(Battery btr) {
+    public static void step(Battery btr) {
         if (on) {
             double shopTime = btr.time.time - btr.timeWhenLevelCompleted -
                     Config.Intervals.nextLevelDelay;
@@ -54,7 +54,7 @@ public class Shop {
         }
     }
 
-    public static final void draw(Battery btr) {
+    public static void draw(Battery btr) {
         if (on) {
             Gfx gfx = btr.gfx;
             System.arraycopy(gfx.getSprite("shop").pixels, -y * 510, gfx.bufGfx.pixels, 0,

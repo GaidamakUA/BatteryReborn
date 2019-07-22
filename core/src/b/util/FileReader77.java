@@ -28,7 +28,7 @@ public class FileReader77 {
     }
 
     public final String read() {
-        return (String) strings.get(currentLine++);
+        return strings.get(currentLine++);
     }
 
     public final String get(int i) {

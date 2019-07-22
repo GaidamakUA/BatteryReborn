@@ -15,11 +15,11 @@ public class Heli extends Monster {
     private Sprite flipped;
 
     public Heli(double x, double y, World world, int direction) {
-        super(world, x, y, world.g.getSprite("heli"),
+        super(world, x, y, world.gfx.getSprite("heli"),
                 Config.Monsters.Heli.life * Config.Damages.bullet);
         lvl = 5;
         dir = direction;
-        flipped = world.g.getSprite("heliLeft");
+        flipped = world.gfx.getSprite("heliLeft");
         final double speed = Config.Monsters.Heli.maxSpeed;
         mover = new Mover(this, speed, 0, 0);
         mover.setSpeed(speed, dir);
@@ -32,15 +32,15 @@ public class Heli extends Monster {
 
     public void draw() {
         super.draw();
-        Sprite blades = world.g.getSprite("heli_blades" +
-                U77.rem((int) (world.g.battery.time.time *
+        Sprite blades = world.gfx.getSprite("heli_blades" +
+                U77.rem((int) (world.gfx.battery.time.time *
                         Config.Monsters.Heli.bladesK), 4));
         int shift = (int) blades.hh;
         if (dir == 3) {
-            world.g.bufGfx.drawTranspTrRangeCheck(blades, xScreenStart(),
+            world.gfx.bufGfx.drawTranspTrRangeCheck(blades, xScreenStart(),
                     yScreenStart(), 0.7);
         } else {
-            world.g.bufGfx.drawTranspTrRangeCheck(blades, xScreenBorder() - blades.w,
+            world.gfx.bufGfx.drawTranspTrRangeCheck(blades, xScreenBorder() - blades.w,
                     yScreenStart(), 0.7);
         }
     }

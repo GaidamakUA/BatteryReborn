@@ -95,7 +95,7 @@ public class Font77 {
         for (int j = 0; j < charW; j++) Arrays.fill(charMap[j], transp);
         font.put(" ", charMap);
 
-        charMap = (int[][]) font.get("y");
+        charMap = font.get("y");
         for (int y = 0; y < charH; y++) {
             if (charMap[0][y] == c) charMap[0][y] = bc;
         }
@@ -105,7 +105,6 @@ public class Font77 {
             for (int x = 0; x < strLength; x++) {
                 int bitNumber = y * strLength + x;
                 int dataElemNumber = bitNumber / 64;
-                int bit = bitNumber - (dataElemNumber * 64);
                 charMap = font.get("" + chars.charAt(x / charWMin));
                 int charX = x - (x / charWMin * charWMin);
                 if ((data[dataElemNumber] & (1L << (63 - bitNumber))) != 0L) {

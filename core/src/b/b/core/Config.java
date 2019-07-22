@@ -44,8 +44,6 @@ public class Config {
     public static class Pathes {
         public static final String rootDir = "C:\\tomcat\\webapps\\ROOT\\";
         public static final String statsDir = rootDir + "battery\\";
-        public static final String statsFile = statsDir + "out.html";
-        public static final String logFile = statsDir + "battery.log";
     }
 
     public static class Monsters {

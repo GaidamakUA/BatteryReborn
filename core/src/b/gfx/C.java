@@ -25,15 +25,6 @@ public class C {
         return (0xff000000 | ((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF));
     }
 
-    /**
-     * @param k 0 < k < 1: 0 - 128, 1 - the same
-     */
-    public static final int gray(int r, int g, int b, double k) {
-        return (0xff000000 | (((128 + (int) (k * (r - 128))) & 0xFF) << 16) |
-                (((128 + (int) (k * (g - 128))) & 0xFF) << 8) |
-                (((128 + (int) (k * (b - 128)))) & 0xFF));
-    }
-
     public static final int[] rgb(int c) {
         int[] r = new int[3];
         r[0] = (c >> 16) & 0xFF;

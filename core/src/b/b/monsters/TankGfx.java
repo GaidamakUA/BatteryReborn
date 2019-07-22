@@ -16,9 +16,9 @@ public class TankGfx {
     }
 
     protected final void draw(World w) {
-        BufGfx b = w.g.bufGfx;
+        BufGfx b = w.gfx.bufGfx;
         drawCatters(b);
-        t.sprite = w.g.getSprite("tank_base");
+        t.sprite = w.gfx.getSprite("tank_base");
         int xShift = 0;
         int yShift = 0;
         double time = t.time() - t.gun.lastShotTime;
@@ -34,7 +34,7 @@ public class TankGfx {
                 xShift = (int) (8 - (time * 8));
             }
         }
-        Sprite turret = w.g.getSprite("tank_turret" + t.ai.turretDir);
+        Sprite turret = w.gfx.getSprite("tank_turret" + t.ai.turretDir);
         if (t.afterDmg()) {
             if (t.afterWrongDmg()) {
                 b.drawTranspBlackRangeCheck(t.sprite, t.xScreenStart(), t.yScreenStart());

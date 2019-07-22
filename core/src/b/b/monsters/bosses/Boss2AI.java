@@ -61,7 +61,7 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
     }
 
     private void initSprites() {
-        Gfx g = world.g;
+        Gfx g = world.gfx;
         headLeftSprite = g.getSprite("boss2_head_left");
         headRightSprite = g.getSprite("boss2_head_right");
         paneLeftSprite = g.getSprite("boss2_pane_left");
@@ -88,7 +88,7 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
         addToWorld(paneRight);
     }
 
-    private final void add(Boss2Well well, int toAdd) {
+    private void add(Boss2Well well, int toAdd) {
         addToWorld(well);
         if (toAdd > 0) {
             Boss2Well w = new Boss2Well(world, this, well, well.left);
@@ -97,12 +97,12 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
         }
     }
 
-    private final void addToWorld(MonsterPart part) {
+    private void addToWorld(MonsterPart part) {
         world.objsToAdd.add(part);
         world.addToMap(part);
     }
 
-    private final void initGuns() {
+    private void initGuns() {
         gunMonsters = new ArrayList<GunMonster>();
         initGun(-49);
         initGun(-49 + 9);
@@ -129,8 +129,8 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
     public void draw() {
         if (!alreadyDrawn) {
             alreadyDrawn = true;
-            BufGfx b = world.g.bufGfx;
-            Sprite mainCarcasSprite = world.g.getSprite("boss2_main_carcas");
+            BufGfx b = world.gfx.bufGfx;
+            Sprite mainCarcasSprite = world.gfx.getSprite("boss2_main_carcas");
             b.drawTranspRangeCheck(mainCarcasSprite, (int) (xScreenStart() -
                     mainCarcasSprite.hw), (int) (yScreenStart() - mainCarcasSprite.hh));
             verticals();
@@ -151,14 +151,14 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
     }
 
     private void verticals() {
-        BufGfx b = world.g.bufGfx;
-        Sprite mainCarcasSprite = world.g.getSprite("boss2_main_carcas");
-        Sprite vertCarcasSprite = world.g.getSprite("boss2_carcas_vert");
+        BufGfx b = world.gfx.bufGfx;
+        Sprite mainCarcasSprite = world.gfx.getSprite("boss2_main_carcas");
+        Sprite vertCarcasSprite = world.gfx.getSprite("boss2_carcas_vert");
         b.drawRangeCheck(vertCarcasSprite, (int) (xScreenStart() - 25 - headShift),
                 (int) (yScreenStart() - mainCarcasSprite.hh + 6));
         b.drawRangeCheck(vertCarcasSprite, (int) (xScreenStart() + 18 + headShift),
                 (int) (yScreenStart() - mainCarcasSprite.hh + 6));
-        Sprite cross = world.g.getSprite("boss2_carcas_cross");
+        Sprite cross = world.gfx.getSprite("boss2_carcas_cross");
         b.drawTranspRangeCheck(cross, (int) (xScreenStart() - 27 - headShift),
                 (int) (yScreenStart() - mainCarcasSprite.hh - 2));
         b.drawTranspRangeCheck(cross, (int) (xScreenStart() + 16 + headShift),
@@ -166,12 +166,12 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
     }
 
     private void horizontal() {
-        BufGfx b = world.g.bufGfx;
-        Sprite mainCarcasSprite = world.g.getSprite("boss2_main_carcas");
-        b.drawRangeCheck(world.g.getSprite("boss2_carcas_horiz"),
+        BufGfx b = world.gfx.bufGfx;
+        Sprite mainCarcasSprite = world.gfx.getSprite("boss2_main_carcas");
+        b.drawRangeCheck(world.gfx.getSprite("boss2_carcas_horiz"),
                 (int) (xScreenStart() - mainCarcasSprite.hw + 6),
                 (int) (yScreenStart() - mainCarcasSprite.hh + 85 + horizYShift));
-        Sprite cross = world.g.getSprite("boss2_carcas_cross");
+        Sprite cross = world.gfx.getSprite("boss2_carcas_cross");
         b.drawTranspRangeCheck(cross, (int) (xScreenStart() - mainCarcasSprite.hw - 2),
                 (int) (yScreenStart() - mainCarcasSprite.hh + 83 + horizYShift));
         b.drawTranspRangeCheck(cross, (int) (xScreenStart() + mainCarcasSprite.hw - 8),
@@ -260,9 +260,9 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
                 if (x < 50) {
                     left = false;
                     x = 50;
-                } else if (x > world.g.w - 50) {
+                } else if (x > world.gfx.w - 50) {
                     left = true;
-                    x = world.g.w - 50;
+                    x = world.gfx.w - 50;
                 }
                 mover.move();
                 for (GunMonster gun : gunMonsters) {
@@ -275,7 +275,7 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
         }
     }
 
-    private final void dmg(Boss2Well well) {
+    private void dmg(Boss2Well well) {
         well.dmg(100, world.btr.player);
         removeFromWorld(well);
         if (well.child != null) {
@@ -283,7 +283,7 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
         }
     }
 
-    private final void removeFromWorld(Boss2Well well) {
+    private void removeFromWorld(Boss2Well well) {
         world.objsToRemove.add(well);
         world.removeFromMap(well);
         if (well.child != null) {
@@ -291,7 +291,7 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
         }
     }
 
-    private final void headUpDown() {
+    private void headUpDown() {
         if (headUp) {
             horizYShift -= Config.Monsters.Boss2.headYSpeed;
             if (horizYShift < -35) {
@@ -307,7 +307,7 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
         }
     }
 
-    private final void headLeftRight() {
+    private void headLeftRight() {
         if (headShiftOn) {
             headShift += Config.Monsters.Boss2.headXSpeed;
             if (headShift > 15) {
@@ -354,7 +354,7 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
         }
     }
 
-    private final boolean inFirstFive(GunMonster gun) {
+    private boolean inFirstFive(GunMonster gun) {
         for (int i = 0; i < 5; i++) {
             if (gunMonsters.get(i) == gun) return true;
         }

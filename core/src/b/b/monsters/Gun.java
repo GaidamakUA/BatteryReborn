@@ -31,7 +31,7 @@ public class Gun {
             double x = mon.x + xShift;
             double y = mon.y + yShift;
             double shift = Config.Monsters.Bullet.startShift +
-                    world.g.getSprite("bullet0").hh;
+                    world.gfx.getSprite("bullet0").hh;
             if (dir == 0) {
                 y = mon.yStart() - shift;
             } else if (dir == 1) {
@@ -41,7 +41,7 @@ public class Gun {
             } else {
                 x = mon.xStart() - shift;
             }
-            Bullet bullet = new Bullet(bulletSpeed, x, y, dir, world, world.g.battery.screen,
+            Bullet bullet = new Bullet(bulletSpeed, x, y, dir, world, world.gfx.battery.screen,
                     owner);
             world.objsToAdd.add(bullet);
             lastShotTime = mon.time();

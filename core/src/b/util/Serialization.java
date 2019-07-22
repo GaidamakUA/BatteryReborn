@@ -23,13 +23,6 @@ public class Serialization {
     /**
      * on error throws RuntimeException
      */
-    public static synchronized Object deserialize(File file) {
-        return deserialize(file.getAbsolutePath());
-    }
-
-    /**
-     * on error throws RuntimeException
-     */
     public static synchronized Object deserialize(String pathname) {
         ObjectInputStream s = null;
         try {

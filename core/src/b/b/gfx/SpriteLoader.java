@@ -30,18 +30,18 @@ public class SpriteLoader {
         initItems();
     }
 
-    private final static int getHeight(int lvl) {
+    private static int getHeight(int lvl) {
         if (lvl(lvl, 4)) return 123;
         if (lvl(lvl, 5) || lvl(lvl, 8)) return 100;
         if (lvl(lvl, 7)) return 77;
         return 200;
     }
 
-    private final static boolean lvl(int lvl, int version) {
+    private static boolean lvl(int lvl, int version) {
         return ((lvl - version == 100) || (lvl - version == 200) || lvl == version);
     }
 
-    private final void initDecor() {
+    private void initDecor() {
         addSprite("watcur", "water");
         addSprite("water");
         addSprite4Dir("cannon", 30);
@@ -96,11 +96,11 @@ public class SpriteLoader {
         }
     }
 
-    private final void addShop() {
+    private void addShop() {
         addSprite("shop", 510, 510);
     }
 
-    private final void addCyanBricks() {
+    private void addCyanBricks() {
         Set<String> sprites = (Set<String>) gfx.sprites.keySet();
         Set<Sprite> toAdd = new HashSet();
         for (String name : sprites) {
@@ -120,7 +120,7 @@ public class SpriteLoader {
         }
     }
 
-    private final void addSpriteUnitedSimmetricaly(String name, int w) {
+    private void addSpriteUnitedSimmetricaly(String name, int w) {
         BufGfx b = new BufGfx(w * 2, w * 2);
         Sprite sp = new Sprite(name + ".png", w, w);
         b.draw(sp, 0, 0);
@@ -134,7 +134,7 @@ public class SpriteLoader {
         gfx.putSprite(s);
     }
 
-    private final void initMonsters() {
+    private void initMonsters() {
         initBosses();
         addSprite("cannon_ball", 21);
         addSprite4Dir("bullet", 4, 9);
@@ -152,7 +152,7 @@ public class SpriteLoader {
         Sprite expl = addSprite("expl", 15);
     }
 
-    private final void initBosses() {
+    private void initBosses() {
         addSprite("pix", 1, 1);
         addSpritePlusFlip("boss1shield_left", "boss1_shield.png", 27, 63,
                 "boss1shield_right");
@@ -173,8 +173,8 @@ public class SpriteLoader {
         addSprite("boss2_well", 74, 74);
     }
 
-    private final void addSpritePlusFlip(String name, String file, int w, int h,
-                                         String flip) {
+    private void addSpritePlusFlip(String name, String file, int w, int h,
+                                   String flip) {
         Sprite left = new Sprite(file, w, h);
         putSprite(name, left);
         Sprite right = new Sprite(flip, left, true);
@@ -182,20 +182,20 @@ public class SpriteLoader {
         putSprite(flip, right);
     }
 
-    private final void initItems() {
+    private void initItems() {
         addSprite("firstaid");
         addSprite("caterpillar", 16, 46);
         addSprite("coin", 32);
     }
 
-    private final Sprite addSprite(String name) {
+    private Sprite addSprite(String name) {
         Sprite s = new Sprite(name + ".png",
                 Config.squareSize, Config.squareSize);
         putSprite(name, s);
         return s;
     }
 
-    private final Sprite addSprite(String name, String fname) {
+    private Sprite addSprite(String name, String fname) {
         Sprite s = new Sprite(fname + ".png",
                 Config.squareSize, Config.squareSize);
         putSprite(name, s);
@@ -206,7 +206,7 @@ public class SpriteLoader {
      * Original, flipped horizontaly, flipped horizontaly & verticaly,
      * flipped verticaly
      */
-    private final void addSprite4Dir(String name, int size) {
+    private void addSprite4Dir(String name, int size) {
         Sprite sprite = new Sprite(name + ".png", size, size);
         putSprite(name + "0", sprite);
 
@@ -225,7 +225,7 @@ public class SpriteLoader {
         putSprite(name + "3", s);
     }
 
-    private final void addSprite4Dir(String name, int width, int height) {
+    private void addSprite4Dir(String name, int width, int height) {
         Sprite sprite = new Sprite(name + ".png", width, height);
         putSprite(name + "0", sprite);
 
@@ -248,7 +248,7 @@ public class SpriteLoader {
         putSprite(name + "3", s);
     }
 
-    private final void addSpriteRot(String name) {
+    private void addSpriteRot(String name) {
         Sprite s = new Sprite(name + ".png", Config.squareSize,
                 Config.squareSize);
         putSprite(name + "|", s);
@@ -257,17 +257,17 @@ public class SpriteLoader {
         putSprite(name + "-", s);
     }
 
-    private final Sprite addSprite(String name, int size) {
+    private Sprite addSprite(String name, int size) {
         return addSprite(name, size, size);
     }
 
-    private final Sprite addSprite(String name, int w, int h) {
+    private Sprite addSprite(String name, int w, int h) {
         Sprite s = new Sprite(name + ".png", w, h);
         putSprite(name, s);
         return s;
     }
 
-    private final void putSprite(String name, Sprite s) {
+    private void putSprite(String name, Sprite s) {
         s.setName(name);
         gfx.putSprite(s);
     }

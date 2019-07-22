@@ -15,7 +15,7 @@ public class Str77 {
     }
 
     public static void main(String[] args) {
-        P.p(replaceAllRepeating("<a href=\"\"\"\"\"\"\"\"\"\"\"\"\"\"" +
+        P.log(replaceAllRepeating("<a href=\"\"\"\"\"\"\"\"\"\"\"\"\"\"" +
                 "\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"" +
                 "\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"" +
                 "\"\"\"\"\"\"\"http://searchportal.information.com/?epl=01540021R1\">" +

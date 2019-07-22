@@ -32,7 +32,7 @@ public class SiteStats implements Serializable {
                 stats = (SiteStats) Serialization.deserialize(saveDir + fileName);
             }
         } catch (Exception e) {
-            P.p("Error deserializing SiteStats:\n" + U77.toString(e));
+            P.log("Error deserializing SiteStats:\n" + U77.toString(e));
             stats = new SiteStats();
         }
         hitsTillAutosave = 50;
@@ -41,11 +41,11 @@ public class SiteStats implements Serializable {
     public static synchronized String save() {
         if (stats == null) {
             SiteStats.init();
-            P.p("SiteStats77: nothing to save");
+            P.log("SiteStats77: nothing to save");
             return "SiteStats77: nothing to save";
         } else {
             Serialization.serialize(stats, saveDir + fileName);
-            P.p("SiteStats77: saved");
+            P.log("SiteStats77: saved");
             return "SiteStats77: saved";
         }
     }
@@ -69,7 +69,7 @@ public class SiteStats implements Serializable {
 
     public synchronized String generate(String dir) {
         try {
-            P.p("SiteStats.generate start");
+            P.log("SiteStats.generate start");
             String saved = save();
             if (dir == null || dir.equals("")) {
                 dir = Config.Pathes.statsDir;
@@ -97,7 +97,7 @@ public class SiteStats implements Serializable {
                 hitNum++;
                 if (hitNum * 100 / hitTotal > prevProc) {
                     prevProc = hitNum * 100 / hitTotal;
-                    P.p("SiteStats.stats.generate() hits: " + prevProc + "%");
+                    P.log("SiteStats.stats.generate() hits: " + prevProc + "%");
                 }
                 if (day < Date77.dayOfYear(hit.time)) {
                     day = Date77.dayOfYear(hit.time);
@@ -110,22 +110,22 @@ public class SiteStats implements Serializable {
                         "</td><td>" + getReferer(hit.referer) + "</td><td>" + (hit.params == null ? "" : hit.params) +
                         "</td><td>" + getBrowser(hit.browser) + "</td><td>" + hit.locale + "</td></tr>\n";
             }
-            P.p("SiteStats.stats.generate().createByDays start");
+            P.log("SiteStats.stats.generate().createByDays start");
             createByDays(dir);
-            P.p("SiteStats.stats.generate().createByDays end");
+            P.log("SiteStats.stats.generate().createByDays end");
             File77.create(dir + "/stats.html", res + "</table><p>\n" +
                     "  </body>\n</html>\n");
-            P.p("SiteStats.stats.generate() finished");
+            P.log("SiteStats.stats.generate() finished");
             return saved + "<br>\n<a href=\"stats/stats.html\">ready</a>";
         } catch (Exception e) {
-            P.p("SiteStats.stats.generate() error:");
+            P.log("SiteStats.stats.generate() error:");
             e.printStackTrace();
             return "SiteStats.stats.generate() error:";
         }
     }
 
     private synchronized final void createByDays(String dir) {
-        P.p("createByDays start");
+        P.log("createByDays start");
         StringBuffer res = new StringBuffer(100000);
         res.append(
                 "<html>\n" +
@@ -150,7 +150,7 @@ public class SiteStats implements Serializable {
                         "<table border=\"1\">\n" +
                         "<tr><td><b>date" + th + "hosts" + th + "hits</b></td></tr>\n");
         List<Hit> hits = allHits();
-        P.p("sort all hits start");
+        P.log("sort all hits start");
         Collections.sort(hits, new Comparator() {
             public int compare(Object o1, Object o2) {
                 Hit h1 = (Hit) o1;
@@ -162,19 +162,19 @@ public class SiteStats implements Serializable {
                 return false;
             }
         });
-        P.p("sort all hits end");
+        P.log("sort all hits end");
         int day = 0;
         int hosts = 0;
         int hitCount = 0;
         Set<String> ips = null;
         int prevProc = -1;
-        P.p("hits.size():" + hits.size());
-        P.p("res.length:" + res.length());
-        P.p("res2 length:" + res2.length());
+        P.log("hits.size():" + hits.size());
+        P.log("res.length:" + res.length());
+        P.log("res2 length:" + res2.length());
         for (int i = 0; i < hits.size(); i++) {
             if (prevProc < (int) ((((double) i) / hits.size()) * 10000)) {
                 prevProc = (int) ((((double) i) / hits.size()) * 10000);
-                P.p("" + ((double) prevProc) / 100 + "%");
+                P.log("" + ((double) prevProc) / 100 + "%");
             }
             Hit hit = hits.get(i);
             int dayYear = Date77.dayOfYear(hit.time);
@@ -202,7 +202,7 @@ public class SiteStats implements Serializable {
                 "  </body>\n</html>\n");
         File77.create(dir + "/by_days.html", res2 + "</table><p>\n" +
                 "  </body>\n</html>\n");
-        P.p("Create by days end");
+        P.log("Create by days end");
     }
 
     private synchronized static final int hitCount(String ip, int dayYear,

@@ -75,7 +75,7 @@ public class SiteStatsUtil {
             for (Hit hit : hits) serveReferer(hit);
             return "SiteStatsUtil.serverReferers(): ok<br>\n";
         } catch (Exception e) {
-            P.p("SiteStatsUtil.serveReferers():\n" + U77.toString(e));
+            P.log("SiteStatsUtil.serveReferers():\n" + U77.toString(e));
             return "SiteStatsUtil.serverReferers(): error<br>\n" + U77.toString(e);
         }
     }

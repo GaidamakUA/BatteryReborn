@@ -10,11 +10,11 @@ import b.util.U77;
 
 public class Water extends ChanSquare {
     public Water(int x, int y, World w) {
-        super(w.g.getSprite("water"), x, y, w, true, 0);
+        super(w.gfx.getSprite("water"), x, y, w, true, 0);
     }
 
     public void changeSprite() {
-        sprite = world.g.getSprite("watcur");
+        sprite = world.gfx.getSprite("watcur");
     }
 
     public static void prepareWatCur(Battery btr) {

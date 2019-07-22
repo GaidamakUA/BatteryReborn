@@ -13,7 +13,7 @@ public abstract class Item extends Monster {
     }
 
     public void draw() {
-        world.g.bufGfx.drawTranspRangeCheck(sprite, xScreenStart(), yScreenStart());
+        world.gfx.bufGfx.drawTranspRangeCheck(sprite, xScreenStart(), yScreenStart());
     }
 
     protected void move() {

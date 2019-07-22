@@ -13,14 +13,14 @@ public class BrickManager {
     private WorldSquare[][] map;
     private int w;
     private int h;
-    private Gfx g;
+    private Gfx gfx;
     private World world;
-    private Sprite s;
+    private Sprite sprite;
 
-    protected BrickManager(WorldSquare[][] map, World world, Sprite s) {
+    protected BrickManager(WorldSquare[][] map, World world, Sprite sprite) {
         this.world = world;
-        g = world.g;
-        this.s = s;
+        gfx = world.gfx;
+        this.sprite = sprite;
         this.map = map;
         h = map.length;
         w = map[0].length;
@@ -33,7 +33,7 @@ public class BrickManager {
                 for (Drawable o : objs) {
                     if (o instanceof Square) {
                         if (((Square) o).sprite.name().startsWith("brick")) {
-                            ((Square) o).sprite = g.getSprite(prepareBrick(x, y));
+                            ((Square) o).sprite = gfx.getSprite(prepareBrick(x, y));
                         }
                     }
                 }
@@ -47,14 +47,14 @@ public class BrickManager {
         yellowBorder();
     }
 
-    private final void yellowBorder() {
+    private void yellowBorder() {
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
                 if (isGround(x, y)) {
                     if (isWall(y - 1, x - 1) || isWall(y - 1, x) || isWall(y - 1, x + 1) ||
                             isWall(y, x - 1) || isWall(y, x) || isWall(y, x + 1) ||
                             isWall(y + 1, x - 1) || isWall(y + 1, x) || isWall(y + 1, x + 1)) {
-                        YellowBorder border = new YellowBorder(g.getSprite("yellow_border"),
+                        YellowBorder border = new YellowBorder(gfx.getSprite("yellow_border"),
                                 x, y, world, false);
                         map[y][x].objs.add(border);
                         border.leftUp = isWall(y - 1, x - 1);
@@ -71,7 +71,7 @@ public class BrickManager {
         }
     }
 
-    private final boolean isGround(int x, int y) {
+    private boolean isGround(int x, int y) {
         try {
             List<Drawable> objs = map[y][x].objs;
             for (Drawable o : objs) {
@@ -89,7 +89,7 @@ public class BrickManager {
         }
     }
 
-    private final boolean isWall(int y, int x) {
+    private boolean isWall(int y, int x) {
         if (x == -1 || y == -1 || x == w || y == h) return false;
         for (Drawable d : map[y][x].objs) {
             if (d instanceof Square) {
@@ -103,7 +103,7 @@ public class BrickManager {
         return true;
     }
 
-    private final void prepareWalls() {
+    private void prepareWalls() {
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
                 List<Drawable> objs = map[y][x].objs;
@@ -111,7 +111,7 @@ public class BrickManager {
                     if (o instanceof Square) {
                         String name = ((Square) o).sprite.name();
                         if (name.startsWith("brick") && !name.equals("brickbig")) {
-                            ((Square) o).sprite = g.getSprite(prepareBrickWall(x, y));
+                            ((Square) o).sprite = gfx.getSprite(prepareBrickWall(x, y));
                         }
                     }
                 }
@@ -119,7 +119,7 @@ public class BrickManager {
         }
     }
 
-    private final void anotherBricks() {
+    private void anotherBricks() {
         int offset = 0;
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
@@ -128,14 +128,14 @@ public class BrickManager {
                     if (o instanceof Square) {
                         String name = ((Square) o).sprite.name();
                         if (name.startsWith("brick")) {
-                            int c = s.pixels[offset];
+                            int c = sprite.pixels[offset];
                             if (c != -8355776/*0xff804040*/) {
                                 if (U77.rnd() < 0.5) {
-                                    ((Square) o).sprite = g.getSprite("c_" + name);
+                                    ((Square) o).sprite = gfx.getSprite("c_" + name);
                                 } else if (U77.rnd() < 0.5) {
-                                    ((Square) o).sprite = g.getSprite("s_" + name);
+                                    ((Square) o).sprite = gfx.getSprite("s_" + name);
                                 } else {
-                                    ((Square) o).sprite = g.getSprite("ss_" + name);
+                                    ((Square) o).sprite = gfx.getSprite("ss_" + name);
                                 }
                             }
                         }
@@ -146,7 +146,7 @@ public class BrickManager {
         }
     }
 
-    private final void serveCrossingWalls() {
+    private void serveCrossingWalls() {
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
                 Square brick = getBrickSquare(x, y);
@@ -167,7 +167,7 @@ public class BrickManager {
         }
     }
 
-    private final void prepareBorders() {
+    private void prepareBorders() {
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
                 Square brickbig = getBrickSquare(x, y);
@@ -175,7 +175,7 @@ public class BrickManager {
                     if (brorbo(x - 1, y) && brorbo(x, y - 1) && brorbo(x + 1, y) && brorbo(x, y + 1)) {
                         if (!(isSprite(x - 1, y, "brick", "|") || isSprite(x + 1, y, "brick", "|") ||
                                 isSprite(x, y - 1, "brick", "-") || isSprite(x, y + 1, "brick", "-"))) {
-                            brickbig.sprite = g.getSprite("borderno");
+                            brickbig.sprite = gfx.getSprite("borderno");
                         }
                     }
                 }
@@ -183,7 +183,7 @@ public class BrickManager {
         }
     }
 
-    private final void drawBorders() {
+    private void drawBorders() {
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
                 Square b = getSquare(x, y, "border");
@@ -196,29 +196,29 @@ public class BrickManager {
                         if (up) {
                             if (right) {
                                 if (down) {
-                                    b.sprite = g.getSprite("borderno");
+                                    b.sprite = gfx.getSprite("borderno");
                                 } else {
-                                    b.sprite = g.getSprite("border2");
+                                    b.sprite = gfx.getSprite("border2");
                                 }
                             } else {/*nodown left up */
                                 if (down) {
-                                    b.sprite = g.getSprite("border1");
+                                    b.sprite = gfx.getSprite("border1");
                                 } else {
-                                    b.sprite = g.getSprite("bordercorner2");
+                                    b.sprite = gfx.getSprite("bordercorner2");
                                 }
                             }
                         } else {/*noup left*/
                             if (right) {
                                 if (down) {
-                                    b.sprite = g.getSprite("border0");
+                                    b.sprite = gfx.getSprite("border0");
                                 } else {
-                                    b.sprite = g.getSprite("bordertube-");
+                                    b.sprite = gfx.getSprite("bordertube-");
                                 }
                             } else {/*noup noright left*/
                                 if (down) {
-                                    b.sprite = g.getSprite("bordercorner1");
+                                    b.sprite = gfx.getSprite("bordercorner1");
                                 } else {
-                                    b.sprite = g.getSprite("borderalmost1");
+                                    b.sprite = gfx.getSprite("borderalmost1");
                                 }
                             }
                         }
@@ -226,29 +226,29 @@ public class BrickManager {
                         if (up) {
                             if (right) {
                                 if (down) {
-                                    b.sprite = g.getSprite("border3");
+                                    b.sprite = gfx.getSprite("border3");
                                 } else {
-                                    b.sprite = g.getSprite("bordercorner3");
+                                    b.sprite = gfx.getSprite("bordercorner3");
                                 }
                             } else {/*noleft noright*/
                                 if (down) {
-                                    b.sprite = g.getSprite("bordertube|");
+                                    b.sprite = gfx.getSprite("bordertube|");
                                 } else {
-                                    b.sprite = g.getSprite("borderalmost2");
+                                    b.sprite = gfx.getSprite("borderalmost2");
                                 }
                             }
                         } else {/*noleft noup*/
                             if (right) {
                                 if (down) {
-                                    b.sprite = g.getSprite("bordercorner0");
+                                    b.sprite = gfx.getSprite("bordercorner0");
                                 } else {
-                                    b.sprite = g.getSprite("borderalmost3");
+                                    b.sprite = gfx.getSprite("borderalmost3");
                                 }
                             } else {/*noleft noup noright*/
                                 if (down) {
-                                    b.sprite = g.getSprite("borderalmost0");
+                                    b.sprite = gfx.getSprite("borderalmost0");
                                 } else {
-                                    b.sprite = g.getSprite("bordered");
+                                    b.sprite = gfx.getSprite("bordered");
                                 }
                             }
                         }
@@ -261,7 +261,7 @@ public class BrickManager {
     /**
      * Brick is | or - and it has neighbor of another type
      */
-    private final void serveCrossingBrick(Square brick) {
+    private void serveCrossingBrick(Square brick) {
         int x = (int) (brick.x / Config.squareSize);
         int y = (int) (brick.y / Config.squareSize);
         int length = getWallLength(brick);
@@ -296,9 +296,9 @@ public class BrickManager {
         }
         if (br != null) {
             if (length > getWallLength(br)) {
-                br.sprite = g.getSprite("brickbig");
+                br.sprite = gfx.getSprite("brickbig");
             } else {
-                brick.sprite = g.getSprite("brickbig");
+                brick.sprite = gfx.getSprite("brickbig");
             }
         }
     }
@@ -306,7 +306,7 @@ public class BrickManager {
     /**
      * Brick should be - or |
      */
-    private final int getWallLength(Square brick) {
+    private int getWallLength(Square brick) {
         String name = brick.sprite.name();
         int x = (int) (brick.x / Config.squareSize);
         int y = (int) (brick.y / Config.squareSize);
@@ -341,10 +341,10 @@ public class BrickManager {
         return length;
     }
 
-    private final String prepareBrick(int x, int y) {
+    private String prepareBrick(int x, int y) {
         Square brick = getBrickSquare(x, y);
         if (brick(x - 1, y) && brick(x + 1, y)) {
-            if (notbrick(x, y - 1) || notbrick(x, y + 1)) {
+            if (notBrick(x, y - 1) || notBrick(x, y + 1)) {
                 if (y / 2 * 2 == y) {
                     return "brick1o|";
                 } else {
@@ -354,7 +354,7 @@ public class BrickManager {
                 return "brickbig";
             }
         } else if (brick(x, y - 1) && brick(x, y + 1)) {
-            if (notbrick(x - 1, y) || notbrick(x + 1, y)) {
+            if (notBrick(x - 1, y) || notBrick(x + 1, y)) {
                 if (x / 2 * 2 == x) {
                     return "brick1o-";
                 } else {
@@ -371,7 +371,7 @@ public class BrickManager {
     /**
      * The brick is not brickbig
      */
-    private final String prepareBrickWall(int x, int y) {
+    private String prepareBrickWall(int x, int y) {
         Square brick = getBrickSquare(x, y);
         String name = brick.sprite.name();
         if (name.endsWith("|")) {
@@ -398,7 +398,7 @@ public class BrickManager {
         return name;
     }
 
-    private final Square getSquare(int x, int y, String starts) {
+    private Square getSquare(int x, int y, String starts) {
         try {
             List<Drawable> objs = map[y][x].objs;
             for (Drawable d : objs) {
@@ -414,11 +414,11 @@ public class BrickManager {
         }
     }
 
-    private final Square getBrickSquare(int x, int y) {
+    private Square getBrickSquare(int x, int y) {
         return getSquare(x, y, "brick");
     }
 
-    private final boolean brickwall(int x, int y) {
+    private boolean brickwall(int x, int y) {
         try {
             List<Drawable> objs = map[y][x].objs;
             for (Drawable o : objs) {
@@ -436,7 +436,7 @@ public class BrickManager {
         }
     }
 
-    private final boolean brickEnds(int x, int y, String ends) {
+    private boolean brickEnds(int x, int y, String ends) {
         if (isSprite(x, y, "brick")) {
             Square brick = getBrickSquare(x, y);
             if (brick == null) return false;
@@ -446,19 +446,19 @@ public class BrickManager {
         }
     }
 
-    private final boolean brick(int x, int y) {
+    private boolean brick(int x, int y) {
         return isSprite(x, y, "brick");
     }
 
-    private final boolean brorbo(int x, int y) {
+    private boolean brorbo(int x, int y) {
         return isSprite(x, y, "brick") || isSprite(x, y, "border");
     }
 
-    private final boolean isSprite(int x, int y, String start, String ends) {
+    private boolean isSprite(int x, int y, String start, String ends) {
         return isSprite(x, y, start) && isSpriteEnds(x, y, ends);
     }
 
-    private final boolean isSprite(int x, int y, String start) {
+    private boolean isSprite(int x, int y, String start) {
         try {
             List<Drawable> objs = map[y][x].objs;
             for (Drawable o : objs) {
@@ -474,7 +474,7 @@ public class BrickManager {
         }
     }
 
-    private final boolean isSpriteEnds(int x, int y, String ends) {
+    private boolean isSpriteEnds(int x, int y, String ends) {
         try {
             List<Drawable> objs = map[y][x].objs;
             for (Drawable o : objs) {
@@ -490,7 +490,7 @@ public class BrickManager {
         }
     }
 
-    private final boolean notbrick(int x, int y) {
+    private boolean notBrick(int x, int y) {
         try {
             List<Drawable> objs = map[y][x].objs;
             for (Drawable o : objs) {

@@ -21,7 +21,7 @@ public class Boss2Well extends MonsterPart {
 
     protected Boss2Well(World world, Boss2AI pboss, Boss2Well pparent,
                         boolean pleft) {
-        super(world, 0, 0, world.g.getSprite("boss2_well"),
+        super(world, 0, 0, world.gfx.getSprite("boss2_well"),
                 Config.Monsters.Boss2.wellLife, pboss, 6);
         parent = pparent;
         left = pleft;
@@ -33,7 +33,7 @@ public class Boss2Well extends MonsterPart {
 
     protected void drawFromBoss() {
         if (life > 0) {
-            BufGfx b = world.g.bufGfx;
+            BufGfx b = world.gfx.bufGfx;
             if (afterDmg() || life == 0) {
                 if (afterWrongDmg()) {
                     b.drawTranspBlackRangeCheck(sprite, xScreenStart(), yScreenStart());
@@ -104,7 +104,7 @@ public class Boss2Well extends MonsterPart {
         }
     }
 
-    private final double getX() {
+    private double getX() {
         if (parent == null) {
             if (left) {
                 return boss.x - 156;
@@ -116,7 +116,7 @@ public class Boss2Well extends MonsterPart {
         }
     }
 
-    private final double getY() {
+    private double getY() {
         if (parent == null) {
             return boss.y + 25;
         } else {

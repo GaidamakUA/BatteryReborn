@@ -12,7 +12,7 @@ import b.gfx.Screen;
 import java.util.*;
 
 public class World {
-    public Gfx g;
+    public Gfx gfx;
     public Battery btr;
     public List<Monster> objsToAdd;
     public List<Monster> activeObjs;
@@ -30,7 +30,7 @@ public class World {
 
     public World(Gfx gfx) {
         nextId = 0;
-        g = gfx;
+        this.gfx = gfx;
         btr = gfx.battery;
         lvl = 1;
         new WorldLoader(this, false);
@@ -85,32 +85,6 @@ public class World {
             }
         }
         return new ArrayList<Drawable>(res);
-    }
-
-    public List<Drawable> getNotChangeable(int xScreen, int yScreen,
-                                           int xScreenBorder, int yScreenBorder) {
-        Screen scr = btr.screen;
-        int x = xScreen;
-        int y = scr.camY() + yScreen;
-        int xBorder = xScreenBorder;
-        int yBorder = scr.camY() + yScreenBorder;
-        Set<Drawable> res = new HashSet<Drawable>();
-        xBorder = (xBorder - 1) / Config.squareSize + 1;
-        yBorder = (yBorder - 1) / Config.squareSize + 1;
-        int xStart = (int) (x) / Config.squareSize;
-        for (int yy = (int) (y) / Config.squareSize; yy < yBorder; yy++) {
-            for (int xx = xStart; xx < xBorder; xx++) {
-                List<Drawable> drawables = get(xx, yy).objs;
-                for (Drawable d : drawables) {
-                    if (!(d instanceof Changeable)) {
-                        res.add(d);
-                    }
-                }
-            }
-        }
-        List<Drawable> list = new ArrayList<Drawable>(res);
-        Collections.sort(list);
-        return list;
     }
 
     public List<Drawable> getChangeablesOnScreen() {

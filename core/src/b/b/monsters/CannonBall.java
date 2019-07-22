@@ -13,7 +13,7 @@ public class CannonBall extends Monster {
 
     public CannonBall(double x, double y, int dir, World world,
                       Screen screen) {
-        super(world, x, y, world.g.getSprite("cannon_ball"), 0.000001);
+        super(world, x, y, world.gfx.getSprite("cannon_ball"), 0.000001);
         lvl = 2;
         this.dir = dir;
         double speed = Config.Monsters.Cannon.ballSpeed;
@@ -22,7 +22,7 @@ public class CannonBall extends Monster {
     }
 
     public void draw() {
-        world.g.bufGfx.drawTranspRangeCheck(sprite, xScreenStart(), yScreenStart());
+        world.gfx.bufGfx.drawTranspRangeCheck(sprite, xScreenStart(), yScreenStart());
     }
 
     protected void move() {

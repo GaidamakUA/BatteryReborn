@@ -33,11 +33,11 @@ public class TopPlayers implements Serializable {
                 topPlayers = new TopPlayers();
                 players = (ArrayList<Tripple>) Serialization.
                         deserialize(Config.Pathes.statsDir + "top_players.ser");
-                P.p("top_players.ser loaded successfully");
+                P.log("top_players.ser loaded successfully");
             }
         } catch (Exception e) {
             topPlayers = new TopPlayers();
-            P.p("new TopPlayers created");
+            P.log("new TopPlayers created");
         }
     }
 

@@ -12,7 +12,7 @@ public class Expl extends Item {
 
     public Expl(double x, double y, World world, double xsp, double ysp,
                 Explosion expl) {
-        super(world, x, y, world.g.getSprite("expl"));
+        super(world, x, y, world.gfx.getSprite("expl"));
         this.expl = expl;
         lvl = 5;
         double speed = U77.rnd(maxSpeed * 0.4) + (maxSpeed * 0.6);
@@ -35,6 +35,6 @@ public class Expl extends Item {
     }
 
     public void draw(double perc) {
-        world.g.bufGfx.drawTranspRangeCheck(sprite, xScreenStart(), yScreenStart());
+        world.gfx.bufGfx.drawTranspRangeCheck(sprite, xScreenStart(), yScreenStart());
     }
 }

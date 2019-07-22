@@ -14,14 +14,14 @@ public class Tank extends Monster {
     private Gfx gfx;
 
     public Tank(double x, double y, World world, int direction) {
-        super(world, x, y, world.g.getSprite("tank_base"),
+        super(world, x, y, world.gfx.getSprite("tank_base"),
                 Config.Monsters.Tank.life * Config.Damages.bullet);
         ai = new TankAI(this, world, direction);
-        Sprite caterpillar = world.g.getSprite("caterpillar");
+        Sprite caterpillar = world.gfx.getSprite("caterpillar");
         gun = new Gun(this, world, 1, Config.Monsters.Tank.bulletSpeed,
                 null);
         tankGfx = new TankGfx(this, caterpillar);
-        gfx = world.g;
+        gfx = world.gfx;
     }
 
     protected void move() {

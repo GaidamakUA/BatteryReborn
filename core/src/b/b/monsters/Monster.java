@@ -103,7 +103,7 @@ public abstract class Monster extends Drawable implements Changeable {
     }
 
     public void draw() {
-        BufGfx b = world.g.bufGfx;
+        BufGfx b = world.gfx.bufGfx;
         if (afterDmg() || life == 0) {
             if (afterWrongDmg()) {
                 b.drawTranspBlackRangeCheck(sprite, xScreenStart(), yScreenStart());
@@ -242,6 +242,6 @@ public abstract class Monster extends Drawable implements Changeable {
     }
 
     protected double time() {
-        return world.g.battery.time.time;
+        return world.gfx.battery.time.time;
     }
 }

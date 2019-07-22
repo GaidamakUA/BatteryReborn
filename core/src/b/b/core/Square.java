@@ -30,7 +30,7 @@ public class Square extends Drawable {
                   World w, boolean isShape, int lvl) {
         super(x, y, width, height, isShape, lvl, w);
         sprite = s;
-        b = w.g.bufGfx;
+        b = w.gfx.bufGfx;
     }
 
     public void draw() {

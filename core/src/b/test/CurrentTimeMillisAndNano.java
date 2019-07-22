@@ -13,13 +13,13 @@ public class CurrentTimeMillisAndNano {
                 if (c > current) {
                     current = c;
                     nano = n;
-                    P.p("c:" + current + " n/1000+:" + (nano / 1000 + 1235206099170L) + " dif:" +
+                    P.log("c:" + current + " n/1000+:" + (nano / 1000 + 1235206099170L) + " dif:" +
                             (current - (nano / 1000 + 1235206099170L)));
                     break;
                 } else if (n > nano) {
                     current = c;
                     nano = n;
-                    P.p("c:" + current + " n/1000+:" + (nano / 1000 + 1235206099170L) + " dif:" +
+                    P.log("c:" + current + " n/1000+:" + (nano / 1000 + 1235206099170L) + " dif:" +
                             (current - (nano / 1000 + 1235206099170L)));
                     break;
                 }

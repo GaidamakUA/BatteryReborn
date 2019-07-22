@@ -13,7 +13,7 @@ public class Bullet extends Monster {
 
     public Bullet(double speed, double x, double y, int dir, World world,
                   Screen screen, Object owner) {
-        super(world, x, y, world.g.getSprite("bullet" + dir), 0.000001);
+        super(world, x, y, world.gfx.getSprite("bullet" + dir), 0.000001);
         this.owner = owner;
         lvl = 5;
         this.dir = dir;
@@ -22,7 +22,7 @@ public class Bullet extends Monster {
     }
 
     public void draw() {
-        world.g.bufGfx.drawRangeCheck(sprite, xScreenStart(), yScreenStart());
+        world.gfx.bufGfx.drawRangeCheck(sprite, xScreenStart(), yScreenStart());
     }
 
     protected void move() {

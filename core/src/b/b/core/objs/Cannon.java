@@ -5,11 +5,9 @@ import b.b.core.World;
 import b.b.monsters.InvisibleCannon;
 
 public class Cannon extends ChanSquare {
-    private int dir;
 
     public Cannon(int dir, int xMap, int yMap, World w) {
-        super(w.g.getSprite("cannon" + dir), xMap, yMap, w, true, 3);
-        this.dir = dir;
+        super(w.gfx.getSprite("cannon" + dir), xMap, yMap, w, true, 3);
         new InvisibleCannon(w, xMap * Config.squareSize, yMap * Config.squareSize, dir);
     }
 

@@ -15,7 +15,7 @@ public class GunMonster extends MonsterPart {
     private double k;
 
     protected GunMonster(World world, ComplexAI boss, int pshift) {
-        super(world, 0, 0, world.g.getSprite("boss2_gun"), Config.Monsters.Boss2.gunLife,
+        super(world, 0, 0, world.gfx.getSprite("boss2_gun"), Config.Monsters.Boss2.gunLife,
                 boss, 3);
         shift = pshift;
         partY = -15;
@@ -27,7 +27,7 @@ public class GunMonster extends MonsterPart {
 
     public void draw() {
         super.draw();
-        world.g.bufGfx.drawRangeCheck(world.g.getSprite("boss2_gun_part"), xScreenStart() - 1,
+        world.gfx.bufGfx.drawRangeCheck(world.gfx.getSprite("boss2_gun_part"), xScreenStart() - 1,
                 (int) (yScreenStart() + 23 + partY));
     }
 

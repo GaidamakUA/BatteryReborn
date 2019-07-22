@@ -55,7 +55,7 @@ public class Boss1AI extends InvisibleMonster implements ComplexAI {
     }
 
     private void initSprites() {
-        Gfx g = world.g;
+        Gfx g = world.gfx;
         topSprite = g.getSprite("boss1_top");
         bottomSprite = g.getSprite("boss1_bottom");
         leftSprite = g.getSprite("boss1shield_left");
@@ -112,7 +112,7 @@ public class Boss1AI extends InvisibleMonster implements ComplexAI {
     public void draw() {
         if (lastDraw != time()) {
             lastDraw = time();
-            BufGfx b = world.g.bufGfx;
+            BufGfx b = world.gfx.bufGfx;
             b.drawTranspRangeCheck(core, (int) (xScreenStart() - core.hw),
                     (int) (yScreenStart() - core.hh));
         }

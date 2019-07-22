@@ -20,7 +20,7 @@ public class Player extends Monster {
     public Player(Keyboard77 keyboard, World world, int pscores, int plifes,
                   int pcoins, PlayerExtras pextras) {
         super(world, (double) world.width / 2 * Config.squareSize,
-                (world.height - 3) * Config.squareSize, world.g.getSprite("plane"),
+                (world.height - 3) * Config.squareSize, world.gfx.getSprite("plane"),
                 Config.Monsters.Player.life * Config.Damages.bullet);
         scores = pscores;
         lifes = plifes;
@@ -80,7 +80,7 @@ public class Player extends Monster {
     protected void justDied() {
         super.justDied();
         lifes--;
-        Battery btr = world.g.battery;
+        Battery btr = world.gfx.battery;
         btr.timeWhenLevelCompleted = time();
         btr.logger.log("gameover " + U77.sprecision(time()));
         if (lifes == 0) {
@@ -93,9 +93,9 @@ public class Player extends Monster {
     }
 
     public void draw() {
-        BufGfx b = world.g.bufGfx;
+        BufGfx b = world.gfx.bufGfx;
         if (extras.immortal(world.btr.time.time)) {
-            b.drawTransp(world.g.getSprite("immune"), xScreenStart(), yScreenStart());
+            b.drawTransp(world.gfx.getSprite("immune"), xScreenStart(), yScreenStart());
         } else super.draw();
     }
 

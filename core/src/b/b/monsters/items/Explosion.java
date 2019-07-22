@@ -19,7 +19,7 @@ public class Explosion extends Item {
     }
 
     public Explosion(double x, double y, World world, Monster m, int k) {
-        super(world, x, y, world.g.getSprite("expl"));
+        super(world, x, y, world.gfx.getSprite("expl"));
         lvl = 7;
         this.k = k - 1;
         list = new ArrayList<Expl>();

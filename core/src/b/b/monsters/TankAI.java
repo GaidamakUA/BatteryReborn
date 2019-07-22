@@ -35,11 +35,11 @@ public class TankAI {
         timeWhenStand = -9999;
         timeWhenMoved = -9999;
         stays = false;
-        p = world.g.battery.player;
+        p = world.gfx.battery.player;
     }
 
     private final double time() {
-        return world.g.battery.time.time;
+        return world.gfx.battery.time.time;
     }
 
     protected static final int opposite(int dir) {
@@ -89,10 +89,6 @@ public class TankAI {
 
     private final boolean stood() {
         return (time() - timeWhenStand > Config.Monsters.Tank.stayPeriod) && stays;
-    }
-
-    private final boolean stays() {
-        return (time() - timeWhenStand <= Config.Monsters.Tank.stayPeriod) && stays;
     }
 
     private final boolean onPlayerLine() {

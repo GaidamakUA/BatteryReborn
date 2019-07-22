@@ -25,11 +25,6 @@ public abstract class Drawable implements Comparable {
 
     protected World world;
 
-    public Drawable(double x, double y, int size, boolean isShape,
-                    int lvl, World world) {
-        this(x, y, size, size, isShape, lvl, world);
-    }
-
     public Drawable(double x, double y, int width, int height,
                     boolean isShape, int lvl, World world) {
         this.world = world;

@@ -22,7 +22,7 @@ public class ConfigLoader {
             setLevels(getParam("levels"));
         } catch (Exception e) {
             try {
-                P.p("probably error getting levels parameter:[" + getParam("levels") + "]");
+                P.log("probably error getting levels parameter:[" + getParam("levels") + "]");
                 e.printStackTrace();
             } catch (Exception ignored) {
             }
@@ -122,7 +122,7 @@ public class ConfigLoader {
         try {
             return Double.parseDouble(getParam(paramName));
         } catch (Exception e) {
-            P.p("error getting " + paramName + " parameter");
+            P.log("error getting " + paramName + " parameter");
             return defaultValue;
         }
     }
@@ -131,7 +131,7 @@ public class ConfigLoader {
         try {
             return (int) Double.parseDouble(getParam(name));
         } catch (Exception e) {
-            P.p("error getting " + name + " parameter");
+            P.log("error getting " + name + " parameter");
             return defaultValue;
         }
     }
@@ -140,7 +140,7 @@ public class ConfigLoader {
         try {
             return getParam(paramName).equals("true");
         } catch (Exception e) {
-            P.p("error getting " + paramName + " parameter");
+            P.log("error getting " + paramName + " parameter");
             return defaultValue;
         }
     }
