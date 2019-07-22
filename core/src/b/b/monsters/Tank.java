@@ -39,7 +39,7 @@ public class Tank extends Monster {
     }
 
     protected boolean onMonster(Monster m) {
-        if ((m instanceof Heli) || (m instanceof EnPlane)) return false;
+        if ((m instanceof Helicopter) || (m instanceof EnPlane)) return false;
         if (!(m instanceof Tank)) return super.onMonster(m);
         removeFrom(m);
         ai.dir = TankAI.opposite(ai.dir);

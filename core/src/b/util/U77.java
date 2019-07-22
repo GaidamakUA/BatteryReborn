@@ -9,7 +9,7 @@ public class U77 {
 
     private static Random rnd = new Random(77);
 
-    public static final void dropRandom() {
+    public static void dropRandom() {
         rnd = new Random(77);
     }
 
@@ -22,7 +22,7 @@ public class U77 {
      * ----------------> kk
      * 0   |>center<|   1
      */
-    public static final double k(double kk, double center) {
+    public static double k(double kk, double center) {
         double k = (kk <= 0.5) ? kk : 1 - kk;
         center /= 2;
         return (k > 0.5 - center) ? 0 : (0.5 - center - k) / (0.5 - center);
@@ -71,10 +71,6 @@ public class U77 {
         return (r == b) ? 0 : r;
     }
 
-    public static boolean brem(int a, int b) {
-        return rem(a, b) == 0;
-    }
-
     public static double rnd() {
         return rnd.nextDouble();
     }
@@ -85,16 +81,6 @@ public class U77 {
 
     public static double rnd(double max) {
         return rnd.nextDouble() * max;
-    }
-
-    public static double rnd(double min, double max) {
-        return rnd.nextDouble() * (max - min) + min;
-    }
-
-    public static String leadZeros(String s, int length) {
-        if (s.startsWith("-")) return "-" + repeat("0", length - s.length()) +
-                s.substring(1);
-        return repeat("0", length - s.length()) + s;
     }
 
     public static String sprecision(double d) {
@@ -115,7 +101,7 @@ public class U77 {
     public static String ssprecision(double d, int afterDot) {
         if (afterDot == 0) return "" + (int) (d + 0.5);
         String res = sprecision(d, afterDot);
-        if (res.indexOf(".") == -1) {
+        if (!res.contains(".")) {
             return res + "." + repeat("0", afterDot);
         } else {
             int aftDot = res.length() - 1 - res.indexOf(".");
@@ -147,8 +133,8 @@ public class U77 {
     public static String toString(Exception e) {
         String res = "" + e.getClass().getName() + " " + e.getMessage();
         StackTraceElement[] stack = e.getStackTrace();
-        for (int i = 0; i < stack.length; i++) {
-            res += " | " + stack[i];
+        for (StackTraceElement stackTraceElement : stack) {
+            res += " | " + stackTraceElement;
         }
         return res + "\n";
     }

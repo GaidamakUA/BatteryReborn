@@ -101,7 +101,6 @@ public class Player extends Monster {
 
     protected void dmg(double dmg, double time, Object cause) {
         if (!extras.immortal(world.btr.time.time)) {
-            double prevLife = life;
             super.dmg(dmg, time, cause);
         }
     }

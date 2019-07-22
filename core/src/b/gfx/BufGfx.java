@@ -260,29 +260,6 @@ public class BufGfx {
         }
     }
 
-    public final void drawBlackRangeCheck(int[] p, int width, int height, int x,
-                                          int y) {
-        int xStart = x < 0 ? 0 : x;
-        int yStart = y < 0 ? 0 : y;
-        int xBorder = x + width;
-        int yBorder = y + height;
-        int xxBorder = xBorder > w ? w : xBorder;
-        int yyBorder = yBorder > h ? h : yBorder;
-        int pixel = 0;
-        for (int yy = y; yy < yBorder; yy++) {
-            int offset = yy * w + x;
-            for (int xx = x; xx < xBorder; xx++) {
-                int c = p[pixel++];
-                if ((c == 0xff000000) && (xx >= xStart && xx < xxBorder && yy >= yStart &&
-                        yy < yyBorder)) {
-                    pixels[offset++] = c;
-                } else {
-                    offset++;
-                }
-            }
-        }
-    }
-
     public final void drawTranspWhiteRangeCheck(int[] p, int width, int height, int x,
                                                 int y) {
         int xStart = x < 0 ? 0 : x;

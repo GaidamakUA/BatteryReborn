@@ -28,22 +28,12 @@ public class Config {
         return Str77.toString(levels);
     }
 
-    public class Server {
-        public static final String site = "btrgame.com";
-        public static final int port = 6563;
-    }
-
     public static class Intervals {
         public static double nextLevelDelay = 700;
         public static double afterShotTime = 309;
         public static final double fpsLogPeriod = 10000;
         public static final double immortality = 5000;
         public static double afterBossPeriod = 6000;
-    }
-
-    public static class Pathes {
-        public static final String rootDir = "C:\\tomcat\\webapps\\ROOT\\";
-        public static final String statsDir = rootDir + "battery\\";
     }
 
     public static class Monsters {

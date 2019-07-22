@@ -17,7 +17,7 @@ public class ConfigLoader {
         logConfig();
     }
 
-    private final void initConfig() {
+    private void initConfig() {
         try {
             setLevels(getParam("levels"));
         } catch (Exception e) {
@@ -78,7 +78,7 @@ public class ConfigLoader {
                 Config.Damages.cannonBall);
     }
 
-    private final void logConfig() {
+    private void logConfig() {
         log("start clienttime " + System.currentTimeMillis());
         log("version " + U77.sprecision(Config.version, 2));
         log("levels " + Config.getLevelsString());
@@ -109,16 +109,16 @@ public class ConfigLoader {
         log("dmgCannonBall " + Config.Damages.cannonBall);
     }
 
-    private final void log(String s) {
+    private void log(String s) {
         btr.logger.log(s);
     }
 
-    public static final void setLevels(String s) {
+    public static void setLevels(String s) {
         Integer[] lvls = Str77.integerArr(s);
         Config.levels = Arrays.asList(lvls);
     }
 
-    private final double getDouble(String paramName, double defaultValue) {
+    private double getDouble(String paramName, double defaultValue) {
         try {
             return Double.parseDouble(getParam(paramName));
         } catch (Exception e) {
@@ -127,7 +127,7 @@ public class ConfigLoader {
         }
     }
 
-    private final int getInt(String name, int defaultValue) {
+    private int getInt(String name, int defaultValue) {
         try {
             return (int) Double.parseDouble(getParam(name));
         } catch (Exception e) {
@@ -136,7 +136,7 @@ public class ConfigLoader {
         }
     }
 
-    private final boolean getBool(String paramName, boolean defaultValue) {
+    private boolean getBool(String paramName, boolean defaultValue) {
         try {
             return getParam(paramName).equals("true");
         } catch (Exception e) {
@@ -148,7 +148,7 @@ public class ConfigLoader {
     /**
      * @return null on error
      */
-    private final String getParam(String name) {
+    private String getParam(String name) {
         throw new RuntimeException("error getting " + name + " parameter");
     }
 }

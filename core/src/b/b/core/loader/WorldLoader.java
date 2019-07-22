@@ -261,8 +261,8 @@ public class WorldLoader {
     }
 
     private void heli(int x, int y) {
-        Heli heli = new Heli(squareCenter(x), squareCenter(y), world, 1);
-        world.objsToAddInTime.add(heli);
+        Helicopter helicopter = new Helicopter(squareCenter(x), squareCenter(y), world, 1);
+        world.objsToAddInTime.add(helicopter);
     }
 
     private void tank(int x, int y) {

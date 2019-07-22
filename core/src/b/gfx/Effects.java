@@ -56,10 +56,6 @@ public class Effects {
         }
     }
 
-    public final void dirt(int c, int randomSeed) {
-        dirt(c, randomSeed, Config.Gfx.dirtK);
-    }
-
     public final void dirt(int c, int randomSeed, double k) {
         Random r = new Random(randomSeed);
         int[] p = b.pixels;
@@ -76,24 +72,6 @@ public class Effects {
         int[] p = b.pixels;
         for (int i = p.length - 1; i >= 0; i--) {
             p[i] = C.dark(p[i], r.nextDouble() * Config.Gfx.dirtK + Config.Gfx.restDirtK);
-        }
-    }
-
-    public final void red(int c, double red) {//todo ispoljzovatj etot effekt onLandingGround
-        int[] p = b.pixels;
-        int[] rgb = C.rgb(c);
-        int cc = C.c((int) (red * 255), rgb[1], rgb[2]);
-        for (int i = p.length - 1; i >= 0; i--) {
-            if (p[i] == c) p[i] = cc;
-        }
-    }
-
-    public final void inv() {
-        int[] p = b.pixels;
-        int c;
-        for (int i = p.length - 1; i >= 0; i--) {
-            c = p[i];
-            if (c != 0xffffffff && c != 0xff000000) p[i] = C.inv(c);
         }
     }
 }

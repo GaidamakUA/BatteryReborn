@@ -7,14 +7,14 @@ import b.b.core.objs.Water;
 import b.gfx.Sprite;
 import b.util.U77;
 
-public class Heli extends Monster {
+public class Helicopter extends Monster {
     /**
      * Direction: 0-up, 1-right, 2-down, 3-left
      */
     private int dir;
     private Sprite flipped;
 
-    public Heli(double x, double y, World world, int direction) {
+    public Helicopter(double x, double y, World world, int direction) {
         super(world, x, y, world.gfx.getSprite("heli"),
                 Config.Monsters.Heli.life * Config.Damages.bullet);
         lvl = 5;
@@ -35,7 +35,6 @@ public class Heli extends Monster {
         Sprite blades = world.gfx.getSprite("heli_blades" +
                 U77.rem((int) (world.gfx.battery.time.time *
                         Config.Monsters.Heli.bladesK), 4));
-        int shift = (int) blades.hh;
         if (dir == 3) {
             world.gfx.bufGfx.drawTranspTrRangeCheck(blades, xScreenStart(),
                     yScreenStart(), 0.7);
@@ -73,7 +72,7 @@ public class Heli extends Monster {
 
     protected boolean onMonster(Monster m) {
         if (m instanceof Tank) return false;
-        if (!(m instanceof Heli)) return super.onMonster(m);
+        if (!(m instanceof Helicopter)) return super.onMonster(m);
         removeFrom(m);
         mover.stop();
         m.mover.stop();

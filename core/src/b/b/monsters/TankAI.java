@@ -38,11 +38,11 @@ public class TankAI {
         p = world.gfx.battery.player;
     }
 
-    private final double time() {
+    private double time() {
         return world.gfx.battery.time.time;
     }
 
-    protected static final int opposite(int dir) {
+    protected static int opposite(int dir) {
         return U77.rem(dir + 2, 4);
     }
 
@@ -83,20 +83,20 @@ public class TankAI {
         }
     }
 
-    private final boolean movedEnough() {
+    private boolean movedEnough() {
         return (time() - timeWhenMoved > Config.Monsters.Tank.minMovePeriod && !stays);
     }
 
-    private final boolean stood() {
+    private boolean stood() {
         return (time() - timeWhenStand > Config.Monsters.Tank.stayPeriod) && stays;
     }
 
-    private final boolean onPlayerLine() {
+    private boolean onPlayerLine() {
         return (tank.x >= p.xStart() && tank.x <= p.xEnd()) ||
                 (tank.y >= p.yStart() && tank.y <= p.yEnd());
     }
 
-    protected final void turnRnd90() {
+    protected void turnRnd90() {
         if (U77.rnd() > 0.5) {
             dir++;
             if (dir == 4) dir = 0;
@@ -106,7 +106,7 @@ public class TankAI {
         }
     }
 
-    private final void moveDir() {
+    private void moveDir() {
         double speed = Config.Monsters.Tank.speed * Time77.STEP;
         if (dir == 0) {
             tank.y -= speed;
@@ -120,7 +120,7 @@ public class TankAI {
     /**
      * To come online
      */
-    private final int dirToPlayer() {
+    private int dirToPlayer() {
         if (tank.x <= p.x) {
             double xDist = p.x - tank.x;
             if (tank.y <= p.y) {
@@ -158,7 +158,7 @@ public class TankAI {
         }
     }
 
-    private final int anotherDirToPlayer() {
+    private int anotherDirToPlayer() {
         if (tank.x <= p.x) {
             double xDist = p.x - tank.x;
             if (tank.y <= p.y) {

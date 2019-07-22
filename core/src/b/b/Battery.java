@@ -21,11 +21,8 @@ import java.applet.AudioClip;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 public class Battery extends BatteryGame {
-    /*for gfx need*/
-    public static Random r = new Random();
     public World world;
     public Player player;
     public Screen screen;
