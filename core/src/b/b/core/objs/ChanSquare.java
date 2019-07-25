@@ -39,8 +39,8 @@ public abstract class ChanSquare extends Square implements Changeable {
 
     protected boolean onPlayer() {
         Player p = world.btr.player;
-        return ((new Rectangle2D.Double(p.xStart(), p.yStart(), p.w, p.h)).intersects(
-                new Rectangle2D.Double(xStart(), yStart(), w, h)));
+        return ((new Rectangle2D.Double(p.xStart(), p.yStart(), p.width, p.height)).intersects(
+                new Rectangle2D.Double(xStart(), yStart(), width, height)));
     }
 
     public void act() {

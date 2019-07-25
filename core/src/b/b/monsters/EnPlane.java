@@ -12,7 +12,7 @@ public class EnPlane extends Monster {
     public EnPlane(double x, double y, World world) {
         super(world, x, y, world.gfx.getSprite("enplane"),
                 Config.Monsters.EnPlane.life * Config.Damages.bullet);
-        lvl = 5;
+        zLayer = 5;
         final double speed = Config.Monsters.EnPlane.speed;
         mover = new Mover(this, Config.Monsters.EnPlane.shiftSpeed, 0, speed);
         mover.setSpeed(speed, 2);

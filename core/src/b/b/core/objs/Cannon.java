@@ -13,8 +13,8 @@ public class Cannon extends ChanSquare {
 
     public void draw() {
         System.out.println("draw");
-        b.drawRangeCheck(sprite, (int) (x - hw),
-                (int) (y - hh - screen.cameraY()) + chanSquareBonus());
+        b.drawRangeCheck(sprite, (int) (x - halfWidth),
+                (int) (y - halfHeight - screen.cameraY()) + chanSquareBonus());
     }
 
     public void changeSprite() {

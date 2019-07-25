@@ -37,7 +37,7 @@ public class Shop {
                     if (x >= 161 && y >= 99 && x < 224 && y < 162) {
                         if (p.getCoins() >= 100) {
                             p.minusCoins(100);
-                            p.lifes++;
+                            p.lives++;
                         }
                     } else if (x >= 161 && y >= 173 && x < 224 && y < 236) {
                         if (p.getCoins() >= 20) {

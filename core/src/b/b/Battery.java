@@ -87,7 +87,7 @@ public class Battery extends BatteryGame {
     }
 
     private void init2() {
-        if (player != null && player.lifes > 0) {
+        if (player != null && player.lives > 0) {
             world.restartLevel();
         } else {
             intro = null;

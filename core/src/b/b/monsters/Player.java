@@ -9,7 +9,7 @@ import b.gfx.BufGfx;
 import b.util.U77;
 
 public class Player extends Monster {
-    public int lifes;
+    public int lives;
     private int scores;
     public double bullets;
     public PlayerExtras extras;
@@ -23,13 +23,12 @@ public class Player extends Monster {
                 (world.height - 3) * Config.squareSize, world.gfx.getSprite("plane"),
                 Config.Monsters.Player.life * Config.Damages.bullet);
         scores = pscores;
-        lifes = plifes;
+        lives = plifes;
         coins = pcoins;
         extras = pextras;
-        screen = world.btr.screen;
         screen.setCameraY(world.height * Config.squareSize - screen.h, world);
         kbd = keyboard;
-        lvl = 5;
+        zLayer = 5;
         lastShotTime = 0;
         mover = new Mover(this, Config.Monsters.Player.maxStrafeSpeed,
                 Config.Monsters.Player.maxSpeed, Config.Monsters.Player.minSpeed);
@@ -79,11 +78,11 @@ public class Player extends Monster {
 
     protected void justDied() {
         super.justDied();
-        lifes--;
+        lives--;
         Battery btr = world.gfx.battery;
         btr.timeWhenLevelCompleted = time();
         btr.logger.log("gameover " + U77.sprecision(time()));
-        if (lifes == 0) {
+        if (lives == 0) {
             btr.logger.log("GAMEOVER");
         }
     }
@@ -116,17 +115,17 @@ public class Player extends Monster {
     protected boolean checkScreenCollision() {
         boolean moved = false;
         if (xStart() < 0) {
-            x = hw;
+            x = halfWidth;
             moved = true;
         } else if (xEnd() > screen.xEnd()) {
-            x = screen.xEnd() - hw;
+            x = screen.xEnd() - halfWidth;
             moved = true;
         }
         if (yStart() < screen.camY()) {
-            y = screen.camY() + hh;
+            y = screen.camY() + halfHeight;
             moved = true;
         } else if (yEnd() > screen.yEnd()) {
-            y = screen.yEnd() - hh;
+            y = screen.yEnd() - halfHeight;
             moved = true;
         }
         return moved;
@@ -138,7 +137,7 @@ public class Player extends Monster {
             bullets--;
             Bullet bullet = new Bullet(Config.Monsters.Bullet.speed, x, yStart() -
                     Config.Monsters.Bullet.startShift, 0, world, screen, this);
-            bullet.y -= bullet.hh;
+            bullet.y -= bullet.halfHeight;
             world.objectsToAdd.add(bullet);
             lastShotTime = time();
         }

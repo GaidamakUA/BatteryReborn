@@ -224,8 +224,8 @@ public abstract class Monster extends Drawable implements Changeable {
     protected void removeFrom(Drawable o) {
         double xCenterDist = x - o.x;
         double yCenterDist = y - o.y;
-        double xDist = hw + o.hw;
-        double yDist = hh + o.hh;
+        double xDist = halfWidth + o.halfWidth;
+        double yDist = halfHeight + o.halfHeight;
         if (xDist - Math.abs(xCenterDist) < yDist - Math.abs(yCenterDist)) {
             if (xCenterDist < 0) {
                 x = o.x - xDist;

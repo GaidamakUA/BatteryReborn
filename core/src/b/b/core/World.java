@@ -161,18 +161,18 @@ public class World {
     }
 
     private int xMapStart(Drawable obj) {
-        return (int) ((obj.x - obj.hw)) / Config.squareSize;
+        return (int) ((obj.x - obj.halfWidth)) / Config.squareSize;
     }
 
     private int yMapStart(Drawable obj) {
-        return (int) ((obj.y - obj.hh)) / Config.squareSize;
+        return (int) ((obj.y - obj.halfHeight)) / Config.squareSize;
     }
 
     private int xMapBorder(Drawable obj) {
-        return (int) ((obj.x + obj.hw) - 0.0001) / Config.squareSize + 1;
+        return (int) ((obj.x + obj.halfWidth) - 0.0001) / Config.squareSize + 1;
     }
 
     private int yMapBorder(Drawable obj) {
-        return (int) ((obj.y + obj.hh) - 0.0001) / Config.squareSize + 1;
+        return (int) ((obj.y + obj.halfHeight) - 0.0001) / Config.squareSize + 1;
     }
 }

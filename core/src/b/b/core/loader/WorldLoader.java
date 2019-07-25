@@ -73,7 +73,7 @@ public class WorldLoader {
                 gfx.battery.logger.log("newgame " + U77.sprecision(gfx.battery.time.time));
             } else {
                 Player p = gfx.battery.player;
-                gfx.battery.player = new Player(battery.kbd, world, p.getScores(), p.lifes,
+                gfx.battery.player = new Player(battery.kbd, world, p.getScores(), p.lives,
                         p.getCoins(), p.extras);
                 gfx.battery.logger.log("newlife " + U77.sprecision(gfx.battery.time.time));
             }

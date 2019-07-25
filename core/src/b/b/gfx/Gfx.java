@@ -63,7 +63,7 @@ public class Gfx {
                     Config.Intervals.nextLevelDelay) {
                 if (battery.player.life == 0) {
                     console.addString("GAME OVER");
-                    if (battery.player.lifes > 0) {
+                    if (battery.player.lives > 0) {
                         console.addString("TO BE CONTINUED...");
                     }
                 } else {
@@ -89,7 +89,7 @@ public class Gfx {
         percentBar(p.bullets, 0, 2, h - 70, "ic_ammo");
         percentBar(p.getCoins(), 0, 2, h - 47, "ic_coin");
         percentBar(p.life, p.maxLife, 2, h - 24, "ic_plane");
-        for (int i = 0; i < p.lifes; i++) {
+        for (int i = 0; i < p.lives; i++) {
             bufGfx.drawTransp(getSprite("ic_plane"), 106 + (i * 15), h - 24 + 3);
         }
         if (p.extras.immortalities > 0) {

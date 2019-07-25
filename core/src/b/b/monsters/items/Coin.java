@@ -12,7 +12,7 @@ public class Coin extends Item {
 
     public Coin(double x, double y, World world) {
         super(world, x, y, world.gfx.getSprite("coin"));
-        lvl = 3;
+        zLayer = 3;
         prevFrameTime = -999;
     }
 

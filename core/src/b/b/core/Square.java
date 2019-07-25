@@ -34,8 +34,8 @@ public class Square extends Drawable {
     }
 
     public void draw() {
-        b.drawRangeCheck(sprite, (int) (x - hw),
-                (int) (y - hh - screen.cameraY()) + chanSquareBonus());
+        b.drawRangeCheck(sprite, (int) (x - halfWidth),
+                (int) (y - halfHeight - screen.cameraY()) + chanSquareBonus());
     }
 
     protected int chanSquareBonus() {
@@ -64,10 +64,10 @@ public class Square extends Drawable {
                     sn.startsWith("ss_brick") ||
                     sn.startsWith("c_brick")) {
                 BufGfx buf = new BufGfx(sprite, util);
-                buf.effects().dirt(id);
+                buf.effects().dirt(randomSeed);
                 p = buf.pixels;
             } else if (sn.equals("ground") && Config.Gfx.dirtGround) {
-                new BufGfx(sprite, util).effects().dirt(0xffb5b5b5, id, Config.Gfx.groundDirtK);
+                new BufGfx(sprite, util).effects().dirt(0xffb5b5b5, randomSeed, Config.Gfx.groundDirtK);
                 p = util;
             } else if (sn.startsWith("border")) {
                 BufGfx buf = new BufGfx(sprite, util);
@@ -92,7 +92,7 @@ public class Square extends Drawable {
                         offset--;
                     }
                 }
-                buf.effects().dirt(id);
+                buf.effects().dirt(randomSeed);
             }
         }
         int yyy = U77.rem(yScreen + screen.camY(), (int) sprite.height);
@@ -131,10 +131,10 @@ public class Square extends Drawable {
                     sn.startsWith("ss_brick") ||
                     sn.startsWith("c_brick")) {
                 BufGfx buf = new BufGfx(sprite, util);
-                buf.effects().dirt(id);
+                buf.effects().dirt(randomSeed);
                 p = buf.pixels;
             } else if (sn.equals("ground") && Config.Gfx.dirtGround) {
-                new BufGfx(sprite, util).effects().dirt(0xffb5b5b5, id, Config.Gfx.groundDirtK);
+                new BufGfx(sprite, util).effects().dirt(0xffb5b5b5, randomSeed, Config.Gfx.groundDirtK);
                 p = util;
             } else if (sn.startsWith("border")) {
                 BufGfx buf = new BufGfx(sprite, util);
@@ -159,7 +159,7 @@ public class Square extends Drawable {
                         offset--;
                     }
                 }
-                buf.effects().dirt(id);
+                buf.effects().dirt(randomSeed);
                 buf.effects().flipVertical();
             }
         }

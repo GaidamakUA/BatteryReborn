@@ -12,7 +12,7 @@ public class MonsterPart extends Monster {
                        ComplexAI ai, int plvl) {
         super(world, x, y, s, life * Config.Damages.bullet);
         this.ai = ai;
-        lvl = plvl;
+        zLayer = plvl;
     }
 
     public void move() {

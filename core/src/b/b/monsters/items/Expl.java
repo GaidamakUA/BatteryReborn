@@ -14,7 +14,7 @@ public class Expl extends Item {
                 Explosion expl) {
         super(world, x, y, world.gfx.getSprite("expl"));
         this.expl = expl;
-        lvl = 5;
+        zLayer = 5;
         double speed = U77.rnd(maxSpeed * 0.4) + (maxSpeed * 0.6);
         double angle = U77.rnd(U77.dpi);
         xSpeed = (Math.sin(angle) * speed + (xsp * 0.6)) * Time77.STEP;

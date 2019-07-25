@@ -13,7 +13,7 @@ public class FirstAid extends Item {
 
     public FirstAid(double x, double y, World world) {
         super(world, x, y, world.gfx.getSprite("firstaid"));
-        lvl = 5;
+        zLayer = 5;
         angle1 = U77.rnd(U77.dpi);
         angle2 = U77.rnd(U77.dpi);
         xCenter = x;
