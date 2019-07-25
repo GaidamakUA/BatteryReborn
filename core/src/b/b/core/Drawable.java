@@ -51,8 +51,6 @@ public abstract class Drawable implements Comparable {
 
     public abstract void draw();
 
-    public abstract void draw(int xStart, int yStart, int borderX, int borderY);
-
     public final double xStart() {
         return x - halfWidth;
     }

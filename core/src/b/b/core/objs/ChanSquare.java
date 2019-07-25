@@ -27,14 +27,6 @@ public abstract class ChanSquare extends Square implements Changeable {
         sprite = ex;
     }
 
-    public final void draw(int xScreen, int yScreen, int xScreenBorder,
-                           int yScreenBorder) {
-        Sprite ex = sprite;
-        changeSprite();
-        super.draw(xScreen, yScreen, xScreenBorder, yScreenBorder);
-        sprite = ex;
-    }
-
     protected abstract void changeSprite();
 
     protected boolean onPlayer() {
