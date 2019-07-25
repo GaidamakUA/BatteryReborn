@@ -70,13 +70,13 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
 
     private void initParts() {
         int life = Config.Monsters.Boss2.paneLife;
-        headLeft = new MonsterPart(world, x - headLeftSprite.w, y - (headLeftSprite.h / 2),
+        headLeft = new MonsterPart(world, x - headLeftSprite.width, y - (headLeftSprite.height / 2),
                 headLeftSprite, life, this, 5);
-        headRight = new MonsterPart(world, x, y - (headRightSprite.h / 2), headRightSprite,
+        headRight = new MonsterPart(world, x, y - (headRightSprite.height / 2), headRightSprite,
                 life, this, 5);
-        paneLeft = new Boss2Pane(world, x - 150 - paneLeftSprite.w,
-                y - (paneLeftSprite.h / 2), paneLeftSprite, this);
-        paneRight = new Boss2Pane(world, x + 150, y - (paneRightSprite.h / 2),
+        paneLeft = new Boss2Pane(world, x - 150 - paneLeftSprite.width,
+                y - (paneLeftSprite.height / 2), paneLeftSprite, this);
+        paneRight = new Boss2Pane(world, x + 150, y - (paneRightSprite.height / 2),
                 paneRightSprite, this);
         wellLeft = new Boss2Well(world, this, null, true);
         wellRight = new Boss2Well(world, this, null, false);
@@ -132,7 +132,7 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
             BufGfx b = world.gfx.bufGfx;
             Sprite mainCarcasSprite = world.gfx.getSprite("boss2_main_carcas");
             b.drawTranspRangeCheck(mainCarcasSprite, (int) (xScreenStart() -
-                    mainCarcasSprite.hw), (int) (yScreenStart() - mainCarcasSprite.hh));
+                    mainCarcasSprite.halfWidth), (int) (yScreenStart() - mainCarcasSprite.halfHeight));
             verticals();
             horizontal();
             if (paneLeft.life > 0) {
@@ -155,31 +155,31 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
         Sprite mainCarcasSprite = world.gfx.getSprite("boss2_main_carcas");
         Sprite vertCarcasSprite = world.gfx.getSprite("boss2_carcas_vert");
         b.drawRangeCheck(vertCarcasSprite, (int) (xScreenStart() - 25 - headShift),
-                (int) (yScreenStart() - mainCarcasSprite.hh + 6));
+                (int) (yScreenStart() - mainCarcasSprite.halfHeight + 6));
         b.drawRangeCheck(vertCarcasSprite, (int) (xScreenStart() + 18 + headShift),
-                (int) (yScreenStart() - mainCarcasSprite.hh + 6));
+                (int) (yScreenStart() - mainCarcasSprite.halfHeight + 6));
         Sprite cross = world.gfx.getSprite("boss2_carcas_cross");
         b.drawTranspRangeCheck(cross, (int) (xScreenStart() - 27 - headShift),
-                (int) (yScreenStart() - mainCarcasSprite.hh - 2));
+                (int) (yScreenStart() - mainCarcasSprite.halfHeight - 2));
         b.drawTranspRangeCheck(cross, (int) (xScreenStart() + 16 + headShift),
-                (int) (yScreenStart() - mainCarcasSprite.hh - 2));
+                (int) (yScreenStart() - mainCarcasSprite.halfHeight - 2));
     }
 
     private void horizontal() {
         BufGfx b = world.gfx.bufGfx;
         Sprite mainCarcasSprite = world.gfx.getSprite("boss2_main_carcas");
         b.drawRangeCheck(world.gfx.getSprite("boss2_carcas_horiz"),
-                (int) (xScreenStart() - mainCarcasSprite.hw + 6),
-                (int) (yScreenStart() - mainCarcasSprite.hh + 85 + horizYShift));
+                (int) (xScreenStart() - mainCarcasSprite.halfWidth + 6),
+                (int) (yScreenStart() - mainCarcasSprite.halfHeight + 85 + horizYShift));
         Sprite cross = world.gfx.getSprite("boss2_carcas_cross");
-        b.drawTranspRangeCheck(cross, (int) (xScreenStart() - mainCarcasSprite.hw - 2),
-                (int) (yScreenStart() - mainCarcasSprite.hh + 83 + horizYShift));
-        b.drawTranspRangeCheck(cross, (int) (xScreenStart() + mainCarcasSprite.hw - 8),
-                (int) (yScreenStart() - mainCarcasSprite.hh + 83 + horizYShift));
+        b.drawTranspRangeCheck(cross, (int) (xScreenStart() - mainCarcasSprite.halfWidth - 2),
+                (int) (yScreenStart() - mainCarcasSprite.halfHeight + 83 + horizYShift));
+        b.drawTranspRangeCheck(cross, (int) (xScreenStart() + mainCarcasSprite.halfWidth - 8),
+                (int) (yScreenStart() - mainCarcasSprite.halfHeight + 83 + horizYShift));
         b.drawTranspRangeCheck(cross, (int) (xScreenStart() - 27 - headShift),
-                (int) (yScreenStart() - mainCarcasSprite.hh + 83 + horizYShift));
+                (int) (yScreenStart() - mainCarcasSprite.halfHeight + 83 + horizYShift));
         b.drawTranspRangeCheck(cross, (int) (xScreenStart() + 16 + headShift),
-                (int) (yScreenStart() - mainCarcasSprite.hh + 83 + horizYShift));
+                (int) (yScreenStart() - mainCarcasSprite.halfHeight + 83 + horizYShift));
     }
 
     public void move() {
@@ -326,19 +326,19 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
     public void move(Monster m) {
         move();
         if (m.equals(headLeft)) {
-            headLeft.x = (int) (x - 66 + headLeftSprite.hw -
+            headLeft.x = (int) (x - 66 + headLeftSprite.halfWidth -
                     headShift);
             headLeft.y = y + 40 + horizYShift;
         } else if (m.equals(headRight)) {
-            headRight.x = (int) (x + 2 + headRightSprite.hw +
+            headRight.x = (int) (x + 2 + headRightSprite.halfWidth +
                     headShift);
             headRight.y = y + 40 + horizYShift;
             ;
         } else if (m.equals(paneLeft)) {
-            paneLeft.x = x - 167 + paneLeftSprite.hw;
+            paneLeft.x = x - 167 + paneLeftSprite.halfWidth;
             paneLeft.y = y + 40;
         } else if (m.equals(paneRight)) {
-            paneRight.x = x + 31 + paneRightSprite.hw;
+            paneRight.x = x + 31 + paneRightSprite.halfWidth;
             paneRight.y = y + 40;
         } else if (m instanceof Boss2Well) {
             Boss2Well well = (Boss2Well) m;

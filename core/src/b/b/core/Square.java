@@ -22,7 +22,7 @@ public class Square extends Drawable {
                   int lvl) {
         this(s, xMap * Config.squareSize + Config.hSquareSize,
                 yMap * Config.squareSize + Config.hSquareSize,
-                s.w, s.h, w, isShape, lvl);
+                s.width, s.height, w, isShape, lvl);
         setWH(Config.squareSize, Config.squareSize);
     }
 
@@ -95,29 +95,29 @@ public class Square extends Drawable {
                 buf.effects().dirt(id);
             }
         }
-        int yyy = U77.rem(yScreen + screen.camY(), (int) sprite.h);
+        int yyy = U77.rem(yScreen + screen.camY(), (int) sprite.height);
         String name = sprite.name();
         boolean warfloor = name.startsWith("warfloor") ||
                 name.equals("bck0");
-        int xSpriteStart = U77.rem(xScreen, (int) sprite.w);
+        int xSpriteStart = U77.rem(xScreen, (int) sprite.width);
         int y0 = U77.rem(yScreen + screen.camY(), Config.squareSize);
         for (int yy = yScreen; yy < yScreenBorder; yy++) {
             int offset = yy * screen.w + xScreen;
-            int pix = (yy - yyStart) * sprite.w + (xScreen - xxStart);
+            int pix = (yy - yyStart) * sprite.width + (xScreen - xxStart);
             int xxx = xSpriteStart;
             int x0 = 0;
             for (int xx = xScreen; xx < xScreenBorder; xx++) {
                 if (warfloor) {
-                    b[offset++] = p[yyy * sprite.w + xxx];
+                    b[offset++] = p[yyy * sprite.width + xxx];
                 } else if (name.equals("yellow_border")) {
-                    ((YellowBorder) this).draw(offset++, p, yyy * sprite.w + xxx, x0, y0);
+                    ((YellowBorder) this).draw(offset++, p, yyy * sprite.width + xxx, x0, y0);
                 } else {
                     b[offset++] = p[pix++];
                 }
-                xxx = U77.rem(xxx + 1, sprite.w);
+                xxx = U77.rem(xxx + 1, sprite.width);
                 x0++;
             }
-            yyy = U77.rem(yyy + 1, sprite.h);
+            yyy = U77.rem(yyy + 1, sprite.height);
             y0 = U77.rem(y0 + 1, Config.squareSize);
         }
     }
@@ -163,21 +163,21 @@ public class Square extends Drawable {
                 buf.effects().flipVertical();
             }
         }
-        int yyy = U77.rem((int) y, sprite.h);
+        int yyy = U77.rem((int) y, sprite.height);
         String name = sprite.name();
         boolean warfloor = name.startsWith("warfloor") ||
                 name.equals("bck0");
         if (warfloor) {
             int offset = 0;
             for (int yy = 0; yy < 30; yy++) {
-                int xxx = U77.rem((int) x, sprite.w);
+                int xxx = U77.rem((int) x, sprite.width);
                 for (int xx = 0; xx < 30; xx++) {
                     if (warfloor) {
-                        to[offset++] = p[yyy * sprite.w + xxx];
+                        to[offset++] = p[yyy * sprite.width + xxx];
                     }
-                    xxx = U77.rem(xxx + 1, sprite.w);
+                    xxx = U77.rem(xxx + 1, sprite.width);
                 }
-                yyy = U77.rem(yyy + 1, sprite.h);
+                yyy = U77.rem(yyy + 1, sprite.height);
             }
         } else if (name.equals("yellow_border")) {
             ((YellowBorder) this).draw2(to, sprite);

@@ -6,13 +6,13 @@ import b.util.Time77;
 import b.util.U77;
 
 public class TankAI {
-    protected Tank tank;
+    private Tank tank;
     protected World world;
 
     /*
      * Direction: 0-up, 1-right, 2-down, 3-left
      */
-    protected int dir;
+    protected int direction;
     protected int turretDir;
 
     /*
@@ -29,7 +29,7 @@ public class TankAI {
     protected TankAI(Tank t, World w, int direction) {
         tank = t;
         world = w;
-        dir = direction;
+        this.direction = direction;
         turretDir = direction;
         distance = 0;
         timeWhenStand = -9999;
@@ -49,20 +49,20 @@ public class TankAI {
     protected void move() {
         if (!stays) {
             if (U77.rnd(distance) > U77.rnd(Config.Monsters.Tank.turnDistance)) {
-                if (dir == dirToPlayer()) {
+                if (direction == dirToPlayer()) {
                     if (U77.rnd() > Config.Monsters.Tank.wishForPlayer) {
-                        dir = anotherDirToPlayer();
+                        direction = anotherDirToPlayer();
                         turretDir = dirToPlayer();
                     } else {
                         turnRnd90();
                     }
                 } else {
                     if (U77.rnd() > Config.Monsters.Tank.wishForPlayer) {
-                        dir = dirToPlayer();
-                        turretDir = dir;
+                        direction = dirToPlayer();
+                        turretDir = direction;
                     } else {
                         turnRnd90();
-                        turretDir = dir;
+                        turretDir = direction;
                     }
                 }
                 distance = 0;
@@ -98,21 +98,21 @@ public class TankAI {
 
     protected void turnRnd90() {
         if (U77.rnd() > 0.5) {
-            dir++;
-            if (dir == 4) dir = 0;
+            direction++;
+            if (direction == 4) direction = 0;
         } else {
-            dir--;
-            if (dir == -1) dir = 3;
+            direction--;
+            if (direction == -1) direction = 3;
         }
     }
 
     private void moveDir() {
         double speed = Config.Monsters.Tank.speed * Time77.STEP;
-        if (dir == 0) {
+        if (direction == 0) {
             tank.y -= speed;
-        } else if (dir == 1) {
+        } else if (direction == 1) {
             tank.x += speed;
-        } else if (dir == 2) {
+        } else if (direction == 2) {
             tank.y += speed;
         } else tank.x -= speed;
     }

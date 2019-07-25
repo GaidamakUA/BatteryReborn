@@ -34,7 +34,7 @@ public class Tank extends Monster {
 
     protected boolean onSquare(Square o) {
         removeFrom(o);
-        ai.dir = TankAI.opposite(ai.dir);
+        ai.direction = TankAI.opposite(ai.direction);
         return true;
     }
 
@@ -42,7 +42,7 @@ public class Tank extends Monster {
         if ((m instanceof Helicopter) || (m instanceof EnPlane)) return false;
         if (!(m instanceof Tank)) return super.onMonster(m);
         removeFrom(m);
-        ai.dir = TankAI.opposite(ai.dir);
+        ai.direction = TankAI.opposite(ai.direction);
         return true;
     }
 }

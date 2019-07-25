@@ -19,7 +19,7 @@ public class YellowBorder extends Square {
     public YellowBorder(Sprite s, int xMap, int yMap, World w, boolean isShape) {
         super(s, xMap * Config.squareSize + Config.hSquareSize,
                 yMap * Config.squareSize + Config.hSquareSize,
-                s.w, s.h, w, isShape, 2);
+                s.width, s.height, w, isShape, 2);
         setWH(Config.squareSize, Config.squareSize);
     }
 
@@ -40,9 +40,9 @@ public class YellowBorder extends Square {
     public void draw2(int[] to, Sprite sprite) {
         int[] buf = sprite.pixels;
         int offset = 0;
-        int yyy = U77.rem((int) y, sprite.h);
+        int yyy = U77.rem((int) y, sprite.height);
         for (int yy = 0; yy < 30; yy++) {
-            int xxx = U77.rem((int) x, sprite.w);
+            int xxx = U77.rem((int) x, sprite.width);
             for (int xx = 0; xx < 30; xx++) {
                 if ((left && xx < 10) ||
                         (leftUp && xx < 10 && yy < 10) ||
@@ -53,12 +53,12 @@ public class YellowBorder extends Square {
                         (down && yy >= Config.squareSize - 10) ||
                         (downLeft && xx < 10 && yy >= Config.squareSize - 10) ||
                         (left && xx < 10)) {
-                    to[offset] = buf[yyy * sprite.w + xxx];
+                    to[offset] = buf[yyy * sprite.width + xxx];
                 }
                 offset++;
-                xxx = U77.rem(xxx + 1, sprite.w);
+                xxx = U77.rem(xxx + 1, sprite.width);
             }
-            yyy = U77.rem(yyy + 1, sprite.h);
+            yyy = U77.rem(yyy + 1, sprite.height);
         }
     }
 }

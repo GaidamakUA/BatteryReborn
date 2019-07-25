@@ -1,6 +1,5 @@
 package b.gfx;
 
-import b.util.U77;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -11,25 +10,21 @@ public class Sprite {
     private String name;
 
     public int[] pixels;
-    public int w;
-    public int h;
-    public double hw;
-    public double hh;
+    public int width;
+    public int height;
+    public double halfWidth;
+    public double halfHeight;
 
     public Sprite(String filename, int width, int height) {
-        try {
-            name = filename.substring(0, filename.indexOf('.'));
-            setWH(width, height);
+        name = filename.substring(0, filename.indexOf('.'));
+        setWH(width, height);
 
-            Pixmap pixmap = new Pixmap(Gdx.files.internal(filename));
-            ByteBuffer nativeData = pixmap.getPixels();
-            byte[] managedData = new byte[nativeData.remaining()];
-            nativeData.get(managedData);
-            pixmap.dispose();
-            pixels = createPixelArrayFromBytes(width, height, managedData);
-        } catch (Exception e) {
-            U77.throwException(e);
-        }
+        Pixmap pixmap = new Pixmap(Gdx.files.internal(filename));
+        ByteBuffer nativeData = pixmap.getPixels();
+        byte[] managedData = new byte[nativeData.remaining()];
+        nativeData.get(managedData);
+        pixmap.dispose();
+        pixels = createPixelArrayFromBytes(width, height, managedData);
     }
 
     public Sprite(String name, Sprite sprite, boolean newBuf) {
@@ -39,9 +34,10 @@ public class Sprite {
     public Sprite(String name, BufGfx buf) {
         this.name = name;
         setWH(buf.w, buf.h);
-        pixels = new int[w * h];
-        System.arraycopy(buf.pixels, 0, pixels, 0, w * h);
+        pixels = new int[width * height];
+        System.arraycopy(buf.pixels, 0, pixels, 0, width * height);
     }
+
     static int[] createPixelArrayFromBytes(int width, int height, byte[] managedData) {
         int[] pixels = new int[width * height];
         for (int i = 0; i < pixels.length; i++) {
@@ -59,12 +55,11 @@ public class Sprite {
         return b & 0xFF;
     }
 
-
     public final void setWH(int width, int height) {
-        w = width;
-        h = height;
-        hw = (double) w / 2;
-        hh = (double) h / 2;
+        this.width = width;
+        this.height = height;
+        halfWidth = (double) this.width / 2;
+        halfHeight = (double) this.height / 2;
     }
 
     public final void setName(String name) {

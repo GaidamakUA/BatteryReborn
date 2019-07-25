@@ -31,7 +31,7 @@ public class Gun {
             double x = mon.x + xShift;
             double y = mon.y + yShift;
             double shift = Config.Monsters.Bullet.startShift +
-                    world.gfx.getSprite("bullet0").hh;
+                    world.gfx.getSprite("bullet0").halfHeight;
             if (dir == 0) {
                 y = mon.yStart() - shift;
             } else if (dir == 1) {

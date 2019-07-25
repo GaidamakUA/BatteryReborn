@@ -39,7 +39,7 @@ public class Helicopter extends Monster {
             world.gfx.bufGfx.drawTranspTrRangeCheck(blades, xScreenStart(),
                     yScreenStart(), 0.7);
         } else {
-            world.gfx.bufGfx.drawTranspTrRangeCheck(blades, xScreenBorder() - blades.w,
+            world.gfx.bufGfx.drawTranspTrRangeCheck(blades, xScreenBorder() - blades.width,
                     yScreenStart(), 0.7);
         }
     }

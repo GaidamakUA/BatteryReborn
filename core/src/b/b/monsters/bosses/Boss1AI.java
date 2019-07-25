@@ -65,13 +65,13 @@ public class Boss1AI extends InvisibleMonster implements ComplexAI {
 
     private void initParts() {
         double life = Config.Monsters.Boss1.life;
-        top = new MonsterPart(world, x, y - topSprite.h + 25, topSprite,
+        top = new MonsterPart(world, x, y - topSprite.height + 25, topSprite,
                 life / 5 * 2, this, 4);
-        bottom = new MonsterPart(world, x, y + bottomSprite.h - 5, bottomSprite,
+        bottom = new MonsterPart(world, x, y + bottomSprite.height - 5, bottomSprite,
                 life / 5, this, 4);
-        left = new MonsterPart(world, x - leftSprite.w + 1 - topSprite.hw, y, leftSprite,
+        left = new MonsterPart(world, x - leftSprite.width + 1 - topSprite.halfWidth, y, leftSprite,
                 life / 5, this, 4);
-        right = new MonsterPart(world, x + rightSprite.w - 1 + topSprite.hw, y, rightSprite,
+        right = new MonsterPart(world, x + rightSprite.width - 1 + topSprite.halfWidth, y, rightSprite,
                 life / 5, this, 4);
         world.objectsToAdd.add(bottom);
         world.addToMap(bottom);
@@ -113,8 +113,8 @@ public class Boss1AI extends InvisibleMonster implements ComplexAI {
         if (lastDraw != time()) {
             lastDraw = time();
             BufGfx b = world.gfx.bufGfx;
-            b.drawTranspRangeCheck(core, (int) (xScreenStart() - core.hw),
-                    (int) (yScreenStart() - core.hh));
+            b.drawTranspRangeCheck(core, (int) (xScreenStart() - core.halfWidth),
+                    (int) (yScreenStart() - core.halfHeight));
         }
     }
 
@@ -157,15 +157,15 @@ public class Boss1AI extends InvisibleMonster implements ComplexAI {
         move();
         if (m.equals(top)) {
             top.x = x;
-            top.y = y - topSprite.h + 25;
+            top.y = y - topSprite.height + 25;
         } else if (m.equals(bottom)) {
             bottom.x = x;
-            bottom.y = y + bottomSprite.h - 5;
+            bottom.y = y + bottomSprite.height - 5;
         } else if (m.equals(left)) {
-            left.x = x - leftSprite.w + 1 - topSprite.hw;
+            left.x = x - leftSprite.width + 1 - topSprite.halfWidth;
             left.y = y;
         } else {
-            right.x = x + rightSprite.w - 1 + topSprite.hw;
+            right.x = x + rightSprite.width - 1 + topSprite.halfWidth;
             right.y = y;
         }
     }

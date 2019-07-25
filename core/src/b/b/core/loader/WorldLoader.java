@@ -49,8 +49,8 @@ public class WorldLoader {
 
     private void loadPart1(boolean oldPlayer) {
         Sprite sprite = gfx.getSprite("lvl" + lvl);
-        w = world.width = sprite.w;
-        h = world.height = sprite.h;
+        w = world.width = sprite.width;
+        h = world.height = sprite.height;
         map = new WorldSquare[h][w];
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {

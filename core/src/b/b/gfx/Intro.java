@@ -29,12 +29,12 @@ public class Intro {
     public Intro(Gfx gfx) {
         this.gfx = gfx;
         logo = gfx.getSprite("battery");
-        int xStart = gfx.bufGfx.w / 2 - (logo.w / 2) - WAVE_HEIGHT - 1;
-        int yStart = gfx.bufGfx.h / 2 - (logo.h / 2) - WAVE_HEIGHT - 1;
-        int width = WAVE_HEIGHT * 2 + logo.w + 2;
-        int height = WAVE_HEIGHT * 2 + logo.h + 2;
+        int xStart = gfx.bufGfx.w / 2 - (logo.width / 2) - WAVE_HEIGHT - 1;
+        int yStart = gfx.bufGfx.h / 2 - (logo.height / 2) - WAVE_HEIGHT - 1;
+        int width = WAVE_HEIGHT * 2 + logo.width + 2;
+        int height = WAVE_HEIGHT * 2 + logo.height + 2;
         waves = new Waves(gfx.bufGfx, xStart + WAVE_HEIGHT, yStart + WAVE_HEIGHT,
-                logo.w + 1, logo.h + 1, WAVE_LENGTH, WAVE_HEIGHT, 4000);
+                logo.width + 1, logo.height + 1, WAVE_LENGTH, WAVE_HEIGHT, 4000);
         appearing = new Appearing(gfx.bufGfx, xStart, yStart, width, height, true, false);
         diagonals = new RunningDiagonals(gfx.bufGfx, xStart, yStart, xStart + width,
                 yStart + height, DIAGONAL_LENGTH);
@@ -57,7 +57,7 @@ public class Intro {
         diagonals.draw(U77.k2(timeK, 0.25));
         if (timeK > 0.25 && timeK < 0.75) {
             Sprite s = gfx.getSprite("copy");
-            gfx.bufGfx.draw(s, gfx.w / 2 - (int) s.hw, gfx.h - 50);
+            gfx.bufGfx.draw(s, gfx.w / 2 - (int) s.halfWidth, gfx.h - 50);
         }
     }
 }
