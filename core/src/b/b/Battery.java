@@ -9,7 +9,6 @@ import b.b.monsters.Monster;
 import b.b.monsters.Player;
 import b.b.monsters.bosses.Boss2AI;
 import b.gfx.Screen;
-import b.util.P;
 import b.util.Pair;
 import b.util.Time77;
 import b.util.U77;
@@ -31,8 +30,6 @@ public class Battery extends BatteryGame {
     public Keyboard77 kbd;
     public Gfx gfx;
     public volatile String loading;
-    public String prevLoading;
-    private int loadingScreenY;
     /* Double - activation time; Action */
     public java.util.List<Pair> timers;
     private final Color siftwareRendererColor = new Color();
@@ -61,12 +58,10 @@ public class Battery extends BatteryGame {
     private Intro intro = null;
     private double lastFpsLog;
     private AudioClip audio = null;
-    private boolean loadingScreenFirstTime = true;
 
 
     public void initialize() {
         loading = "core";
-        initInProgress = true;
         activated = false;
         justStarted = true;
         timers = new ArrayList<Pair>();
@@ -89,10 +84,9 @@ public class Battery extends BatteryGame {
         lastFpsLog = 0;
         loading = "rest";
         System.gc();
-        initialized = true;
     }
 
-    private final void init2() {
+    private void init2() {
         if (player != null && player.lifes > 0) {
             world.restartLevel();
         } else {
@@ -114,58 +108,21 @@ public class Battery extends BatteryGame {
     @Override
     public void paint() {
         try {
-            if (!initialized) {
-                loadingScreen();
-            } else {
-                while (time.step()) {
-                    step();
-                }
-                time.nextFrame();
-                if (intro != null) {
-                    intro.draw(time.time);
-                } else {
-                    gfx.drawAll();
-                }
-                Shop.draw(this);
-                gfx.updateScreen();
+            while (time.step()) {
+                step();
             }
+            time.nextFrame();
+            if (intro != null) {
+                intro.draw(time.time);
+            } else {
+                gfx.drawAll();
+            }
+            Shop.draw(this);
+            gfx.updateScreen();
             Thread.sleep(2);
         } catch (Exception e) {
             exception(e);
         }
-    }
-
-    private void loadingScreen() {
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        if (loadingScreenFirstTime) {
-            loadingScreenFirstTime = false;
-            loadingScreenY = 92;
-            shapeRenderer.setColor(Color.BLACK);
-            shapeRenderer.rect(0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
-        }
-        shapeRenderer.end();
-        batch.begin();
-        font.setColor(new Color(0x808040FF));
-        drawText("BATTERY " + U77.ssprecision(Config.version, 2), 10, 20);
-        drawText("http:" + P.bs + "btrgame.com", 10, 42);
-        drawText("\2512009 M77 & enter.dreams", 10, 56);
-        drawText("Loading.......", 10, 78);
-        if (loading == null || loading.equals("core")) {
-            loading = "core";
-            prevLoading = "core";
-        }
-        if (!loading.equals(prevLoading)) {
-            loadingScreenY += 14;
-            prevLoading = loading;
-        }
-        font.draw(batch, loading, 20, loadingScreenY);
-        batch.end();
-    }
-
-    private void drawText(String text, int x, int yTop) {
-        // Transforming font coordinates from AWT to LibGDX
-        int fontY = VIEWPORT_HEIGHT - yTop + FONT_SIZE;
-        font.draw(batch, text, x, fontY);
     }
 
     private void step() {

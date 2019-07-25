@@ -20,9 +20,6 @@ public class BatteryGame extends ApplicationAdapter {
 
 
 	public boolean exception;
-	public Exception firstException;
-	protected volatile boolean initialized;
-	protected volatile boolean initInProgress;
 
 	private OrthographicCamera camera;
 
@@ -35,7 +32,6 @@ public class BatteryGame extends ApplicationAdapter {
 	public void exception(Exception e) {
 		if (!exception) {
 			exception = true;
-			firstException = e;
 			e.printStackTrace();
 		}
 	}

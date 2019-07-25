@@ -32,6 +32,16 @@ public class Sprite {
         }
     }
 
+    public Sprite(String name, Sprite sprite, boolean newBuf) {
+        this(name, new BufGfx(sprite, newBuf));
+    }
+
+    public Sprite(String name, BufGfx buf) {
+        this.name = name;
+        setWH(buf.w, buf.h);
+        pixels = new int[w * h];
+        System.arraycopy(buf.pixels, 0, pixels, 0, w * h);
+    }
     static int[] createPixelArrayFromBytes(int width, int height, byte[] managedData) {
         int[] pixels = new int[width * height];
         for (int i = 0; i < pixels.length; i++) {
@@ -49,16 +59,6 @@ public class Sprite {
         return b & 0xFF;
     }
 
-    public Sprite(String name, Sprite sprite, boolean newBuf) {
-        this(name, new BufGfx(sprite, newBuf));
-    }
-
-    public Sprite(String name, BufGfx buf) {
-        this.name = name;
-        setWH(buf.w, buf.h);
-        pixels = new int[w * h];
-        System.arraycopy(buf.pixels, 0, pixels, 0, w * h);
-    }
 
     public final void setWH(int width, int height) {
         w = width;
