@@ -5,37 +5,30 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Font77 {
-    public static final int charW = 9;
-    public static final int charH = 17;
-    public static final int charWMin = charW - 1;
+    public static final int CHAR_WIDTH = 9;
+    public static final int CHAR_HEIGHT = 17;
+    public static final int CHAR_WIDTH_MIN = CHAR_WIDTH - 1;
 
-    protected BufGfx b;
+    protected BufGfx bufGfx;
 
     private Map<String, int[][]> font;
 
     /*
      * Default transp color
      */
-    private int transp;
+    private int transparent;
 
-    /*
-     * Default color
-     */
-    private int c;
-
-    /*
-     * Default border color
-     */
-    private int bc;
+    private int color;
+    private int outlineColor;
 
     private static int[][] m;
 
-    public Font77(int color, int borderColor, BufGfx buf) {
-        c = color;
-        bc = borderColor;
-        transp = c + 1;
-        if (transp == bc) transp++;
-        b = buf;
+    public Font77(int color, int outlineColor, BufGfx bufGfx) {
+        this.color = color;
+        this.outlineColor = outlineColor;
+        transparent = this.color + 1;
+        if (transparent == this.outlineColor) transparent++;
+        this.bufGfx = bufGfx;
         font = new HashMap<String, int[][]>();
 
         long[] data = {0L, 0L, 0L, 0L, 0L, 0L, 0L, 14336L, 103080787968L, 0L, 0L, 0L, 0L, 0L,
@@ -86,33 +79,33 @@ public class Font77 {
                 "VWXYZ`~!@#$%^&*()-_=+\\|[{]};:'\",<.>/?";
 
         for (int i = 0; i < chars.length(); i++) {
-            int[][] charMap = new int[charW][charH];
-            for (int j = 0; j < charW; j++) Arrays.fill(charMap[j], transp);
+            int[][] charMap = new int[CHAR_WIDTH][CHAR_HEIGHT];
+            for (int j = 0; j < CHAR_WIDTH; j++) Arrays.fill(charMap[j], transparent);
             font.put("" + chars.charAt(i), charMap);
         }
 
-        int[][] charMap = new int[charW][charH];
-        for (int j = 0; j < charW; j++) Arrays.fill(charMap[j], transp);
+        int[][] charMap = new int[CHAR_WIDTH][CHAR_HEIGHT];
+        for (int j = 0; j < CHAR_WIDTH; j++) Arrays.fill(charMap[j], transparent);
         font.put(" ", charMap);
 
         charMap = font.get("y");
-        for (int y = 0; y < charH; y++) {
-            if (charMap[0][y] == c) charMap[0][y] = bc;
+        for (int y = 0; y < CHAR_HEIGHT; y++) {
+            if (charMap[0][y] == this.color) charMap[0][y] = this.outlineColor;
         }
 
-        int strLength = chars.length() * charWMin;
-        for (int y = 0; y < charH - 2; y++) {
+        int strLength = chars.length() * CHAR_WIDTH_MIN;
+        for (int y = 0; y < CHAR_HEIGHT - 2; y++) {
             for (int x = 0; x < strLength; x++) {
                 int bitNumber = y * strLength + x;
                 int dataElemNumber = bitNumber / 64;
-                charMap = font.get("" + chars.charAt(x / charWMin));
-                int charX = x - (x / charWMin * charWMin);
+                charMap = font.get("" + chars.charAt(x / CHAR_WIDTH_MIN));
+                int charX = x - (x / CHAR_WIDTH_MIN * CHAR_WIDTH_MIN);
                 if ((data[dataElemNumber] & (1L << (63 - bitNumber))) != 0L) {
-                    charMap[charX][y + 1] = c;
+                    charMap[charX][y + 1] = this.color;
                     for (int xx = charX - 1; xx < charX + 2; xx++) {
                         for (int yy = y - 1; yy < y + 2; yy++) {
-                            if (xx >= 0 && xx < charW && yy >= 0 & yy < charH) {
-                                if (charMap[xx][yy + 1] != c) charMap[xx][yy + 1] = bc;
+                            if (xx >= 0 && xx < CHAR_WIDTH && yy >= 0 & yy < CHAR_HEIGHT) {
+                                if (charMap[xx][yy + 1] != this.color) charMap[xx][yy + 1] = this.outlineColor;
                             }
                         }
                     }
@@ -121,17 +114,17 @@ public class Font77 {
         }
 
         charMap = font.get("_");
-        for (int y = 0; y < charH; y++) {
-            if (charMap[0][y] != transp) charMap[0][y] = bc;
+        for (int y = 0; y < CHAR_HEIGHT; y++) {
+            if (charMap[0][y] != transparent) charMap[0][y] = this.outlineColor;
         }
     }
 
     public void p(String s, int x, int y) {
-        p(s, x, y, b);
+        p(s, x, y, bufGfx);
     }
 
     public void pCenter(String s, int x, int y) {
-        p(s, x - (length(s) / 2), y - (charH / 2) + 1);
+        p(s, x - (length(s) / 2), y - (CHAR_HEIGHT / 2) + 1);
     }
 
     public void p(String s, int x, int y, BufGfx b) {
@@ -139,9 +132,9 @@ public class Font77 {
         int w = b.w;
         for (int i = 0; i < s.length(); i++) {
             m = font.get("" + s.charAt(i));
-            for (int x0 = 0; x0 < charW; x0++) {
-                for (int y0 = 0; y0 < charH; y0++) {
-                    if (m[x0][y0] != transp) t[(y + y0) * w + x + (i * charWMin) + x0] =
+            for (int x0 = 0; x0 < CHAR_WIDTH; x0++) {
+                for (int y0 = 0; y0 < CHAR_HEIGHT; y0++) {
+                    if (m[x0][y0] != transparent) t[(y + y0) * w + x + (i * CHAR_WIDTH_MIN) + x0] =
                             m[x0][y0];
                 }
             }
@@ -154,16 +147,16 @@ public class Font77 {
         int clr;
         for (int i = 0; i < s.length(); i++) {
             m = font.get("" + s.charAt(i));
-            for (int x0 = 0; x0 < charW; x0++) {
-                for (int y0 = 0; y0 < charH; y0++) {
-                    if (m[x0][y0] != transp) t[(y + y0) * w + x + (i * charWMin) + x0] =
+            for (int x0 = 0; x0 < CHAR_WIDTH; x0++) {
+                for (int y0 = 0; y0 < CHAR_HEIGHT; y0++) {
+                    if (m[x0][y0] != transparent) t[(y + y0) * w + x + (i * CHAR_WIDTH_MIN) + x0] =
                             m[x0][y0];
                     clr = m[x0][y0];
-                    if (clr != transp) {
-                        if (clr == this.c) {
-                            t[(y + y0) * w + x + (i * charWMin) + x0] = c;
+                    if (clr != transparent) {
+                        if (clr == this.color) {
+                            t[(y + y0) * w + x + (i * CHAR_WIDTH_MIN) + x0] = c;
                         } else {
-                            t[(y + y0) * w + x + (i * charWMin) + x0] = clr;
+                            t[(y + y0) * w + x + (i * CHAR_WIDTH_MIN) + x0] = clr;
                         }
                     }
                 }
@@ -172,6 +165,6 @@ public class Font77 {
     }
 
     private static int length(String s) {
-        return s.length() * charWMin;
+        return s.length() * CHAR_WIDTH_MIN;
     }
 }

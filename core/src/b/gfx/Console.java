@@ -11,20 +11,20 @@ public class Console {
 
     public Console(Font77 font) {
         this.font = font;
-        w = font.b.w;
-        h = font.b.h;
+        w = font.bufGfx.w;
+        h = font.bufGfx.h;
         strings = new ArrayList<String>();
     }
 
-    public void print(String s) {
+    public void addString(String s) {
         strings.add(s);
     }
 
-    public void print() {
+    public void displayString() {
         int string = 0;
-        int hStart = (int) (h / 2 - (strings.size() * (double) Font77.charH / 2) + (Font77.charH / 2));
+        int hStart = (int) (h / 2 - (strings.size() * (double) Font77.CHAR_HEIGHT / 2) + (Font77.CHAR_HEIGHT / 2));
         for (String s : strings) {
-            font.pCenter(s, 255, string * font.charH + hStart);
+            font.pCenter(s, 255, string * font.CHAR_HEIGHT + hStart);
             string++;
         }
         strings.clear();

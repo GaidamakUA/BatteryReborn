@@ -52,35 +52,35 @@ public class Gfx {
         drawNewBackAndForeGround();
         drawChangeables();
         if (battery.justStarted) {
-            console.print("Use arrow keys to move the airplane.");
-            console.print("Use Ctrl to shoot.");
-            console.print("");
+            console.addString("Use arrow keys to move the airplane.");
+            console.addString("Use Ctrl to shoot.");
+            console.addString("");
         }
         if (!battery.activated) {
-            console.print("CLICK MOUSE TO START");
+            console.addString("CLICK MOUSE TO START");
         } else {
             if (battery.time.time - battery.timeWhenLevelCompleted <
                     Config.Intervals.nextLevelDelay) {
                 if (battery.player.life == 0) {
-                    console.print("GAME OVER");
+                    console.addString("GAME OVER");
                     if (battery.player.lifes > 0) {
-                        console.print("TO BE CONTINUED...");
+                        console.addString("TO BE CONTINUED...");
                     }
                 } else {
-                    console.print("LEVEL COMPLETED");
+                    console.addString("LEVEL COMPLETED");
                 }
             }
             // TODO reimplement
 //            else if (!battery.hasFocus()) {
-//                console.print("CLICK MOUSE");
+//                console.displayString("CLICK MOUSE");
 //            }
         }
         if (Config.debugMode) {
             String fps = "" + battery.time.fps;
-            font.p(fps, w - (fps.length() * Font77.charWMin) - 4, h - 17);
+            font.p(fps, w - (fps.length() * Font77.CHAR_WIDTH_MIN) - 4, h - 17);
         }
         drawStats();
-        console.print();
+        console.displayString();
     }
 
     private void drawStats() {
