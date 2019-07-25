@@ -50,7 +50,6 @@ public class Gfx {
 
     public void drawAll() {
         drawNewBackAndForeGround();
-        int lvl = battery.world.trueLevel();
         drawChangeables();
         if (battery.justStarted) {
             console.print("Use arrow keys to move the airplane.");
@@ -139,7 +138,7 @@ public class Gfx {
     /**
      * Now for scroll up only.
      */
-    public void drawNewBackAndForeGround() {
+    private void drawNewBackAndForeGround() {
         Screen scr = battery.screen;
         int lvl = battery.world.trueLevel();
         if (lvl == 6) {

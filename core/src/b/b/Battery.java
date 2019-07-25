@@ -139,7 +139,7 @@ public class Battery extends BatteryGame {
         }
         kbd.next();
         if (!activated && kbd.anyKey()) activated = true;
-        if (intro == null || time.time > intro.startTime + intro.duration) {
+        if (intro == null || time.time > intro.getStartTime() + intro.DURATION) {
             if (player == null) {
                 init2();
             }
