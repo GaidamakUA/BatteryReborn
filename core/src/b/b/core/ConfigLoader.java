@@ -11,14 +11,12 @@ public class ConfigLoader {
     }
 
     private void initConfig() {
-        Config.levels = Config.getLevels();
         double speed = Config.speed;
         Config.Monsters.Player.maxSpeed = Config.Monsters.Player.maxSpeed * speed;
         Config.Monsters.Player.maxStrafeSpeed = Config.Monsters.Player.maxStrafeSpeed * speed;
         Config.Monsters.Player.minSpeed = Config.Monsters.Player.minSpeed * speed;
         Config.Monsters.Heli.maxSpeed = Config.Monsters.Heli.maxSpeed * speed;
         Config.cameraSpeed = Config.cameraSpeed * speed;
-        Config.Gfx.restDirtK = 1 - Config.Gfx.dirtK;
         Config.Monsters.Bullet.speed = Config.Monsters.Bullet.speed * speed;
         Config.Monsters.Boss1.shotInterval = Config.Monsters.Boss1.shotInterval / speed;
         Config.Monsters.Boss1.bulletSpeed = Config.Monsters.Boss1.bulletSpeed * speed;
