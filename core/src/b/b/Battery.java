@@ -1,8 +1,20 @@
 package b.b;
 
-import b.b.core.*;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.blogspot.androidgaidamak.BatteryGame;
+
+import java.applet.AudioClip;
+import java.util.ArrayList;
+
+import b.b.core.Action;
+import b.b.core.Config;
+import b.b.core.ConfigLoader;
+import b.b.core.Keyboard77;
+import b.b.core.Logger;
+import b.b.core.Shop;
+import b.b.core.World;
 import b.b.core.objs.ChanSquare;
-import b.b.core.objs.Water;
 import b.b.gfx.Gfx;
 import b.b.gfx.Intro;
 import b.b.monsters.Monster;
@@ -12,14 +24,6 @@ import b.gfx.Screen;
 import b.util.Pair;
 import b.util.Time77;
 import b.util.U77;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.blogspot.androidgaidamak.BatteryGame;
-
-import java.applet.AudioClip;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Battery extends BatteryGame {
     public World world;
@@ -68,7 +72,7 @@ public class Battery extends BatteryGame {
         logger.log("scores 0 ");
         kbd = new Keyboard77(this);
         loading = "config";
-        new ConfigLoader(this);
+        new ConfigLoader();
         loading = "gfx";
         gfx = new Gfx(this);
         screen = new Screen(gfx.w, gfx.h);
