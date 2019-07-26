@@ -86,32 +86,32 @@ public class WorldLoader {
         Sprite sprite = gfx.getSprite("lvl" + lvl);
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
-                int c = sprite.pixels[offset++];
+                int pixel = sprite.pixels[offset++];
                 List<Drawable> list = map[y][x].objects;
-                if (c == 0xff0000ff) {
+                if (pixel == 0xff0000ff) {
                     list.add(new Water(x, y, world));
-                } else if (c == 0xffff0000 || c == 0xff808040) {
+                } else if (pixel == 0xffff0000 || pixel == 0xff808040) {
                     list.add(new Square(gfx.getSprite("brickbig"), x, y, world, true, 1));
-                } else if (c == 0xffc0c0c0) {
+                } else if (pixel == 0xffc0c0c0) {
                     list.add(new Square(gfx.getSprite("ground"), x, y, world, false, 0));
-                } else if (c == 0xff808080) {
+                } else if (pixel == 0xff808080) {
                     list.add(new Square(gfx.getSprite("warfloor"), x, y, world, false, 0));
-                } else if (c == 0xffc0e6c0) {
+                } else if (pixel == 0xffc0e6c0) {
                     list.add(new Square(gfx.getSprite("bck0"), x, y, world, false, 0));
-                } else if (c == 0xff8000ff) {
+                } else if (pixel == 0xff8000ff) {
                     Sprite spr = gfx.getSprite("grass");
                     list.add(new Square(spr, x, y, world, false, 0));
-                } else if (c == 0xff008080) {
+                } else if (pixel == 0xff008080) {
                     throw new RuntimeException("corner should not be defined on image " +
                             "map for a while x:" + x + " y:" + y);
-                } else if (c == 0xff004040) {
+                } else if (pixel == 0xff004040) {
                     list.add(new Square(gfx.getSprite("trap|"), x, y, world, false, 0));
-                } else if (c == 0xff008282) {
+                } else if (pixel == 0xff008282) {
                     list.add(new Square(gfx.getSprite("trap-"), x, y, world, false, 0));
-                } else if (c == 0xffa2a2a2) {
+                } else if (pixel == 0xffa2a2a2) {
                     list.add(new Square(gfx.getSprite("bck4_" + random.nextInt(4)), x, y,
                             world, false, 0));
-                } else if (c == 0xff804000) {
+                } else if (pixel == 0xff804000) {
                     int part = getLandingPart(x, y);
                     if (part == 0) {
                         list.add(new LandingGround(x, y, world));
@@ -122,35 +122,35 @@ public class WorldLoader {
                     } else {
                         list.add(getLG(map[y - 1][x].objects));
                     }
-                } else if (c == 0xffff0080) {
+                } else if (pixel == 0xffff0080) {
                     list.add(background(x, y));
                     firstaid(x, y);
-                } else if (c == 0xff008000) {
+                } else if (pixel == 0xff008000) {
                     Drawable sq = background(x, y);
                     list.add(sq);
                     heli(x, y);
-                } else if (c == 0xff00ffff) {
+                } else if (pixel == 0xff00ffff) {
                     list.add(background(x, y));
                     enplane(x, y);
-                } else if (c == 0xff00ff80) {
+                } else if (pixel == 0xff00ff80) {
                     list.add(background(x, y));
                     tank(x, y);
-                } else if (c == 0xff800080) {
+                } else if (pixel == 0xff800080) {
                     list.add(background(x, y));
                     if (lvl == 3 || lvl == 103 || lvl == 203) {
                         boss1(x, y);
                     } else {
                         boss2(x, y);
                     }
-                } else if (c == 0xffff8040) {
+                } else if (pixel == 0xffff8040) {
                     System.out.println("the first cannon");
                     cannon(list, x, y, 1);
-                } else if (c == 0xffff8041) {
+                } else if (pixel == 0xffff8041) {
                     System.out.println("the second cannon");
                     cannon(list, x, y, 3);
-                } else if (c != 0xff000000) {
+                } else if (pixel != 0xff000000) {
                     throw new RuntimeException("WorldLoader.load lvl (true number):" + lvl +
-                            " xy(" + x + "," + y + ") color:" + C.string(c) + " should not be");
+                            " xy(" + x + "," + y + ") color:" + C.string(pixel) + " should not be");
                 }
             }
         }
