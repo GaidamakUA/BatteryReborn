@@ -20,11 +20,11 @@ public class Water extends ChanSquare {
     public static void prepareWatCur(Battery btr) {
         Sprite watcur = btr.gfx.getSprite("watcur");
         Sprite water = btr.gfx.getSprite("water");
-        int b[] = watcur.pixels;
+        int watcurPixles[] = watcur.pixels;
         final int width = water.width;
         final int height = water.height;
         final double time = btr.time.time;
-        System.arraycopy(water.pixels, 0, b, 0, width * height);
+        System.arraycopy(water.pixels, 0, watcurPixles, 0, width * height);
 
         /* x waves */
         int[] line = new int[width];
@@ -33,16 +33,9 @@ public class Water extends ChanSquare {
                     (((double) y / Config.Bcks.waterWave) / width) * U77.dpi) * 4);
             int offset = y * width + width - 1;
             for (int x = width - 1; x >= 0; x--) {
-                line[U77.rem(x + xShift, width)] = b[offset--];
+                line[U77.rem(x + xShift, width)] = watcurPixles[offset--];
             }
-            System.arraycopy(line, 0, b, y * width, width);
+            System.arraycopy(line, 0, watcurPixles, y * width, width);
         }
-    }
-
-    public static void init(Battery btr) {
-        Sprite watcur = btr.gfx.getSprite("watcur");
-        BufGfx buf = new BufGfx(watcur);
-        Appearing a = new Appearing(buf, 0, 0, watcur.width, watcur.height, false, true);
-        btr.things.put("watcurAppearing", a);
     }
 }

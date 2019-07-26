@@ -52,8 +52,6 @@ public class Battery extends BatteryGame {
      */
     public double timeWhenLevelLoaded;
 
-    public Map<String, Object> things;
-
     /* for loading screen */
     private Intro intro = null;
     private double lastFpsLog;
@@ -65,7 +63,6 @@ public class Battery extends BatteryGame {
         activated = false;
         justStarted = true;
         timers = new ArrayList<Pair>();
-        things = new HashMap<String, Object>();
         time = new Time77();
         logger = new Logger(this);
         logger.log("scores 0 ");
@@ -76,7 +73,6 @@ public class Battery extends BatteryGame {
         gfx = new Gfx(this);
         screen = new Screen(gfx.w, gfx.h);
         intro = new Intro(gfx);
-        Water.init(this);
         timeWhenLevelCompleted = 0;
         timeWhenLevelLoaded = 0;
         world = null;
