@@ -1,19 +1,6 @@
 package b.b;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.blogspot.androidgaidamak.BatteryGame;
-
-import java.applet.AudioClip;
-import java.util.ArrayList;
-
-import b.b.core.Action;
-import b.b.core.Config;
-import b.b.core.ConfigLoader;
-import b.b.core.Keyboard77;
-import b.b.core.Logger;
-import b.b.core.Shop;
-import b.b.core.World;
+import b.b.core.*;
 import b.b.core.objs.ChanSquare;
 import b.b.gfx.Gfx;
 import b.b.gfx.Intro;
@@ -24,6 +11,12 @@ import b.gfx.Screen;
 import b.util.Pair;
 import b.util.Time77;
 import b.util.U77;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.blogspot.androidgaidamak.BatteryGame;
+
+import java.applet.AudioClip;
+import java.util.ArrayList;
 
 public class Battery extends BatteryGame {
     public World world;
@@ -154,7 +147,7 @@ public class Battery extends BatteryGame {
                                 Config.Intervals.nextLevelDelay) && (world != null)) {
                     if (player != null && player.life <= 0) {
                         init2();
-                    } else if (!Shop.on) {
+                    } else {
                         kbd.clear(this);//todo ne sdesj
                         Shop.on = true;
                         Shop.step(this);
@@ -212,12 +205,10 @@ public class Battery extends BatteryGame {
         for (Monster a : world.activeObjects) a.act();
         while (!world.objectsToAdd.isEmpty()) {
             world.activeObjects.addAll(world.objectsToAdd);
-            ArrayList<Monster> objs = new ArrayList<Monster>(world.objectsToAdd);
+            ArrayList<Monster> monsters = new ArrayList<Monster>(world.objectsToAdd);
             world.objectsToAdd.clear();
-            for (Monster obj : objs) {
-                if (obj == null) throw
-                        new RuntimeException("null object at Battery.actAll loop");
-                obj.act();
+            for (Monster monster : monsters) {
+                monster.act();
             }
         }
         for (Monster a : world.objectsToRemove) {
