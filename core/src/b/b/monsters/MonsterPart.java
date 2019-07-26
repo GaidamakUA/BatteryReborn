@@ -10,9 +10,8 @@ public class MonsterPart extends Monster {
 
     public MonsterPart(World world, double x, double y, Sprite s, double life,
                        ComplexAI ai, int plvl) {
-        super(world, x, y, s, life * Config.Damages.bullet);
+        super(world, x, y, s, life * Config.Damages.bullet, plvl);
         this.ai = ai;
-        zLayer = plvl;
     }
 
     public void move() {

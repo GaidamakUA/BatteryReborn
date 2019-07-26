@@ -20,9 +20,8 @@ public abstract class Monster extends Drawable implements Changeable {
     protected double dist;
     public Mover mover;
 
-    public Monster(World world, double x, double y,
-                   Sprite sprite, double maxLife) {
-        this(x, y, sprite.width, sprite.height, true, 4, maxLife,
+    public Monster(World world, double x, double y, Sprite sprite, double maxLife, int zLayer) {
+        this(x, y, sprite.width, sprite.height, true, zLayer, maxLife,
                 maxLife, world);
         this.sprite = sprite;
         mover = null;

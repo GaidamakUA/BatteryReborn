@@ -7,9 +7,8 @@ import b.b.monsters.Monster;
 import b.gfx.Sprite;
 
 public abstract class Item extends Monster {
-    public Item(World world, double x, double y,
-                Sprite sprite) {
-        super(world, x, y, sprite, 0.000001);
+    public Item(World world, double x, double y, Sprite sprite, int zLayer) {
+        super(world, x, y, sprite, 0.000001, zLayer);
     }
 
     public void draw() {

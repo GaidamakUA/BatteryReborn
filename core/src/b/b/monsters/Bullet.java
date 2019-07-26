@@ -13,9 +13,8 @@ public class Bullet extends Monster {
 
     public Bullet(double speed, double x, double y, int dir, World world,
                   Screen screen, Object owner) {
-        super(world, x, y, world.gfx.getSprite("bullet" + dir), 0.000001);
+        super(world, x, y, world.gfx.getSprite("bullet" + dir), 0.000001, 5);
         this.owner = owner;
-        zLayer = 5;
         this.dir = dir;
         mover = new Mover(this, speed, speed, speed);
         mover.setSpeed(speed, dir);

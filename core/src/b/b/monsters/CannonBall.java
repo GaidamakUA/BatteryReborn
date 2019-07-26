@@ -13,8 +13,7 @@ public class CannonBall extends Monster {
 
     public CannonBall(double x, double y, int dir, World world,
                       Screen screen) {
-        super(world, x, y, world.gfx.getSprite("cannon_ball"), 0.000001);
-        zLayer = 2;
+        super(world, x, y, world.gfx.getSprite("cannon_ball"), 0.000001, 2);
         this.dir = dir;
         double speed = Config.Monsters.Cannon.ballSpeed;
         mover = new Mover(this, speed, speed, speed);

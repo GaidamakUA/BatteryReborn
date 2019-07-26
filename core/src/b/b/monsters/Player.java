@@ -21,14 +21,13 @@ public class Player extends Monster {
                   int pcoins, PlayerExtras pextras) {
         super(world, (double) world.width / 2 * Config.squareSize,
                 (world.height - 3) * Config.squareSize, world.gfx.getSprite("plane"),
-                Config.Monsters.Player.life * Config.Damages.bullet);
+                Config.Monsters.Player.life * Config.Damages.bullet, 5);
         scores = pscores;
         lives = plifes;
         coins = pcoins;
         extras = pextras;
         screen.setCameraY(world.height * Config.squareSize - screen.h, world);
         kbd = keyboard;
-        zLayer = 5;
         lastShotTime = 0;
         mover = new Mover(this, Config.Monsters.Player.maxStrafeSpeed,
                 Config.Monsters.Player.maxSpeed, Config.Monsters.Player.minSpeed);

@@ -21,7 +21,7 @@ public abstract class Drawable implements Comparable {
     /*
      * Level of height (0-8)
      */
-    public int zLayer;
+    private final int zLayer;
 
     protected World world;
 
@@ -45,7 +45,9 @@ public abstract class Drawable implements Comparable {
     }
 
     public int compareTo(Object o) throws ClassCastException {
-        if (zLayer != ((Drawable) o).zLayer) return zLayer - ((Drawable) o).zLayer;
+        if (zLayer != ((Drawable) o).zLayer) {
+            return zLayer - ((Drawable) o).zLayer;
+        }
         return this.hashCode() - o.hashCode();
     }
 

@@ -16,8 +16,7 @@ public class Helicopter extends Monster {
 
     public Helicopter(double x, double y, World world, int direction) {
         super(world, x, y, world.gfx.getSprite("heli"),
-                Config.Monsters.Heli.life * Config.Damages.bullet);
-        zLayer = 5;
+                Config.Monsters.Heli.life * Config.Damages.bullet, 5);
         dir = direction;
         flipped = world.gfx.getSprite("heliLeft");
         final double speed = Config.Monsters.Heli.maxSpeed;
