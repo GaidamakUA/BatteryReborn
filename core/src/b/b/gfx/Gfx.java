@@ -145,7 +145,7 @@ public class Gfx {
             Sprite map = getSprite("cosmos");
             System.arraycopy(map.pixels, 0, bufGfx.pixels, 0, 510 * 510);
         }
-        Water.prepareWatCur(battery);
+        Water.curlWaterSprite(battery);
         WorldSquare[][] map = battery.world.getMap();
         int yBorder = scr.getYBorder();
         int xBorder = scr.getXBorder();

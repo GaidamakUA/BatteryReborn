@@ -17,7 +17,7 @@ public class Water extends ChanSquare {
         sprite = world.gfx.getSprite("watcur");
     }
 
-    public static void prepareWatCur(Battery btr) {
+    public static void curlWaterSprite(Battery btr) {
         Sprite watcur = btr.gfx.getSprite("watcur");
         Sprite water = btr.gfx.getSprite("water");
         int watcurPixles[] = watcur.pixels;
