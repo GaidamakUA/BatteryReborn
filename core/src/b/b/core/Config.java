@@ -24,7 +24,7 @@ public class Config {
         return Arrays.asList(lvls);
     }
 
-    public static final String getLevelsString() {
+    public static String getLevelsString() {
         return Str77.toString(levels);
     }
 

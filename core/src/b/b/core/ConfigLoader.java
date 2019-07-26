@@ -114,8 +114,8 @@ public class ConfigLoader {
     }
 
     public static void setLevels(String s) {
-        Integer[] lvls = Str77.integerArr(s);
-        Config.levels = Arrays.asList(lvls);
+        Integer[] levels = Str77.integerArr(s);
+        Config.levels = Arrays.asList(levels);
     }
 
     private double getDouble(String paramName, double defaultValue) {

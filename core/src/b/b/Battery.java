@@ -115,7 +115,6 @@ public class Battery extends BatteryGame {
             }
             Shop.draw(this);
             gfx.updateScreen();
-            Thread.sleep(2);
         } catch (Exception e) {
             exception(e);
         }
