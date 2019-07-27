@@ -16,7 +16,7 @@ public class GunMonster extends MonsterPart {
 
     protected GunMonster(World world, ComplexAI boss, int pshift) {
         super(world, 0, 0, world.gfx.getSprite("boss2_gun"), Config.Monsters.Boss2.gunLife,
-                boss, 3);
+                boss, ZLayer.THREE);
         shift = pshift;
         partY = -15;
         k = U77.rnd() + 1;

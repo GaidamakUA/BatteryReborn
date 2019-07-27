@@ -11,7 +11,7 @@ public class Coin extends Item {
     private double prevFrameTime;
 
     public Coin(double x, double y, World world) {
-        super(world, x, y, world.gfx.getSprite("coin"), 3);
+        super(world, x, y, world.gfx.getSprite("coin"), ZLayer.THREE);
         prevFrameTime = -999;
     }
 

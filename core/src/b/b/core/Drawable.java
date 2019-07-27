@@ -18,15 +18,12 @@ public abstract class Drawable implements Comparable {
     public double halfWidth;
     public double halfHeight;
 
-    /*
-     * Level of height (0-8)
-     */
-    private final int zLayer;
+    private final ZLayer zLayer;
 
     protected World world;
 
     public Drawable(double x, double y, int width, int height,
-                    boolean isShape, int zLayer, World world) {
+                    boolean isShape, ZLayer zLayer, World world) {
         this.world = world;
         randomSeed = world.nextId++;
         this.screen = world.btr.screen;
@@ -45,8 +42,9 @@ public abstract class Drawable implements Comparable {
     }
 
     public int compareTo(Object o) throws ClassCastException {
-        if (zLayer != ((Drawable) o).zLayer) {
-            return zLayer - ((Drawable) o).zLayer;
+        ZLayer anotherZLayer = ((Drawable) o).zLayer;
+        if (this.zLayer != anotherZLayer) {
+            return this.zLayer.compareTo(anotherZLayer);
         }
         return this.hashCode() - o.hashCode();
     }
@@ -83,5 +81,9 @@ public abstract class Drawable implements Comparable {
 
     protected int yScreenBorder() {
         return yScreenStart() + height;
+    }
+
+    public enum ZLayer {
+        ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN
     }
 }

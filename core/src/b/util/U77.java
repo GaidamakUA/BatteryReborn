@@ -95,39 +95,10 @@ public class U77 {
         return d == (int) d ? "" + (int) d : "" + d;
     }
 
-    /**
-     * @param afterDot - obligatory digit count after dot
-     */
-    public static String ssprecision(double d, int afterDot) {
-        if (afterDot == 0) return "" + (int) (d + 0.5);
-        String res = sprecision(d, afterDot);
-        if (!res.contains(".")) {
-            return res + "." + repeat("0", afterDot);
-        } else {
-            int aftDot = res.length() - 1 - res.indexOf(".");
-            if (aftDot < afterDot) {
-                return res + repeat("0", afterDot - aftDot);
-            } else if (aftDot > afterDot) {
-                return res.substring(0, res.length() + afterDot - aftDot);
-            } else {
-                return res;
-            }
-        }
-    }
-
     private static String repeat(String s, int count) {
         String res = "";
         for (int i = 0; i < count; i++) res += s;
         return res;
-    }
-
-    public static void throwException(Exception e) {
-        if (e instanceof RuntimeException) throw (RuntimeException) e;
-        throw new RuntimeException(toString(e));
-    }
-
-    public static void throwException(Exception e, String msg) {
-        throw new RuntimeException(msg + " " + toString(e));
     }
 
     public static String toString(Exception e) {

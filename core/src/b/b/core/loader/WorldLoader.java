@@ -91,26 +91,26 @@ public class WorldLoader {
                 if (pixel == 0xff0000ff) {
                     list.add(new Water(x, y, world));
                 } else if (pixel == 0xffff0000 || pixel == 0xff808040) {
-                    list.add(new Square(gfx.getSprite("brickbig"), x, y, world, true, 1));
+                    list.add(new Square(gfx.getSprite("brickbig"), x, y, world, true, Drawable.ZLayer.ONE));
                 } else if (pixel == 0xffc0c0c0) {
-                    list.add(new Square(gfx.getSprite("ground"), x, y, world, false, 0));
+                    list.add(new Square(gfx.getSprite("ground"), x, y, world, false, Drawable.ZLayer.ZERO));
                 } else if (pixel == 0xff808080) {
-                    list.add(new Square(gfx.getSprite("warfloor"), x, y, world, false, 0));
+                    list.add(new Square(gfx.getSprite("warfloor"), x, y, world, false, Drawable.ZLayer.ZERO));
                 } else if (pixel == 0xffc0e6c0) {
-                    list.add(new Square(gfx.getSprite("bck0"), x, y, world, false, 0));
+                    list.add(new Square(gfx.getSprite("bck0"), x, y, world, false, Drawable.ZLayer.ZERO));
                 } else if (pixel == 0xff8000ff) {
                     Sprite spr = gfx.getSprite("grass");
-                    list.add(new Square(spr, x, y, world, false, 0));
+                    list.add(new Square(spr, x, y, world, false, Drawable.ZLayer.ZERO));
                 } else if (pixel == 0xff008080) {
                     throw new RuntimeException("corner should not be defined on image " +
                             "map for a while x:" + x + " y:" + y);
                 } else if (pixel == 0xff004040) {
-                    list.add(new Square(gfx.getSprite("trap|"), x, y, world, false, 0));
+                    list.add(new Square(gfx.getSprite("trap|"), x, y, world, false, Drawable.ZLayer.ZERO));
                 } else if (pixel == 0xff008282) {
-                    list.add(new Square(gfx.getSprite("trap-"), x, y, world, false, 0));
+                    list.add(new Square(gfx.getSprite("trap-"), x, y, world, false, Drawable.ZLayer.ZERO));
                 } else if (pixel == 0xffa2a2a2) {
                     list.add(new Square(gfx.getSprite("bck4_" + random.nextInt(4)), x, y,
-                            world, false, 0));
+                            world, false, Drawable.ZLayer.ZERO));
                 } else if (pixel == 0xff804000) {
                     int part = getLandingPart(x, y);
                     if (part == 0) {
@@ -199,21 +199,21 @@ public class WorldLoader {
         background(map[y - 1][x].objects, wcg);
         int max = U77.maxIndex(wcg);
         if (max == 0) {
-            return new Square(gfx.getSprite("warfloor"), x, y, world, false, 0);
+            return new Square(gfx.getSprite("warfloor"), x, y, world, false, Drawable.ZLayer.ZERO);
         } else if (max == 1) {
-            return new Square(gfx.getSprite("ground"), x, y, world, false, 0);
+            return new Square(gfx.getSprite("ground"), x, y, world, false, Drawable.ZLayer.ZERO);
         } else if (max == 2) {
-            return new Square(gfx.getSprite("bck0"), x, y, world, false, 0);
+            return new Square(gfx.getSprite("bck0"), x, y, world, false, Drawable.ZLayer.ZERO);
         } else if (max == 3) {
-            return new Square(gfx.getSprite("grass"), x, y, world, false, 0);
+            return new Square(gfx.getSprite("grass"), x, y, world, false, Drawable.ZLayer.ZERO);
         } else if (max == 4) {
-            return new Square(gfx.getSprite("trap|"), x, y, world, false, 0);
+            return new Square(gfx.getSprite("trap|"), x, y, world, false, Drawable.ZLayer.ZERO);
         } else if (max == 5) {
             return new Water(x, y, world);
         } else if (max == 6) {
-            return new Square(gfx.getSprite("trap-"), x, y, world, false, 0);
+            return new Square(gfx.getSprite("trap-"), x, y, world, false, Drawable.ZLayer.ZERO);
         } else if (max == 7) {
-            return new Square(gfx.getSprite("bck4_0"), x, y, world, false, 0);
+            return new Square(gfx.getSprite("bck4_0"), x, y, world, false, Drawable.ZLayer.ZERO);
         } else {
             throw new RuntimeException("Should not be: unknown background lvl:" +
                     lvl + " x:" + x + "y:" + y);

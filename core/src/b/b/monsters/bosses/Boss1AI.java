@@ -66,13 +66,13 @@ public class Boss1AI extends InvisibleMonster implements ComplexAI {
     private void initParts() {
         double life = Config.Monsters.Boss1.life;
         top = new MonsterPart(world, x, y - topSprite.height + 25, topSprite,
-                life / 5 * 2, this, 4);
+                life / 5 * 2, this, ZLayer.FOUR);
         bottom = new MonsterPart(world, x, y + bottomSprite.height - 5, bottomSprite,
-                life / 5, this, 4);
+                life / 5, this, ZLayer.FOUR);
         left = new MonsterPart(world, x - leftSprite.width + 1 - topSprite.halfWidth, y, leftSprite,
-                life / 5, this, 4);
+                life / 5, this, ZLayer.FOUR);
         right = new MonsterPart(world, x + rightSprite.width - 1 + topSprite.halfWidth, y, rightSprite,
-                life / 5, this, 4);
+                life / 5, this, ZLayer.FOUR);
         world.objectsToAdd.add(bottom);
         world.addToMap(bottom);
         world.objectsToAdd.add(top);

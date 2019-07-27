@@ -19,7 +19,7 @@ public class YellowBorder extends Square {
     public YellowBorder(Sprite s, int xMap, int yMap, World w, boolean isShape) {
         super(s, xMap * Config.squareSize + Config.hSquareSize,
                 yMap * Config.squareSize + Config.hSquareSize,
-                s.width, s.height, w, isShape, 2);
+                s.width, s.height, w, isShape, ZLayer.TWO);
         setWH(Config.squareSize, Config.squareSize);
     }
 

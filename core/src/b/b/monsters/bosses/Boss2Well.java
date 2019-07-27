@@ -22,7 +22,7 @@ public class Boss2Well extends MonsterPart {
     protected Boss2Well(World world, Boss2AI pboss, Boss2Well pparent,
                         boolean pleft) {
         super(world, 0, 0, world.gfx.getSprite("boss2_well"),
-                Config.Monsters.Boss2.wellLife, pboss, 6);
+                Config.Monsters.Boss2.wellLife, pboss, ZLayer.SIX);
         parent = pparent;
         left = pleft;
         boss = pboss;

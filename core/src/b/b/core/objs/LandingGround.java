@@ -14,7 +14,7 @@ public class LandingGround extends ChanSquare {
     public LandingGround(int x, int y, World world) {
         super(world.gfx.getSprite("landingground"), (x + 1) * Config.squareSize,
                 (y + 1) * Config.squareSize, world.gfx.getSprite("landingground").width,
-                world.gfx.getSprite("landingground").height, world, false, 0);
+                world.gfx.getSprite("landingground").height, world, false, ZLayer.ZERO);
         btr = world.gfx.battery;
     }
 

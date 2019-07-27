@@ -15,7 +15,7 @@ public class Tank extends Monster {
 
     public Tank(double x, double y, World world, int direction) {
         super(world, x, y, world.gfx.getSprite("tank_base"),
-                Config.Monsters.Tank.life * Config.Damages.bullet, 4);
+                Config.Monsters.Tank.life * Config.Damages.bullet, ZLayer.FOUR);
         ai = new TankAI(this, world, direction);
         Sprite caterpillar = world.gfx.getSprite("caterpillar");
         gun = new Gun(this, world, 1, Config.Monsters.Tank.bulletSpeed,

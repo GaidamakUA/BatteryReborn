@@ -19,7 +19,7 @@ public class Square extends Drawable {
     protected BufGfx b;
 
     public Square(Sprite s, int xMap, int yMap, World w, boolean isShape,
-                  int lvl) {
+                  ZLayer lvl) {
         this(s, xMap * Config.squareSize + Config.hSquareSize,
                 yMap * Config.squareSize + Config.hSquareSize,
                 s.width, s.height, w, isShape, lvl);
@@ -27,7 +27,7 @@ public class Square extends Drawable {
     }
 
     public Square(Sprite s, int x, int y, int width, int height,
-                  World w, boolean isShape, int lvl) {
+                  World w, boolean isShape, ZLayer lvl) {
         super(x, y, width, height, isShape, lvl, w);
         sprite = s;
         b = w.gfx.bufGfx;

@@ -21,7 +21,7 @@ public class Player extends Monster {
                   int pcoins, PlayerExtras pextras) {
         super(world, (double) world.width / 2 * Config.squareSize,
                 (world.height - 3) * Config.squareSize, world.gfx.getSprite("plane"),
-                Config.Monsters.Player.life * Config.Damages.bullet, 5);
+                Config.Monsters.Player.life * Config.Damages.bullet, ZLayer.FIVE);
         scores = pscores;
         lives = plifes;
         coins = pcoins;

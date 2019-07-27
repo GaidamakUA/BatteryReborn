@@ -20,7 +20,7 @@ public abstract class Monster extends Drawable implements Changeable {
     protected double dist;
     public Mover mover;
 
-    public Monster(World world, double x, double y, Sprite sprite, double maxLife, int zLayer) {
+    public Monster(World world, double x, double y, Sprite sprite, double maxLife, ZLayer zLayer) {
         this(x, y, sprite.width, sprite.height, true, zLayer, maxLife,
                 maxLife, world);
         this.sprite = sprite;
@@ -28,7 +28,7 @@ public abstract class Monster extends Drawable implements Changeable {
     }
 
     private Monster(double x, double y, int width, int height,
-                    boolean isShape, int lvl, double life, double maxLife, World world) {
+                    boolean isShape, ZLayer lvl, double life, double maxLife, World world) {
         super(x, y, width, height, isShape, lvl, world);
         this.life = life;
         this.maxLife = maxLife;

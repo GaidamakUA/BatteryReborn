@@ -6,7 +6,7 @@ import b.b.monsters.items.Item;
 
 public abstract class InvisibleMonster extends Monster {
     public InvisibleMonster(World world, double x, double y) {
-        super(world, x, y, world.gfx.getSprite("pix"), 0.000001, 4);
+        super(world, x, y, world.gfx.getSprite("pix"), 0.000001, ZLayer.FOUR);
     }
 
     public void draw() {

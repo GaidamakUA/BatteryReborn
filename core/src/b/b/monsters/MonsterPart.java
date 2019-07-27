@@ -9,7 +9,7 @@ public class MonsterPart extends Monster {
     protected ComplexAI ai;
 
     public MonsterPart(World world, double x, double y, Sprite s, double life,
-                       ComplexAI ai, int plvl) {
+                       ComplexAI ai, ZLayer plvl) {
         super(world, x, y, s, life * Config.Damages.bullet, plvl);
         this.ai = ai;
     }

@@ -11,12 +11,12 @@ import java.awt.geom.Rectangle2D;
 
 public abstract class ChanSquare extends Square implements Changeable {
     public ChanSquare(Sprite sprite, int xSquare, int ySquare, World world, boolean isShape,
-                      int lvl) {
+                      ZLayer lvl) {
         super(sprite, xSquare, ySquare, world, isShape, lvl);
     }
 
     public ChanSquare(Sprite s, int x, int y, int width, int height,
-                      World w, boolean isShape, int lvl) {
+                      World w, boolean isShape, ZLayer lvl) {
         super(s, x, y, width, height, w, isShape, lvl);
     }
 

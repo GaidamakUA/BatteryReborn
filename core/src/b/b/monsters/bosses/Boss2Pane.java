@@ -7,7 +7,7 @@ import b.gfx.Sprite;
 
 public class Boss2Pane extends MonsterPart {
     public Boss2Pane(World world, double x, double y, Sprite sprite, Boss2AI boss) {
-        super(world, x, y, sprite, Config.Monsters.Boss2.paneLife, boss, 4);
+        super(world, x, y, sprite, Config.Monsters.Boss2.paneLife, boss, ZLayer.FOUR);
     }
 
     public void draw() {

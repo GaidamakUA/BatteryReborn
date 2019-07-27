@@ -71,9 +71,9 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
     private void initParts() {
         int life = Config.Monsters.Boss2.paneLife;
         headLeft = new MonsterPart(world, x - headLeftSprite.width, y - (headLeftSprite.height / 2),
-                headLeftSprite, life, this, 5);
+                headLeftSprite, life, this, ZLayer.FIVE);
         headRight = new MonsterPart(world, x, y - (headRightSprite.height / 2), headRightSprite,
-                life, this, 5);
+                life, this, ZLayer.FIVE);
         paneLeft = new Boss2Pane(world, x - 150 - paneLeftSprite.width,
                 y - (paneLeftSprite.height / 2), paneLeftSprite, this);
         paneRight = new Boss2Pane(world, x + 150, y - (paneRightSprite.height / 2),

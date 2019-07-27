@@ -3,14 +3,12 @@ package b.b.core.objs;
 import b.b.Battery;
 import b.b.core.Config;
 import b.b.core.World;
-import b.gfx.BufGfx;
 import b.gfx.Sprite;
-import b.gfx.effects.Appearing;
 import b.util.U77;
 
 public class Water extends ChanSquare {
     public Water(int x, int y, World w) {
-        super(w.gfx.getSprite("water"), x, y, w, true, 0);
+        super(w.gfx.getSprite("water"), x, y, w, true, ZLayer.ZERO);
     }
 
     public void changeSprite() {
