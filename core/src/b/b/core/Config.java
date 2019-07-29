@@ -3,8 +3,6 @@ package b.b.core;
 import java.util.Arrays;
 import java.util.List;
 
-import b.util.Str77;
-
 public class Config {
     public static final double version = 1.09;
     public static final double speed = 1.305;
@@ -18,7 +16,7 @@ public class Config {
     public static final List<Integer> levels = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
     public static String getLevelsString() {
-        return Str77.toString(levels);
+        return levels.toString();
     }
 
     public static class Intervals {
