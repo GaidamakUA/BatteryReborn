@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
@@ -14,10 +15,11 @@ public class BatteryGame extends ApplicationAdapter {
 	public static final int VIEWPORT_WIDTH = 510;
 	public static final int VIEWPORT_HEIGHT = 510;
 	public static final int FONT_SIZE = 10;
-	protected SpriteBatch batch;
+    public SpriteBatch batch;
 	protected ShapeRenderer shapeRenderer;
 	protected BitmapFont font;
 
+    public Texture explosionParticleTexture;
 
 	public boolean exception;
 
@@ -48,6 +50,8 @@ public class BatteryGame extends ApplicationAdapter {
 		font = generator.generateFont(parameter);
 		shapeRenderer = new ShapeRenderer();
 		initialize();
+
+        explosionParticleTexture = new Texture(Gdx.files.internal("expl_no_background.png"));
 	}
 
 	@Override
@@ -56,10 +60,6 @@ public class BatteryGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		// tell the camera to update its matrices.
 		camera.update();
-
-		// tell the SpriteBatch to render in the
-		// coordinate system specified by the camera.
-		batch.setProjectionMatrix(camera.combined);
 
 		paint();
 	}

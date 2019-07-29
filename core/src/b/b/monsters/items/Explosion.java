@@ -1,12 +1,14 @@
 package b.b.monsters.items;
 
-import b.b.core.World;
-import b.b.monsters.Monster;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Explosion extends Item {
+import b.b.core.World;
+import b.b.monsters.Monster;
+
+public class Explosion extends Item implements DrawableLibGDX {
     private static final double duration = 370;
     private static final int count = 30;
 
@@ -36,9 +38,6 @@ public class Explosion extends Item {
     }
 
     public void draw() {
-        for (ExplosionParticle e : list) {
-            e.draw();
-        }
     }
 
     protected void move() {
@@ -48,6 +47,13 @@ public class Explosion extends Item {
         }
         if (time + duration < time()) {
             dmg(1, null);
+        }
+    }
+
+    @Override
+    public void draw(SpriteBatch batch) {
+        for (DrawableLibGDX e : list) {
+            e.draw(batch);
         }
     }
 }

@@ -1,10 +1,13 @@
 package b.b.monsters.items;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+import b.b.Battery;
 import b.b.core.World;
 import b.util.Time77;
 import b.util.U77;
 
-public class ExplosionParticle extends Item {
+public class ExplosionParticle extends Item implements DrawableLibGDX {
     public final static double maxSpeed = 0.27;
     private double xSpeed;
     private double ySpeed;
@@ -34,6 +37,11 @@ public class ExplosionParticle extends Item {
     }
 
     public void draw() {
-        world.gfx.bufGfx.drawTranspRangeCheck(sprite, xScreenStart(), yScreenStart());
+    }
+
+    @Override
+    public void draw(SpriteBatch batch) {
+        Battery battery = world.btr;
+        batch.draw(battery.explosionParticleTexture, xScreenStart(), Battery.VIEWPORT_HEIGHT - yScreenStart());
     }
 }

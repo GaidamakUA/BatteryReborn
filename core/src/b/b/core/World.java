@@ -1,15 +1,20 @@
 /* refactoring0 */
 package b.b.core;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import b.b.Battery;
 import b.b.core.loader.WorldLoader;
 import b.b.core.objs.ChanSquare;
 import b.b.gfx.Gfx;
 import b.b.monsters.Monster;
 import b.b.monsters.Player;
+import b.b.monsters.items.DrawableLibGDX;
 import b.gfx.Screen;
-
-import java.util.*;
 
 public class World {
     public Gfx gfx;
@@ -105,6 +110,26 @@ public class World {
         }
         List<Drawable> list = new ArrayList<Drawable>(res);
         Collections.sort(list);
+        return list;
+    }
+
+    public List<DrawableLibGDX> getDrawablesOnScreen() {
+        Set<DrawableLibGDX> res = new HashSet<DrawableLibGDX>();
+        Screen scr = btr.screen;
+        int yBorder = scr.getYBorder();
+        int xStart = 0;
+        int xBorder = scr.getXBorder();
+        for (int yy = scr.getStartY(); yy < yBorder; yy++) {
+            for (int xx = xStart; xx < xBorder; xx++) {
+                List<Drawable> drawables = map[yy][xx].objects;
+                for (Drawable d : drawables) {
+                    if (d instanceof DrawableLibGDX) {
+                        res.add((DrawableLibGDX) d);
+                    }
+                }
+            }
+        }
+        List<DrawableLibGDX> list = new ArrayList<DrawableLibGDX>(res);
         return list;
     }
 
