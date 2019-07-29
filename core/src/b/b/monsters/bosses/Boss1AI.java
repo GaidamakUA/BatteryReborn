@@ -11,7 +11,7 @@ import b.b.monsters.items.Explosion;
 import b.gfx.BufGfx;
 import b.gfx.Sprite;
 import b.util.Pair;
-import b.util.U77;
+import b.util.Utils;
 
 import java.util.Random;
 
@@ -44,8 +44,8 @@ public class Boss1AI extends InvisibleMonster implements ComplexAI {
     }
 
     private void initAnglesAndMover() {
-        angle1 = U77.rnd(U77.dpi);
-        angle2 = U77.rnd(U77.dpi);
+        angle1 = Utils.rnd(Utils.dpi);
+        angle2 = Utils.rnd(Utils.dpi);
         calcXY();
         mover = new Mover(this, Config.Monsters.Boss1.maxStrafeSpeed,
                 Config.Monsters.Boss1.maxSpeed, Config.Monsters.Boss1.minSpeed);
@@ -131,8 +131,8 @@ public class Boss1AI extends InvisibleMonster implements ComplexAI {
                 }));
                 world.objectsToAdd.add(new Explosion(x, y, world, this, 4));
             } else {
-                angle1 = U77.angle(angle1 + 0.01);
-                angle2 = U77.angle(angle2 - 0.015);
+                angle1 = Utils.angle(angle1 + 0.01);
+                angle2 = Utils.angle(angle2 - 0.015);
                 calcXY();
                 if (angle1 > Math.PI && angle1 != 0) {
                     mover.left();
@@ -141,8 +141,12 @@ public class Boss1AI extends InvisibleMonster implements ComplexAI {
                 }
                 if (yScreenStart() > 100) mover.up();
                 if (yScreenStart() < 10) mover.down();
-                if (x > world.btr.player.x && U77.rnd() < 0.2) mover.left();
-                if (x < world.btr.player.x && U77.rnd() < 0.2) mover.right();
+                if (x > world.btr.player.x && Utils.rnd() < 0.2) {
+                    mover.left();
+                }
+                if (x < world.btr.player.x && Utils.rnd() < 0.2) {
+                    mover.right();
+                }
                 mover.move();
                 if (top.life > 0) topGun.shoot(2);
                 if (bottom.life > 0) bottomGun.shoot(2);

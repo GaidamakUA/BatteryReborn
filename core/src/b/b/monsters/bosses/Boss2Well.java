@@ -4,7 +4,7 @@ import b.b.core.Config;
 import b.b.core.World;
 import b.b.monsters.MonsterPart;
 import b.gfx.BufGfx;
-import b.util.U77;
+import b.util.Utils;
 
 public class Boss2Well extends MonsterPart {
     protected Boss2Well parent;
@@ -59,17 +59,17 @@ public class Boss2Well extends MonsterPart {
 
     public final void newFrame() {
         double maxASpeed = Config.Monsters.Boss2.wellChaoticASpeed;
-        aSpeed += (U77.rndBool() ? 1 : -1) * (maxASpeed / 10);
+        aSpeed += (Utils.rndBool() ? 1 : -1) * (maxASpeed / 10);
         if (aSpeed > maxASpeed) {
             aSpeed = maxASpeed;
         } else if (aSpeed < -maxASpeed) {
             aSpeed = -maxASpeed;
         }
-        newAngle = U77.angle(angle + aSpeed);
-        if (newAngle < U77.hpi && U77.rnd() < 0.3) {
+        newAngle = Utils.angle(angle + aSpeed);
+        if (newAngle < Utils.hpi && Utils.rnd() < 0.3) {
             newAngle += aSpeed;
         }
-        if (newAngle > U77.pi34 && U77.rnd() < 0.3) {
+        if (newAngle > Utils.pi34 && Utils.rnd() < 0.3) {
             newAngle -= aSpeed;
         }
         double maxSpeed = Config.Monsters.Boss2.wellChaoticSpeed;

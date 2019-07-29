@@ -4,7 +4,7 @@ import b.b.Battery;
 import b.b.core.Config;
 import b.b.core.World;
 import b.gfx.Sprite;
-import b.util.U77;
+import b.util.Utils;
 
 public class Water extends ChanSquare {
     public Water(int x, int y, World w) {
@@ -28,10 +28,10 @@ public class Water extends ChanSquare {
         int[] line = new int[width];
         for (int y = watcur.height - 1; y >= 0; y--) {
             int xShift = (int) (Math.sin(time / Config.Bcks.waterXWaveTimeK +
-                    (((double) y / Config.Bcks.waterWave) / width) * U77.dpi) * 4);
+                    (((double) y / Config.Bcks.waterWave) / width) * Utils.dpi) * 4);
             int offset = y * width + width - 1;
             for (int x = width - 1; x >= 0; x--) {
-                line[U77.rem(x + xShift, width)] = watcurPixles[offset--];
+                line[Utils.rem(x + xShift, width)] = watcurPixles[offset--];
             }
             System.arraycopy(line, 0, watcurPixles, y * width, width);
         }

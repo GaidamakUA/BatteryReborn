@@ -5,7 +5,7 @@ import b.b.core.Square;
 import b.b.core.World;
 import b.b.core.objs.Water;
 import b.gfx.Sprite;
-import b.util.U77;
+import b.util.Utils;
 
 public class Helicopter extends Monster {
     /**
@@ -32,7 +32,7 @@ public class Helicopter extends Monster {
     public void draw() {
         super.draw();
         Sprite blades = world.gfx.getSprite("heli_blades" +
-                U77.rem((int) (world.gfx.battery.time.time *
+                Utils.rem((int) (world.gfx.battery.time.time *
                         Config.Monsters.Heli.bladesK), 4));
         if (dir == 3) {
             world.gfx.bufGfx.drawTranspTrRangeCheck(blades, xScreenStart(),

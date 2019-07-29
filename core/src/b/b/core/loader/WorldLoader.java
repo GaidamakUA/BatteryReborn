@@ -15,7 +15,7 @@ import b.b.monsters.items.FirstAid;
 import b.gfx.C;
 import b.gfx.Screen;
 import b.gfx.Sprite;
-import b.util.U77;
+import b.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +41,7 @@ public class WorldLoader {
         new BrickManager(map, world, gfx.getSprite("lvl" + lvl)).prepare();
         battery.timeWhenLevelLoaded = battery.time.time;
         battery.timeWhenLevelCompleted = 0;
-        U77.dropRandom();
+        Utils.dropRandom();
         battery.kbd.clear(battery);
         battery.logger.log("lvl " + lvl);
         System.gc();
@@ -70,12 +70,12 @@ public class WorldLoader {
             scr.b = buf;
             if (!oldPlayer) {
                 gfx.battery.player = new Player(battery.kbd, world, 0, 3, 0, new PlayerExtras());
-                gfx.battery.logger.log("newgame " + U77.sprecision(gfx.battery.time.time));
+                gfx.battery.logger.log("newgame " + Utils.sprecision(gfx.battery.time.time));
             } else {
                 Player p = gfx.battery.player;
                 gfx.battery.player = new Player(battery.kbd, world, p.getScores(), p.lives,
                         p.getCoins(), p.extras);
-                gfx.battery.logger.log("newlife " + U77.sprecision(gfx.battery.time.time));
+                gfx.battery.logger.log("newlife " + Utils.sprecision(gfx.battery.time.time));
             }
         }
     }
@@ -197,7 +197,7 @@ public class WorldLoader {
             background(map[y - 1][x + 1].objects, wcg);
         }
         background(map[y - 1][x].objects, wcg);
-        int max = U77.maxIndex(wcg);
+        int max = Utils.maxIndex(wcg);
         if (max == 0) {
             return new Square(gfx.getSprite("warfloor"), x, y, world, false, Drawable.ZLayer.ZERO);
         } else if (max == 1) {

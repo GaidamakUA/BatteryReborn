@@ -1,7 +1,7 @@
 /* refactoring0 */
 package b.b.core;
 
-import b.util.U77;
+import b.util.Utils;
 
 public class ConfigLoader {
 
@@ -28,7 +28,7 @@ public class ConfigLoader {
 
     private void logConfig() {
         System.out.println("start clienttime " + System.currentTimeMillis());
-        System.out.println("version " + U77.sprecision(Config.version, 2));
+        System.out.println("version " + Utils.sprecision(Config.version, 2));
         System.out.println("levels " + Config.getLevelsString());
         double speed = Config.speed;
         System.out.println("speed " + speed);

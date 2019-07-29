@@ -3,7 +3,7 @@ package b.b.monsters;
 import b.b.Battery;
 import b.b.core.Config;
 import b.b.core.World;
-import b.util.U77;
+import b.util.Utils;
 
 public class InvisibleCannon extends InvisibleMonster {
     private int dir;
@@ -14,7 +14,7 @@ public class InvisibleCannon extends InvisibleMonster {
         super(world, x, y);
         this.dir = dir;
         btr = world.btr;
-        lastShot = U77.rnd(Config.Monsters.Cannon.shotInterval) + btr.time.time;
+        lastShot = Utils.rnd(Config.Monsters.Cannon.shotInterval) + btr.time.time;
         world.objectsToAddInTime.add(this);
     }
 

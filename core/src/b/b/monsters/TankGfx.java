@@ -4,7 +4,7 @@ import b.b.core.Config;
 import b.b.core.World;
 import b.gfx.BufGfx;
 import b.gfx.Sprite;
-import b.util.U77;
+import b.util.Utils;
 
 public class TankGfx {
     private Tank tankModel;
@@ -54,7 +54,7 @@ public class TankGfx {
 
     private final void drawCatters(BufGfx b) {
         BufGfx cater = new BufGfx(caterpillar, true);
-        int start = 3 - U77.rem((int) tankModel.dist, 4);
+        int start = 3 - Utils.rem((int) tankModel.dist, 4);
         int width = caterpillar.width - 2;
         for (int y = start; y < caterpillar.height; y += 4) {
             cater.hline(1, y, width, 0xff000000);

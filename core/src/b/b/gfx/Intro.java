@@ -4,7 +4,7 @@ import b.gfx.Sprite;
 import b.gfx.effects.Appearing;
 import b.gfx.effects.RunningDiagonals;
 import b.gfx.effects.Waves;
-import b.util.U77;
+import b.util.Utils;
 
 import java.util.Arrays;
 
@@ -52,9 +52,9 @@ public class Intro {
         Arrays.fill(gfx.bufGfx.pixels, 0xff000000);
         gfx.bufGfx.drawAtCenter(logo);
         double timeK = (time - startTime) / DURATION;
-        waves.draw(time, U77.k(timeK, 0.1));
+        waves.draw(time, Utils.k(timeK, 0.1));
         appearing.draw(timeK);
-        diagonals.draw(U77.k2(timeK, 0.25));
+        diagonals.draw(Utils.k2(timeK, 0.25));
         if (timeK > 0.25 && timeK < 0.75) {
             Sprite s = gfx.getSprite("copy");
             gfx.bufGfx.draw(s, gfx.w / 2 - (int) s.halfWidth, gfx.h - 50);

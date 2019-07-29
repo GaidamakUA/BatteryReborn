@@ -4,7 +4,7 @@ import b.b.core.Config;
 import b.b.core.Square;
 import b.b.core.World;
 import b.gfx.Sprite;
-import b.util.U77;
+import b.util.Utils;
 
 public class YellowBorder extends Square {
     public boolean leftUp;
@@ -40,9 +40,9 @@ public class YellowBorder extends Square {
     public void draw2(int[] to, Sprite sprite) {
         int[] buf = sprite.pixels;
         int offset = 0;
-        int yyy = U77.rem((int) y, sprite.height);
+        int yyy = Utils.rem((int) y, sprite.height);
         for (int yy = 0; yy < 30; yy++) {
-            int xxx = U77.rem((int) x, sprite.width);
+            int xxx = Utils.rem((int) x, sprite.width);
             for (int xx = 0; xx < 30; xx++) {
                 if ((left && xx < 10) ||
                         (leftUp && xx < 10 && yy < 10) ||
@@ -56,9 +56,9 @@ public class YellowBorder extends Square {
                     to[offset] = buf[yyy * sprite.width + xxx];
                 }
                 offset++;
-                xxx = U77.rem(xxx + 1, sprite.width);
+                xxx = Utils.rem(xxx + 1, sprite.width);
             }
-            yyy = U77.rem(yyy + 1, sprite.height);
+            yyy = Utils.rem(yyy + 1, sprite.height);
         }
     }
 }

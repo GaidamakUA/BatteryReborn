@@ -3,7 +3,7 @@ package b.b.monsters.items;
 import b.b.core.Config;
 import b.b.core.World;
 import b.b.monsters.Monster;
-import b.util.U77;
+import b.util.Utils;
 
 public class FirstAid extends Item {
     private double xCenter;
@@ -13,16 +13,16 @@ public class FirstAid extends Item {
 
     public FirstAid(double x, double y, World world) {
         super(world, x, y, world.gfx.getSprite("firstaid"), ZLayer.FIVE);
-        angle1 = U77.rnd(U77.dpi);
-        angle2 = U77.rnd(U77.dpi);
+        angle1 = Utils.rnd(Utils.dpi);
+        angle2 = Utils.rnd(Utils.dpi);
         xCenter = x;
         yCenter = y;
         calcXY();
     }
 
     protected void move() {
-        angle1 = U77.angle(angle1 + Config.Monsters.FirstAid.bigRotSpeed);
-        angle2 = U77.angle(angle2 - Config.Monsters.FirstAid.smallRotSpeed);
+        angle1 = Utils.angle(angle1 + Config.Monsters.FirstAid.bigRotSpeed);
+        angle2 = Utils.angle(angle2 - Config.Monsters.FirstAid.smallRotSpeed);
         calcXY();
     }
 

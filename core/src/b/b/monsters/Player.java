@@ -6,7 +6,7 @@ import b.b.core.Drawable;
 import b.b.core.Keyboard77;
 import b.b.core.World;
 import b.gfx.BufGfx;
-import b.util.U77;
+import b.util.Utils;
 
 public class Player extends Monster {
     public int lives;
@@ -54,7 +54,7 @@ public class Player extends Monster {
 
     public void incScores() {
         scores++;
-        world.btr.logger.log("scores " + scores + " " + U77.sprecision(time()));
+        world.btr.logger.log("scores " + scores + " " + Utils.sprecision(time()));
     }
 
     public void initXY() {
@@ -80,7 +80,7 @@ public class Player extends Monster {
         lives--;
         Battery btr = world.gfx.battery;
         btr.timeWhenLevelCompleted = time();
-        btr.logger.log("gameover " + U77.sprecision(time()));
+        btr.logger.log("gameover " + Utils.sprecision(time()));
         if (lives == 0) {
             btr.logger.log("GAMEOVER");
         }

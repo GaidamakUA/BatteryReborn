@@ -2,7 +2,7 @@ package b.gfx.effects;
 
 import b.gfx.BufGfx;
 import b.gfx.C;
-import b.util.U77;
+import b.util.Utils;
 
 public class Appearing {
     private static final double k1 = 0;
@@ -49,8 +49,8 @@ public class Appearing {
                 double v = effect(x, y, k1, k2, k3) + effect(x, y, k4, k5, k6) +
                         effect(x, y, k7, k8, k9);
                 if (tiled) {
-                    double sin = Math.sin(((double) y) / height * U77.dpi);
-                    v = Math.sin(((double) x) / width * U77.dpi) + (sin * sin * 3) + (sin * 0.2);
+                    double sin = Math.sin(((double) y) / height * Utils.dpi);
+                    v = Math.sin(((double) x) / width * Utils.dpi) + (sin * sin * 3) + (sin * 0.2);
                 }
                 map[offset++] = v;
                 if (v < min) min = v;

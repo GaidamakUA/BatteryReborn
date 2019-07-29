@@ -1,12 +1,5 @@
 package b.b.gfx;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.blogspot.androidgaidamak.BatteryGame;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
 import b.b.Battery;
 import b.b.core.Config;
 import b.b.core.Drawable;
@@ -15,12 +8,14 @@ import b.b.core.objs.Water;
 import b.b.monsters.Player;
 import b.b.monsters.bosses.Boss2AI;
 import b.b.monsters.items.DrawableLibGDX;
-import b.gfx.BufGfx;
-import b.gfx.Console;
-import b.gfx.Font77;
-import b.gfx.Screen;
-import b.gfx.Sprite;
-import b.util.U77;
+import b.gfx.*;
+import b.util.Utils;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.blogspot.androidgaidamak.BatteryGame;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Gfx {
     public int w;
@@ -132,7 +127,7 @@ public class Gfx {
                     18, 0xff000000);
         } else {
             if (icon.equals("ic_ammo") && battery.player.bullets < 20
-                    && U77.rem(((int) battery.time.time) / 500, 3) < 2) {
+                    && Utils.rem(((int) battery.time.time) / 500, 3) < 2) {
                 bufGfx.filledRect(x + 2, y + 2, 100, 18, 0xffff0000);
             } else {
                 bufGfx.rectShadow(x + 2, y + 2, 100, 18, 0.5);
@@ -163,7 +158,7 @@ public class Gfx {
             }
         }
         if (scr.getStartY() + 18 < battery.world.height &&
-                U77.rem(scr.getStartY() + 18 - Screen.lastYGc, 10) == 0 &&
+                Utils.rem(scr.getStartY() + 18 - Screen.lastYGc, 10) == 0 &&
                 scr.getStartY() + 18 != Screen.lastYGc) {
             Screen.lastYGc = scr.getStartY() + 18;
             for (int yy = Screen.lastYGc - 10; yy < Screen.lastYGc; yy++) {

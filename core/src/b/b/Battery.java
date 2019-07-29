@@ -1,19 +1,6 @@
 package b.b;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.blogspot.androidgaidamak.BatteryGame;
-
-import java.applet.AudioClip;
-import java.util.ArrayList;
-
-import b.b.core.Action;
-import b.b.core.Config;
-import b.b.core.ConfigLoader;
-import b.b.core.Keyboard77;
-import b.b.core.Logger;
-import b.b.core.Shop;
-import b.b.core.World;
+import b.b.core.*;
 import b.b.core.objs.ChanSquare;
 import b.b.gfx.Gfx;
 import b.b.gfx.Intro;
@@ -23,7 +10,13 @@ import b.b.monsters.bosses.Boss2AI;
 import b.gfx.Screen;
 import b.util.Pair;
 import b.util.Time77;
-import b.util.U77;
+import b.util.Utils;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.blogspot.androidgaidamak.BatteryGame;
+
+import java.applet.AudioClip;
+import java.util.ArrayList;
 
 public class Battery extends BatteryGame {
     public World world;
@@ -135,7 +128,7 @@ public class Battery extends BatteryGame {
         serveTimers();
         if (time.time - lastFpsLog > Config.Intervals.fpsLogPeriod) {
             lastFpsLog = time.time;
-            logger.log("fps " + " " + time.fps + " " + U77.sprecision(time.time));
+            logger.log("fps " + " " + time.fps + " " + Utils.sprecision(time.time));
         }
         kbd.next();
         if (!activated && kbd.anyKey()) activated = true;
@@ -193,7 +186,7 @@ public class Battery extends BatteryGame {
             screen.setCameraY(screen.cameraY() - Config.cameraSpeed * Time77.STEP, world);
             if (screen.camY() < Config.squareSize) {
                 screen.setCameraY(screen.cameraY(), world);
-                logger.log("lvlcompl " + U77.sprecision(time.time));
+                logger.log("lvlcompl " + Utils.sprecision(time.time));
                 timeWhenLevelCompleted = time.time;
             } else {
                 if (!((time.time - timeWhenLevelCompleted >=
@@ -232,7 +225,7 @@ public class Battery extends BatteryGame {
     public void exception(Exception e) {
         if (!exception) {
             try {
-                logger.log(U77.toString(e));
+                logger.log(Utils.toString(e));
             } catch (Exception ignored) {
             }
         }

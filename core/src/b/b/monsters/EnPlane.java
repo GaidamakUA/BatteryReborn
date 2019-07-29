@@ -4,7 +4,7 @@ import b.b.core.Config;
 import b.b.core.Square;
 import b.b.core.World;
 import b.b.core.objs.Water;
-import b.util.U77;
+import b.util.Utils;
 
 public class EnPlane extends Monster {
     private double angle;
@@ -15,11 +15,11 @@ public class EnPlane extends Monster {
         final double speed = Config.Monsters.EnPlane.speed;
         mover = new Mover(this, Config.Monsters.EnPlane.shiftSpeed, 0, speed);
         mover.setSpeed(speed, 2);
-        angle = U77.rnd(U77.dpi);
+        angle = Utils.rnd(Utils.dpi);
     }
 
     protected void move() {
-        angle = U77.angle(angle + Config.Monsters.EnPlane.turnSpeed);
+        angle = Utils.angle(angle + Config.Monsters.EnPlane.turnSpeed);
         if (angle < Math.PI) mover.move(3);
         else mover.move(1);
         mover.move(2);

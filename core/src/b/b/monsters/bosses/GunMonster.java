@@ -5,7 +5,7 @@ import b.b.core.World;
 import b.b.monsters.ComplexAI;
 import b.b.monsters.Gun;
 import b.b.monsters.MonsterPart;
-import b.util.U77;
+import b.util.Utils;
 
 public class GunMonster extends MonsterPart {
     protected Gun gun;
@@ -19,7 +19,7 @@ public class GunMonster extends MonsterPart {
                 boss, ZLayer.THREE);
         shift = pshift;
         partY = -15;
-        k = U77.rnd() + 1;
+        k = Utils.rnd() + 1;
         gun = new Gun(this, world, 0.0001, Config.Monsters.Boss2.bulletSpeed, boss);
         gun.xShift = 0;
         gun.yShift = 0;

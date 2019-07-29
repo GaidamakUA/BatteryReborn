@@ -2,7 +2,7 @@ package b.util;
 
 import java.util.Random;
 
-public class U77 {
+public class Utils {
     public static final double hpi = Math.PI / 2;
     public static final double pi34 = Math.PI * 3 / 2;
     public static final double dpi = Math.PI * 2;

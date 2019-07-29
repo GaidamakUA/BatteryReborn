@@ -3,7 +3,7 @@ package b.b.monsters;
 import b.b.core.Config;
 import b.b.core.World;
 import b.util.Time77;
-import b.util.U77;
+import b.util.Utils;
 
 public class TankAI {
     private Tank tank;
@@ -43,21 +43,21 @@ public class TankAI {
     }
 
     protected static int opposite(int dir) {
-        return U77.rem(dir + 2, 4);
+        return Utils.rem(dir + 2, 4);
     }
 
     protected void move() {
         if (!stays) {
-            if (U77.rnd(distance) > U77.rnd(Config.Monsters.Tank.turnDistance)) {
+            if (Utils.rnd(distance) > Utils.rnd(Config.Monsters.Tank.turnDistance)) {
                 if (direction == dirToPlayer()) {
-                    if (U77.rnd() > Config.Monsters.Tank.wishForPlayer) {
+                    if (Utils.rnd() > Config.Monsters.Tank.wishForPlayer) {
                         direction = anotherDirToPlayer();
                         turretDir = dirToPlayer();
                     } else {
                         turnRnd90();
                     }
                 } else {
-                    if (U77.rnd() > Config.Monsters.Tank.wishForPlayer) {
+                    if (Utils.rnd() > Config.Monsters.Tank.wishForPlayer) {
                         direction = dirToPlayer();
                         turretDir = direction;
                     } else {
@@ -97,7 +97,7 @@ public class TankAI {
     }
 
     protected void turnRnd90() {
-        if (U77.rnd() > 0.5) {
+        if (Utils.rnd() > 0.5) {
             direction++;
             if (direction == 4) direction = 0;
         } else {

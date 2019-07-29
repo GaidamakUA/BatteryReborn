@@ -6,7 +6,7 @@ import b.b.core.objs.YellowBorder;
 import b.gfx.BufGfx;
 import b.gfx.C;
 import b.gfx.Sprite;
-import b.util.U77;
+import b.util.Utils;
 
 /**
  * not obligatory square
@@ -85,21 +85,21 @@ public class Square extends Drawable {
                 buf.effects().flipVertical();
             }
         }
-        int yyy = U77.rem((int) y, sprite.height);
+        int yyy = Utils.rem((int) y, sprite.height);
         String name = sprite.name();
         boolean warfloor = name.startsWith("warfloor") ||
                 name.equals("bck0");
         if (warfloor) {
             int offset = 0;
             for (int yy = 0; yy < 30; yy++) {
-                int xxx = U77.rem((int) x, sprite.width);
+                int xxx = Utils.rem((int) x, sprite.width);
                 for (int xx = 0; xx < 30; xx++) {
                     if (warfloor) {
                         to[offset++] = p[yyy * sprite.width + xxx];
                     }
-                    xxx = U77.rem(xxx + 1, sprite.width);
+                    xxx = Utils.rem(xxx + 1, sprite.width);
                 }
-                yyy = U77.rem(yyy + 1, sprite.height);
+                yyy = Utils.rem(yyy + 1, sprite.height);
             }
         } else if (name.equals("yellow_border")) {
             ((YellowBorder) this).draw2(to, sprite);

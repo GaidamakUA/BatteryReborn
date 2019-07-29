@@ -5,7 +5,7 @@ import b.b.core.*;
 import b.b.core.objs.YellowBorder;
 import b.b.gfx.Gfx;
 import b.gfx.Sprite;
-import b.util.U77;
+import b.util.Utils;
 
 import java.util.List;
 
@@ -130,9 +130,9 @@ public class BrickManager {
                         if (name.startsWith("brick")) {
                             int c = sprite.pixels[offset];
                             if (c != -8355776/*0xff804040*/) {
-                                if (U77.rnd() < 0.5) {
+                                if (Utils.rnd() < 0.5) {
                                     ((Square) o).sprite = gfx.getSprite("c_" + name);
-                                } else if (U77.rnd() < 0.5) {
+                                } else if (Utils.rnd() < 0.5) {
                                     ((Square) o).sprite = gfx.getSprite("s_" + name);
                                 } else {
                                     ((Square) o).sprite = gfx.getSprite("ss_" + name);

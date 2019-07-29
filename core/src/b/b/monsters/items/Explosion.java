@@ -30,7 +30,7 @@ public class Explosion extends Item implements DrawableLibGDX {
             ySpeed = monster.mover.ySpeed;
         }
         for (int i = 0; i < count; i++) {
-            list.add(new ExplosionParticle(x, y, world, xSpeed, ySpeed, this));
+            list.add(new ExplosionParticle(x, y, world, (float) xSpeed, (float) ySpeed, this));
         }
         time = time();
         setWH(1, 1);
