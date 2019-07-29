@@ -71,16 +71,16 @@ public class Utils {
         return (r == b) ? 0 : r;
     }
 
-    public static double rnd() {
-        return rnd.nextDouble();
+    public static float rnd() {
+        return rnd.nextFloat();
     }
 
     public static boolean rndBool() {
         return rnd.nextBoolean();
     }
 
-    public static double rnd(double max) {
-        return rnd.nextDouble() * max;
+    public static float rnd(double max) {
+        return rnd.nextFloat() * (float) max;
     }
 
     public static String sprecision(double d) {
