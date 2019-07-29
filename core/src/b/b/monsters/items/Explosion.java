@@ -1,12 +1,11 @@
 package b.b.monsters.items;
 
+import b.b.core.World;
+import b.b.monsters.Monster;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import b.b.core.World;
-import b.b.monsters.Monster;
 
 public class Explosion extends Item implements DrawableLibGDX {
     private static final double duration = 370;
@@ -14,15 +13,15 @@ public class Explosion extends Item implements DrawableLibGDX {
 
     private List<ExplosionParticle> list;
     private double time;
-    protected int k;
+    protected int secondaryExplosions;
 
     public Explosion(double x, double y, World world, Monster monster) {
         this(x, y, world, monster, 1);
     }
 
-    public Explosion(double x, double y, World world, Monster monster, int k) {
+    public Explosion(double x, double y, World world, Monster monster, int secondaryExplosions) {
         super(world, x, y, world.gfx.getSprite("expl"), ZLayer.SEVEN);
-        this.k = k - 1;
+        this.secondaryExplosions = secondaryExplosions - 1;
         list = new ArrayList<ExplosionParticle>();
         double xSpeed = 0;
         double ySpeed = 0;

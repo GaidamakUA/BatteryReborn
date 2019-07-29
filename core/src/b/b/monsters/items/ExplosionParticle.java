@@ -1,11 +1,10 @@
 package b.b.monsters.items;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import b.b.Battery;
 import b.b.core.World;
 import b.util.Time77;
 import b.util.U77;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class ExplosionParticle extends Item implements DrawableLibGDX {
     public final static double maxSpeed = 0.27;
@@ -29,9 +28,9 @@ public class ExplosionParticle extends Item implements DrawableLibGDX {
     protected void move() {
         x += xSpeed;
         y += ySpeed;
-        if (explosion.k > 0 && U77.rnd() > 0.999) {
-            int k = explosion.k / 2;
-            explosion.k -= k;
+        if (explosion.secondaryExplosions > 0 && U77.rnd() > 0.999) {
+            int k = explosion.secondaryExplosions / 2;
+            explosion.secondaryExplosions -= k;
             world.objectsToAdd.add(new Explosion(x, y, world, this, k));
         }
     }
