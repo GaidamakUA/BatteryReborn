@@ -2,6 +2,8 @@ package b.b.monsters;
 
 import com.badlogic.gdx.math.Vector2;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
 import b.b.core.Changeable;
@@ -24,6 +26,7 @@ public abstract class Monster extends Drawable implements Changeable {
     protected double wrongDmgTime;
     protected Sprite sprite;
     protected double dist;
+    @Nullable
     public Mover mover;
 
     public Monster(World world, double x, double y, Sprite sprite, double maxLife, ZLayer zLayer) {
@@ -255,6 +258,10 @@ public abstract class Monster extends Drawable implements Changeable {
     }
 
     public Vector2 getSpeed() {
-        return new Vector2((float) mover.xSpeed, (float) mover.ySpeed);
+        if (mover != null) {
+            return new Vector2((float) mover.xSpeed, (float) mover.ySpeed);
+        } else {
+            return new Vector2();
+        }
     }
 }
