@@ -1,14 +1,20 @@
 package b.b.monsters;
 
-import b.b.core.*;
+import com.badlogic.gdx.math.Vector2;
+
+import java.util.List;
+
+import b.b.core.Changeable;
+import b.b.core.Config;
+import b.b.core.Drawable;
+import b.b.core.Square;
+import b.b.core.World;
 import b.b.core.objs.Water;
 import b.b.monsters.items.Coin;
 import b.b.monsters.items.Explosion;
 import b.b.monsters.items.Item;
 import b.gfx.BufGfx;
 import b.gfx.Sprite;
-
-import java.util.List;
 
 public abstract class Monster extends Drawable implements Changeable {
     public double life;
@@ -134,7 +140,9 @@ public abstract class Monster extends Drawable implements Changeable {
             if (o.isShape) {
                 if (!(o instanceof Monster) ||
                         ((o instanceof Monster) && (((Monster) o).life > 0))) {
-                    if (collision(o)) return true;
+                    if (collision(o)) {
+                        return true;
+                    }
                 }
             }
         }
@@ -203,7 +211,9 @@ public abstract class Monster extends Drawable implements Changeable {
     }
 
     protected boolean onMonster(Monster m) {
-        if (m instanceof InvisibleMonster) return false;
+        if (m instanceof InvisibleMonster) {
+            return false;
+        }
         dmg(Config.Damages.monster, m);
         m.dmg(Config.Damages.monster, this);
         if (!afterDmg() && !m.afterDmg()) {
@@ -242,5 +252,9 @@ public abstract class Monster extends Drawable implements Changeable {
 
     protected double time() {
         return world.gfx.battery.time.time;
+    }
+
+    public Vector2 getSpeed() {
+        return new Vector2((float) mover.xSpeed, (float) mover.ySpeed);
     }
 }

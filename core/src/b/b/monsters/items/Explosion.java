@@ -22,20 +22,7 @@ public class Explosion extends Item implements DrawableLibGDX {
     }
 
     public Explosion(double x, double y, World world, Monster monster, int secondaryExplosions) {
-        super(world, x, y, world.gfx.getSprite("expl"), ZLayer.SEVEN);
-        this.secondaryExplosions = secondaryExplosions - 1;
-        list = new ArrayList<ExplosionParticle>();
-        double xSpeed = 0;
-        double ySpeed = 0;
-        if (monster.mover != null) {
-            xSpeed = monster.mover.xSpeed;
-            ySpeed = monster.mover.ySpeed;
-        }
-        for (int i = 0; i < count; i++) {
-            list.add(new ExplosionParticle((float) x, (float) y, world, (float) xSpeed, (float) ySpeed, this));
-        }
-        time = time();
-        setWH(1, 1);
+        this(x, y, world, monster.getSpeed(), secondaryExplosions);
     }
 
     public Explosion(double x, double y, World world, Vector2 initialSpeed, int secondaryExplosions) {
@@ -55,7 +42,6 @@ public class Explosion extends Item implements DrawableLibGDX {
     }
 
     protected void move() {
-        y = world.btr.screen.camY() + (world.btr.screen.h / 2);
         for (ExplosionParticle e : list) {
             e.move();
         }
