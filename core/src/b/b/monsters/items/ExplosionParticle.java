@@ -1,14 +1,15 @@
 package b.b.monsters.items;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+
 import b.b.Battery;
 import b.b.core.World;
 import b.util.Time77;
 import b.util.Utils;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 
 public class ExplosionParticle extends Item implements DrawableLibGDX {
-    public final static float maxSpeed = 0.27f;
+    private final static float MAX_SPEED = 0.27f;
     private Vector2 speed;
     private Explosion explosion;
 
@@ -16,7 +17,7 @@ public class ExplosionParticle extends Item implements DrawableLibGDX {
                              Explosion explosion) {
         super(world, x, y, world.gfx.getSprite("expl"), ZLayer.FIVE);
         this.explosion = explosion;
-        float speedValue = Utils.rnd(maxSpeed * 0.4) + (maxSpeed * 0.6f);
+        float speedValue = Utils.rnd(MAX_SPEED * 0.4) + (MAX_SPEED * 0.6f);
         speed = new Vector2(speedValue, 0);
         speed.rotate(360 * Utils.rnd());
         speed.add(xsp * 0.6f, ysp * 0.6f);
