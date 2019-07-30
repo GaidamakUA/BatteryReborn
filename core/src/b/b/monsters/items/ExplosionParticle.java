@@ -8,14 +8,17 @@ import b.b.core.World;
 import b.util.Time77;
 import b.util.Utils;
 
-public class ExplosionParticle extends Item implements DrawableLibGDX {
+public class ExplosionParticle implements DrawableLibGDX {
     private final static float MAX_SPEED = 0.27f;
-    private Vector2 speed;
-    private Explosion explosion;
+    private final World world;
+    private final Explosion explosion;
+    private final Vector2 speed;
+    private final Vector2 position;
 
-    public ExplosionParticle(double x, double y, World world, float xsp, float ysp,
+    public ExplosionParticle(float x, float y, World world, float xsp, float ysp,
                              Explosion explosion) {
-        super(world, x, y, world.gfx.getSprite("expl"), ZLayer.FIVE);
+        position = new Vector2(x, y);
+        this.world = world;
         this.explosion = explosion;
         float speedValue = Utils.rnd(MAX_SPEED * 0.4) + (MAX_SPEED * 0.6f);
         speed = new Vector2(speedValue, 0);
@@ -28,12 +31,11 @@ public class ExplosionParticle extends Item implements DrawableLibGDX {
     }
 
     protected void move() {
-        x += speed.x;
-        y += speed.y;
+        position.add(speed);
         if (explosion.secondaryExplosions > 0 && Utils.rnd() > 0.999) {
             int k = explosion.secondaryExplosions / 2;
             explosion.secondaryExplosions -= k;
-            world.objectsToAdd.add(new Explosion(x, y, world, this, k));
+            world.objectsToAdd.add(new Explosion(position.x, position.y, world, speed, k));
         }
     }
 
@@ -43,6 +45,6 @@ public class ExplosionParticle extends Item implements DrawableLibGDX {
     @Override
     public void draw(SpriteBatch batch) {
         Battery battery = world.btr;
-        batch.draw(battery.explosionParticleTexture, xScreenStart(), Battery.VIEWPORT_HEIGHT - yScreenStart());
+        batch.draw(battery.explosionParticleTexture, position.x, Battery.VIEWPORT_HEIGHT - (position.y - world.btr.screen.camY()));
     }
 }
