@@ -43,7 +43,7 @@ public class MonsterPart extends Monster {
         world.removeFromMap(this);
         world.objectsToRemove.add(this);
         if (!outOfScreen()) {
-            world.objectsToAdd.add(new Explosion(x, y, world, this));
+            world.level7.add(new Explosion(x, y, world, this));
         }
     }
 

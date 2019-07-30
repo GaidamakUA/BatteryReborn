@@ -1,5 +1,12 @@
 package b.b.gfx;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.blogspot.androidgaidamak.BatteryGame;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
 import b.b.Battery;
 import b.b.core.Config;
 import b.b.core.Drawable;
@@ -8,14 +15,12 @@ import b.b.core.objs.Water;
 import b.b.monsters.Player;
 import b.b.monsters.bosses.Boss2AI;
 import b.b.monsters.items.DrawableLibGDX;
-import b.gfx.*;
+import b.gfx.BufGfx;
+import b.gfx.Console;
+import b.gfx.Font77;
+import b.gfx.Screen;
+import b.gfx.Sprite;
 import b.util.Utils;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.blogspot.androidgaidamak.BatteryGame;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Gfx {
     public int w;
@@ -186,7 +191,7 @@ public class Gfx {
     }
 
     public void newDraw() {
-        Collection<DrawableLibGDX> newDrawables = battery.world.getDrawablesOnScreen();
+        Collection<DrawableLibGDX> newDrawables = battery.world.level7;
         SpriteBatch batch = battery.batch;
         batch.begin();
         for (DrawableLibGDX newDrawable : newDrawables) {

@@ -35,7 +35,7 @@ public class ExplosionParticle implements DrawableLibGDX {
         if (explosion.secondaryExplosions > 0 && Utils.rnd() > 0.999) {
             int k = explosion.secondaryExplosions / 2;
             explosion.secondaryExplosions -= k;
-            world.objectsToAdd.add(new Explosion(position.x, position.y, world, speed, k));
+            world.level7.add(new Explosion(position.x, position.y, world, speed, k));
         }
     }
 

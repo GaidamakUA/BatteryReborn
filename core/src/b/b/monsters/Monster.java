@@ -70,7 +70,7 @@ public abstract class Monster extends Drawable implements Changeable {
         world.objectsToRemove.add(this);
         world.objectsToAdd.add(new Coin(x, y, world));
         if (!outOfScreen()) {
-            world.objectsToAdd.add(new Explosion(x, y, world, this));
+            world.level7.add(new Explosion(x, y, world, this));
         }
     }
 

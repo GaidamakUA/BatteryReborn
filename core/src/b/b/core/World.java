@@ -24,6 +24,7 @@ public class World {
     public List<Monster> objectsToRemove;
     public List<Monster> objectsToAddInTime;
     public List<ChanSquare> notMonsters;
+    public Set<DrawableLibGDX> level7 = new HashSet<DrawableLibGDX>();
     public int nextId;
 
     public int width;
@@ -110,26 +111,6 @@ public class World {
         }
         List<Drawable> list = new ArrayList<Drawable>(res);
         Collections.sort(list);
-        return list;
-    }
-
-    public List<DrawableLibGDX> getDrawablesOnScreen() {
-        Set<DrawableLibGDX> res = new HashSet<DrawableLibGDX>();
-        Screen scr = btr.screen;
-        int yBorder = scr.getYBorder();
-        int xStart = 0;
-        int xBorder = scr.getXBorder();
-        for (int yy = scr.getStartY(); yy < yBorder; yy++) {
-            for (int xx = xStart; xx < xBorder; xx++) {
-                List<Drawable> drawables = map[yy][xx].objects;
-                for (Drawable d : drawables) {
-                    if (d instanceof DrawableLibGDX) {
-                        res.add((DrawableLibGDX) d);
-                    }
-                }
-            }
-        }
-        List<DrawableLibGDX> list = new ArrayList<DrawableLibGDX>(res);
         return list;
     }
 
