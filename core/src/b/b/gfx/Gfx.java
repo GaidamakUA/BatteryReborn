@@ -23,7 +23,7 @@ public class Gfx {
     public BufGfx bufGfx;
     public Battery battery;
     public b.gfx.Font77 font;
-    public Console console;
+    private Console console;
 
     protected Map<String, Sprite> sprites;
 
@@ -107,8 +107,8 @@ public class Gfx {
     /**
      * @param max if max==0 - shadow bar
      */
-    private final void percentBar(double units, double max, int x, int y,
-                                  String icon) {
+    private void percentBar(double units, double max, int x, int y,
+                            String icon) {
         bufGfx.rect(x, y, (int) 100 + 4, 22, 0xff000000);
         bufGfx.rect(x + 1, y + 1, (int) 100 + 2, 20, 0xffffffff);
         if (max > 0) {/* lifebar */
