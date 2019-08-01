@@ -37,17 +37,17 @@ public class TankGfx {
         Sprite turret = w.gfx.getSprite("tank_turret" + tankModel.ai.turretDir);
         if (tankModel.afterDmg()) {
             if (tankModel.afterWrongDmg()) {
-                b.drawTranspBlackRangeCheck(tankModel.sprite, tankModel.xScreenStart(), tankModel.yScreenStart());
-                b.drawTranspBlackRangeCheck(turret, tankModel.xScreenStart() + xShift,
+                b.drawTransparentBlackRangeCheck(tankModel.sprite, tankModel.xScreenStart(), tankModel.yScreenStart());
+                b.drawTransparentBlackRangeCheck(turret, tankModel.xScreenStart() + xShift,
                         tankModel.yScreenStart() + yShift);
             } else {
-                b.drawTranspWhiteRangeCheck(tankModel.sprite, tankModel.xScreenStart(), tankModel.yScreenStart());
-                b.drawTranspWhiteRangeCheck(turret, tankModel.xScreenStart() + xShift,
+                b.drawTransparentWhiteRangeCheck(tankModel.sprite, tankModel.xScreenStart(), tankModel.yScreenStart());
+                b.drawTransparentWhiteRangeCheck(turret, tankModel.xScreenStart() + xShift,
                         tankModel.yScreenStart() + yShift);
             }
         } else {
-            b.drawTranspRangeCheck(tankModel.sprite, tankModel.xScreenStart(), tankModel.yScreenStart());
-            b.drawTranspRangeCheck(turret, tankModel.xScreenStart() + xShift,
+            b.drawTransparentRangeCheck(tankModel.sprite, tankModel.xScreenStart(), tankModel.yScreenStart());
+            b.drawTransparentRangeCheck(turret, tankModel.xScreenStart() + xShift,
                     tankModel.yScreenStart() + yShift);
         }
     }
@@ -57,7 +57,7 @@ public class TankGfx {
         int start = 3 - Utils.rem((int) tankModel.dist, 4);
         int width = caterpillar.width - 2;
         for (int y = start; y < caterpillar.height; y += 4) {
-            cater.hline(1, y, width, 0xff000000);
+            cater.horizontalLine(1, y, width, 0xff000000);
         }
         int xStart1 = tankModel.xScreenStart();
         int yStart1 = tankModel.yScreenStart();
@@ -77,11 +77,11 @@ public class TankGfx {
         }
         if (tankModel.afterDmg()) {
             if (tankModel.afterWrongDmg()) {
-                b.drawTranspBlackRangeCheck(cater.pixels, cater.w, cater.h, xStart1, yStart1);
-                b.drawTranspBlackRangeCheck(cater.pixels, cater.w, cater.h, xStart2, yStart2);
+                b.drawTransparentBlackRangeCheck(cater.pixels, cater.w, cater.h, xStart1, yStart1);
+                b.drawTransparentBlackRangeCheck(cater.pixels, cater.w, cater.h, xStart2, yStart2);
             } else {
-                b.drawTranspWhiteRangeCheck(cater, xStart1, yStart1);
-                b.drawTranspWhiteRangeCheck(cater, xStart2, yStart2);
+                b.drawTransparentWhiteRangeCheck(cater, xStart1, yStart1);
+                b.drawTransparentWhiteRangeCheck(cater, xStart2, yStart2);
             }
         } else {
             b.drawRangeCheck(cater, xStart1, yStart1);

@@ -63,32 +63,32 @@ public class BufGfx {
         drawRangeCheck(buf.pixels, buf.w, buf.h, x, y);
     }
 
-    public final void drawTransp(Sprite sprite, int x, int y) {
-        drawTransp(sprite.pixels, sprite.width, sprite.height, x, y);
+    public final void drawTransparent(Sprite sprite, int x, int y) {
+        drawTransparent(sprite.pixels, sprite.width, sprite.height, x, y);
     }
 
-    public final void drawTranspRangeCheck(Sprite sprite, int x, int y) {
-        drawTranspRangeCheck(sprite.pixels, sprite.width, sprite.height, x, y);
+    public final void drawTransparentRangeCheck(Sprite sprite, int x, int y) {
+        drawTransparentRangeCheck(sprite.pixels, sprite.width, sprite.height, x, y);
     }
 
     /**
      * @param solid 1-not transp.; 0-absolutely transp.
      */
-    public final void drawTranspTrRangeCheck(Sprite sprite, int x, int y,
-                                             double solid) {
-        drawTranspTrRangeCheck(sprite.pixels, sprite.width, sprite.height, x, y, solid);
+    public final void drawTransparentTrRangeCheck(Sprite sprite, int x, int y,
+                                                  double solid) {
+        drawTransparentTrRangeCheck(sprite.pixels, sprite.width, sprite.height, x, y, solid);
     }
 
-    public final void drawTranspWhiteRangeCheck(Sprite sprite, int x, int y) {
-        drawTranspWhiteRangeCheck(sprite.pixels, sprite.width, sprite.height, x, y);
+    public final void drawTransparentWhiteRangeCheck(Sprite sprite, int x, int y) {
+        drawTransparentWhiteRangeCheck(sprite.pixels, sprite.width, sprite.height, x, y);
     }
 
-    public final void drawTranspBlackRangeCheck(Sprite sprite, int x, int y) {
-        drawTranspBlackRangeCheck(sprite.pixels, sprite.width, sprite.height, x, y);
+    public final void drawTransparentBlackRangeCheck(Sprite sprite, int x, int y) {
+        drawTransparentBlackRangeCheck(sprite.pixels, sprite.width, sprite.height, x, y);
     }
 
-    public final void drawTranspWhiteRangeCheck(BufGfx buf, int x, int y) {
-        drawTranspWhiteRangeCheck(buf.pixels, buf.w, buf.h, x, y);
+    public final void drawTransparentWhiteRangeCheck(BufGfx buf, int x, int y) {
+        drawTransparentWhiteRangeCheck(buf.pixels, buf.w, buf.h, x, y);
     }
 
     public final void drawRangeCheck(Sprite sprite, int x, int y) {
@@ -154,7 +154,7 @@ public class BufGfx {
         if (s != null) s.setWH(w, h);
     }
 
-    public final void drawRangeCheck(int[] p, int width, int height, int x, int y) {
+    private void drawRangeCheck(int[] p, int width, int height, int x, int y) {
         int xStart = x < 0 ? 0 : x;
         int yStart = y < 0 ? 0 : y;
         int xBorder = x + width;
@@ -185,7 +185,7 @@ public class BufGfx {
         }
     }
 
-    public final void drawTransp(int[] p, int width, int height, int x, int y) {
+    private void drawTransparent(int[] p, int width, int height, int x, int y) {
         int xBorder = x + width;
         int yBorder = y + height;
         int pixel = 0;
@@ -209,14 +209,14 @@ public class BufGfx {
         for (int yy = y; yy < yBorder; yy++) {
             int offset = yy * w + x;
             for (int xx = x; xx < xBorder; xx++) {
-                pixels[offset] = C.dark(pixels[offset], shadow);
+                pixels[offset] = ColorUtils.dark(pixels[offset], shadow);
                 offset++;
             }
         }
     }
 
-    public final void drawTranspRangeCheck(int[] p, int width, int height, int x,
-                                           int y) {
+    private final void drawTransparentRangeCheck(int[] p, int width, int height, int x,
+                                                 int y) {
         int xStart = x < 0 ? 0 : x;
         int yStart = y < 0 ? 0 : y;
         int xBorder = x + width;
@@ -238,7 +238,7 @@ public class BufGfx {
         }
     }
 
-    public final void drawTranspTrRangeCheck(int[] p, int width, int height,
+    private void drawTransparentTrRangeCheck(int[] p, int width, int height,
                                              int x, int y, double solid) {
         int xStart = x < 0 ? 0 : x;
         int yStart = y < 0 ? 0 : y;
@@ -253,14 +253,14 @@ public class BufGfx {
                 int c = p[pixel++];
                 if ((c != WHITE_COLOR) && (xx >= xStart && xx < xxBorder && yy >= yStart &&
                         yy < yyBorder)) {
-                    pixels[offset] = C.mix(pixels[offset], c, solid);
+                    pixels[offset] = ColorUtils.mix(pixels[offset], c, solid);
                 }
                 offset++;
             }
         }
     }
 
-    public final void drawTranspWhiteRangeCheck(int[] p, int width, int height, int x,
+    private void drawTransparentWhiteRangeCheck(int[] p, int width, int height, int x,
                                                 int y) {
         int xStart = x < 0 ? 0 : x;
         int yStart = y < 0 ? 0 : y;
@@ -290,8 +290,8 @@ public class BufGfx {
         }
     }
 
-    public final void drawTranspBlackRangeCheck(int[] p, int width, int height,
-                                                int x, int y) {
+    public final void drawTransparentBlackRangeCheck(int[] p, int width, int height,
+                                                     int x, int y) {
         int xStart = x < 0 ? 0 : x;
         int yStart = y < 0 ? 0 : y;
         int xBorder = x + width;
@@ -321,10 +321,10 @@ public class BufGfx {
     }
 
     public final void rect(int startX, int startY, int width, int height, int c) {
-        hline(startX, startY, width, c);
-        hline(startX, startY + height - 1, width, c);
-        vline(startX, startY, height, c);
-        vline(startX + width - 1, startY, height, c);
+        horizontalLine(startX, startY, width, c);
+        horizontalLine(startX, startY + height - 1, width, c);
+        verticalLine(startX, startY, height, c);
+        verticalLine(startX + width - 1, startY, height, c);
     }
 
     public final void filledRect(int startX, int startY, int width, int height, int c) {
@@ -336,12 +336,12 @@ public class BufGfx {
         }
     }
 
-    public final void hline(int x, int y, int width, int c) {
+    public final void horizontalLine(int x, int y, int width, int c) {
         int start = y * w + x;
         Arrays.fill(pixels, start, start + width, c);
     }
 
-    public final void vline(int x, int y, int height, int c) {
+    private void verticalLine(int x, int y, int height, int c) {
         int yBorder = y + height;
         int offset = y * w + x;
         for (int i = y; i < yBorder; i++) {

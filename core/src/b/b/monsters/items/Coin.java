@@ -28,7 +28,7 @@ public class Coin extends Item {
                 prevFrameTime = time;
             }
         }
-        world.gfx.bufGfx.drawTranspRangeCheck(sprite, xScreenStart(), yScreenStart());
+        world.gfx.bufGfx.drawTransparentRangeCheck(sprite, xScreenStart(), yScreenStart());
     }
 
     public boolean onMonster(Monster monster) {

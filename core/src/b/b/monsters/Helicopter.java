@@ -35,10 +35,10 @@ public class Helicopter extends Monster {
                 Utils.rem((int) (world.gfx.battery.time.time *
                         Config.Monsters.Heli.bladesK), 4));
         if (dir == 3) {
-            world.gfx.bufGfx.drawTranspTrRangeCheck(blades, xScreenStart(),
+            world.gfx.bufGfx.drawTransparentTrRangeCheck(blades, xScreenStart(),
                     yScreenStart(), 0.7);
         } else {
-            world.gfx.bufGfx.drawTranspTrRangeCheck(blades, xScreenBorder() - blades.width,
+            world.gfx.bufGfx.drawTransparentTrRangeCheck(blades, xScreenBorder() - blades.width,
                     yScreenStart(), 0.7);
         }
     }

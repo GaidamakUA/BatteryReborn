@@ -12,7 +12,7 @@ import b.b.monsters.*;
 import b.b.monsters.bosses.Boss1AI;
 import b.b.monsters.bosses.Boss2AI;
 import b.b.monsters.items.FirstAid;
-import b.gfx.C;
+import b.gfx.ColorUtils;
 import b.gfx.Screen;
 import b.gfx.Sprite;
 import b.util.Utils;
@@ -150,7 +150,7 @@ public class WorldLoader {
                     cannon(list, x, y, 3);
                 } else if (pixel != 0xff000000) {
                     throw new RuntimeException("WorldLoader.load lvl (true number):" + lvl +
-                            " xy(" + x + "," + y + ") color:" + C.string(pixel) + " should not be");
+                            " xy(" + x + "," + y + ") color:" + ColorUtils.string(pixel) + " should not be");
                 }
             }
         }

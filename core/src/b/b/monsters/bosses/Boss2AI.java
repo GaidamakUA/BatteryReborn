@@ -132,7 +132,7 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
             alreadyDrawn = true;
             BufGfx b = world.gfx.bufGfx;
             Sprite mainCarcasSprite = world.gfx.getSprite("boss2_main_carcas");
-            b.drawTranspRangeCheck(mainCarcasSprite, (int) (xScreenStart() -
+            b.drawTransparentRangeCheck(mainCarcasSprite, (int) (xScreenStart() -
                     mainCarcasSprite.halfWidth), (int) (yScreenStart() - mainCarcasSprite.halfHeight));
             verticals();
             horizontal();
@@ -160,9 +160,9 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
         b.drawRangeCheck(vertCarcasSprite, (int) (xScreenStart() + 18 + headShift),
                 (int) (yScreenStart() - mainCarcasSprite.halfHeight + 6));
         Sprite cross = world.gfx.getSprite("boss2_carcas_cross");
-        b.drawTranspRangeCheck(cross, (int) (xScreenStart() - 27 - headShift),
+        b.drawTransparentRangeCheck(cross, (int) (xScreenStart() - 27 - headShift),
                 (int) (yScreenStart() - mainCarcasSprite.halfHeight - 2));
-        b.drawTranspRangeCheck(cross, (int) (xScreenStart() + 16 + headShift),
+        b.drawTransparentRangeCheck(cross, (int) (xScreenStart() + 16 + headShift),
                 (int) (yScreenStart() - mainCarcasSprite.halfHeight - 2));
     }
 
@@ -173,13 +173,13 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
                 (int) (xScreenStart() - mainCarcasSprite.halfWidth + 6),
                 (int) (yScreenStart() - mainCarcasSprite.halfHeight + 85 + horizYShift));
         Sprite cross = world.gfx.getSprite("boss2_carcas_cross");
-        b.drawTranspRangeCheck(cross, (int) (xScreenStart() - mainCarcasSprite.halfWidth - 2),
+        b.drawTransparentRangeCheck(cross, (int) (xScreenStart() - mainCarcasSprite.halfWidth - 2),
                 (int) (yScreenStart() - mainCarcasSprite.halfHeight + 83 + horizYShift));
-        b.drawTranspRangeCheck(cross, (int) (xScreenStart() + mainCarcasSprite.halfWidth - 8),
+        b.drawTransparentRangeCheck(cross, (int) (xScreenStart() + mainCarcasSprite.halfWidth - 8),
                 (int) (yScreenStart() - mainCarcasSprite.halfHeight + 83 + horizYShift));
-        b.drawTranspRangeCheck(cross, (int) (xScreenStart() - 27 - headShift),
+        b.drawTransparentRangeCheck(cross, (int) (xScreenStart() - 27 - headShift),
                 (int) (yScreenStart() - mainCarcasSprite.halfHeight + 83 + horizYShift));
-        b.drawTranspRangeCheck(cross, (int) (xScreenStart() + 16 + headShift),
+        b.drawTransparentRangeCheck(cross, (int) (xScreenStart() + 16 + headShift),
                 (int) (yScreenStart() - mainCarcasSprite.halfHeight + 83 + horizYShift));
     }
 

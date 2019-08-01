@@ -1,7 +1,7 @@
 package b.gfx.effects;
 
 import b.gfx.BufGfx;
-import b.gfx.C;
+import b.gfx.ColorUtils;
 import b.util.Utils;
 
 public class Appearing {
@@ -81,7 +81,7 @@ public class Appearing {
                     if (effectValue * 0.8 < timeK * effectZone || !holes) {
                         double brightness = effectValue * timeK + timeK;
                         if (brightness > 1) brightness = 1;
-                        b[offset] = C.dark(c, brightness);
+                        b[offset] = ColorUtils.dark(c, brightness);
                     } else {
                         b[offset] = 0xff000000;
                     }

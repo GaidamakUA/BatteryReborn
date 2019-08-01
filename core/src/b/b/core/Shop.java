@@ -60,7 +60,7 @@ public class Shop {
             System.arraycopy(gfx.getSprite("shop").pixels, -y * 510, gfx.bufGfx.pixels, 0,
                     (510 + y) * 510);
             if (y == 0) {
-                gfx.bufGfx.drawTransp(gfx.getSprite("immune"), 174, 181);
+                gfx.bufGfx.drawTransparent(gfx.getSprite("immune"), 174, 181);
                 gfx.font.p("" + btr.player.getCoins(), 210, 328);
             }
         }

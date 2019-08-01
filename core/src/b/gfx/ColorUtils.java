@@ -1,6 +1,6 @@
 package b.gfx;
 
-public class C {
+public class ColorUtils {
 
     public static int mix(int base, int col, double solid) {
         double[] b = drgb(base);

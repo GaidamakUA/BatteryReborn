@@ -108,12 +108,12 @@ public abstract class Monster extends Drawable implements Changeable {
         BufGfx b = world.gfx.bufGfx;
         if (afterDmg() || life == 0) {
             if (afterWrongDmg()) {
-                b.drawTranspBlackRangeCheck(sprite, xScreenStart(), yScreenStart());
+                b.drawTransparentBlackRangeCheck(sprite, xScreenStart(), yScreenStart());
             } else {
-                b.drawTranspWhiteRangeCheck(sprite, xScreenStart(), yScreenStart());
+                b.drawTransparentWhiteRangeCheck(sprite, xScreenStart(), yScreenStart());
             }
         } else {
-            b.drawTranspRangeCheck(sprite, xScreenStart(), yScreenStart());
+            b.drawTransparentRangeCheck(sprite, xScreenStart(), yScreenStart());
         }
     }
 

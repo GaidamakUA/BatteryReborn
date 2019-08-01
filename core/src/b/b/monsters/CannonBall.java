@@ -21,7 +21,7 @@ public class CannonBall extends Monster {
     }
 
     public void draw() {
-        world.gfx.bufGfx.drawTranspRangeCheck(sprite, xScreenStart(), yScreenStart());
+        world.gfx.bufGfx.drawTransparentRangeCheck(sprite, xScreenStart(), yScreenStart());
     }
 
     protected void move() {

@@ -4,7 +4,7 @@ package b.b.core;
 import b.b.core.objs.ChanSquare;
 import b.b.core.objs.YellowBorder;
 import b.gfx.BufGfx;
-import b.gfx.C;
+import b.gfx.ColorUtils;
 import b.gfx.Sprite;
 import b.util.Utils;
 
@@ -75,7 +75,7 @@ public class Square extends Drawable {
                             double z = ((Math.sin(xx / 11) + Math.sin(xx / 2) + yK + Math.sin((xx + yy) / 17) + Math.cos((xx - yy) / 19))
                                     / 12 + 0.5);
                             if (z > 0.3 && z < 0.7) {
-                                p[offset] = C.dark(c, (Math.abs((z - 0.5)) * 5) * Config.Gfx.dirtK + Config.Gfx.restDirtK);
+                                p[offset] = ColorUtils.dark(c, (Math.abs((z - 0.5)) * 5) * Config.Gfx.dirtK + Config.Gfx.restDirtK);
                             }
                         }
                         offset--;

@@ -1,12 +1,5 @@
 package b.b.gfx;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.blogspot.androidgaidamak.BatteryGame;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
 import b.b.Battery;
 import b.b.core.Config;
 import b.b.core.Drawable;
@@ -15,12 +8,14 @@ import b.b.core.objs.Water;
 import b.b.monsters.Player;
 import b.b.monsters.bosses.Boss2AI;
 import b.b.monsters.items.DrawableLibGDX;
-import b.gfx.BufGfx;
-import b.gfx.Console;
-import b.gfx.Font77;
-import b.gfx.Screen;
-import b.gfx.Sprite;
+import b.gfx.*;
 import b.util.Utils;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.blogspot.androidgaidamak.BatteryGame;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Gfx {
     public int w;
@@ -98,13 +93,13 @@ public class Gfx {
         percentBar(p.getCoins(), 0, 2, h - 47, "ic_coin");
         percentBar(p.life, p.maxLife, 2, h - 24, "ic_plane");
         for (int i = 0; i < p.lives; i++) {
-            bufGfx.drawTransp(getSprite("ic_plane"), 106 + (i * 15), h - 24 + 3);
+            bufGfx.drawTransparent(getSprite("ic_plane"), 106 + (i * 15), h - 24 + 3);
         }
         if (p.extras.immortalities > 0) {
             bufGfx.rect(445, 445, 63, 63, 0xffffffff);
             Sprite s = getSprite("immune");
             bufGfx.rectShadow(446, 446, 61, 61, 0.5);
-            bufGfx.drawTransp(s, 458, 448);
+            bufGfx.drawTransparent(s, 458, 448);
             font.p("F1x" + p.extras.immortalities, 448, 492);
         }
     }
@@ -138,7 +133,7 @@ public class Gfx {
                 bufGfx.rectShadow(x + 2, y + 2, 100, 18, 0.5);
             }
         }
-        bufGfx.drawTransp(getSprite(icon), 6, y + 3);
+        bufGfx.drawTransparent(getSprite(icon), 6, y + 3);
         String s = (max > 0) ? ("" + (int) units + "/" + (int) max) : ("" + (int) units);
         font.pCenter(s, (int) 100 / 2 + 4, y + 10);
     }

@@ -12,7 +12,7 @@ public class Effects {
     }
 
     public final void diagonal(double part, int length, int c) {
-        int color = C.light(c, 0.5);
+        int color = ColorUtils.light(c, 0.5);
         int start = (int) (part * (length + length + b.w)) - length;
         int border = start + length;
         for (int x = start; x < border; x++) {
@@ -43,7 +43,7 @@ public class Effects {
 
     public final void dark(int c, double dark) {
         int[] p = b.pixels;
-        int cc = C.dark(c, dark);
+        int cc = ColorUtils.dark(c, dark);
         for (int i = p.length - 1; i >= 0; i--) {
             if (p[i] == c) p[i] = cc;
         }
@@ -62,7 +62,7 @@ public class Effects {
         double rest = 1 - k;
         for (int i = p.length - 1; i >= 0; i--) {
             if (p[i] == c) {
-                p[i] = C.dark(c, r.nextDouble() * k + rest);
+                p[i] = ColorUtils.dark(c, r.nextDouble() * k + rest);
             }
         }
     }
@@ -71,7 +71,7 @@ public class Effects {
         Random r = new Random(randomSeed);
         int[] p = b.pixels;
         for (int i = p.length - 1; i >= 0; i--) {
-            p[i] = C.dark(p[i], r.nextDouble() * Config.Gfx.dirtK + Config.Gfx.restDirtK);
+            p[i] = ColorUtils.dark(p[i], r.nextDouble() * Config.Gfx.dirtK + Config.Gfx.restDirtK);
         }
     }
 }
