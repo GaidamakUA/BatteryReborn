@@ -34,24 +34,26 @@ public class Bullet extends Monster {
         world.objectsToRemove.add(this);
     }
 
-    protected boolean onSquare(Square o) {
-        if (o instanceof Water) return false;
-        dmg(1, null);
+    protected boolean onSquare(Square square) {
+        if (square instanceof Water) {
+            return false;
+        }
+        damage(1, null);
         return false;
     }
 
-    protected boolean onBullet(Bullet b) {
-        dmg(1, b.owner);
-        b.dmg(1, owner);
+    protected boolean onBullet(Bullet bullet) {
+        damage(1, bullet.owner);
+        bullet.damage(1, owner);
         return false;
     }
 
-    protected boolean onMonster(Monster m) {
-        if (m instanceof MonsterPart) {
-            return m.onBullet(this);
-        } else if (owner != m) {
-            dmg(1, m);
-            m.dmg(Config.Damages.bullet, owner);
+    protected boolean onMonster(Monster monster) {
+        if (monster instanceof MonsterPart) {
+            return monster.onBullet(this);
+        } else if (owner != monster) {
+            damage(1, monster);
+            monster.damage(Config.Damages.bullet, owner);
         }
         return false;
     }
@@ -61,7 +63,9 @@ public class Bullet extends Monster {
     }
 
     protected boolean checkScreenCollision() {
-        if (outOfScreen()) dmg(1, null);
+        if (outOfScreen()) {
+            damage(1, null);
+        }
         return false;
     }
 }

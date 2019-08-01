@@ -107,7 +107,7 @@ public class Boss1AI extends InvisibleMonster implements ComplexAI {
         y += Math.cos(angle1) * 0.02 + (Math.cos(angle2) * 0.07);
     }
 
-    protected void dmg(double dmg, double time, Object cause) {
+    protected void damage(double damage, double time, Object cause) {
     }
 
     public void draw() {
@@ -123,7 +123,7 @@ public class Boss1AI extends InvisibleMonster implements ComplexAI {
         world.removeFromMap(this);
         if (timeWhenMoved != time()) {
             if (left.life <= 0 && top.life <= 0 && right.life <= 0 && bottom.life <= 0) {
-                super.dmg(1, time(), world.btr.player);
+                super.damage(1, time(), world.btr.player);
                 world.btr.timers.add(new Pair(new Double(time() +
                         Config.Intervals.afterBossPeriod), new Action() {
                     public void act(Battery btr) {

@@ -31,10 +31,10 @@ public class Coin extends Item {
         world.gfx.bufGfx.drawTranspRangeCheck(sprite, xScreenStart(), yScreenStart());
     }
 
-    public boolean onMonster(Monster m) {
-        if (life > 0 && m.life > 0 && (m instanceof Player)) {
-            dmg(1, null);
-            ((Player) m).incCoins();
+    public boolean onMonster(Monster monster) {
+        if (life > 0 && monster.life > 0 && (monster instanceof Player)) {
+            damage(1, null);
+            ((Player) monster).incCoins();
             return true;
         }
         return false;

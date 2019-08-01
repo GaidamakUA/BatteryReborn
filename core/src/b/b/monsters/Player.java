@@ -97,17 +97,17 @@ public class Player extends Monster {
         } else super.draw();
     }
 
-    protected void dmg(double dmg, double time, Object cause) {
+    protected void damage(double damage, double time, Object cause) {
         if (!extras.immortal(world.btr.time.time)) {
-            super.dmg(dmg, time, cause);
+            super.damage(damage, time, cause);
         }
     }
 
-    protected boolean collision(Drawable o) {
+    protected boolean collision(Drawable drawable) {
         if (extras.immortal(world.btr.time.time)) {
             return false;
         } else {
-            return super.collision(o);
+            return super.collision(drawable);
         }
     }
 

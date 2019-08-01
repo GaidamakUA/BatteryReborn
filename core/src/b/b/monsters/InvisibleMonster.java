@@ -22,15 +22,15 @@ public abstract class InvisibleMonster extends Monster {
         world.objectsToRemove.add(this);
     }
 
-    protected boolean onSquare(Square o) {
+    protected boolean onSquare(Square square) {
         return false;
     }
 
-    protected boolean onBullet(Bullet b) {
+    protected boolean onBullet(Bullet bullet) {
         return false;
     }
 
-    protected boolean onMonster(Monster m) {
+    protected boolean onMonster(Monster monster) {
         return false;
     }
 

@@ -26,11 +26,13 @@ public class FirstAid extends Item {
         calcXY();
     }
 
-    public boolean onMonster(Monster m) {
-        if (life > 0 && m.life > 0) {
-            dmg(1, null);
-            m.life += Config.Monsters.FirstAid.effect;
-            if (m.life > m.maxLife) m.life = m.maxLife;
+    public boolean onMonster(Monster monster) {
+        if (life > 0 && monster.life > 0) {
+            damage(1, null);
+            monster.life += Config.Monsters.FirstAid.effect;
+            if (monster.life > monster.maxLife) {
+                monster.life = monster.maxLife;
+            }
         }
         return false;
     }

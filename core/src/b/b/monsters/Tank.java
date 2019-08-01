@@ -32,16 +32,20 @@ public class Tank extends Monster {
         tankGfx.draw(gfx.battery.world);
     }
 
-    protected boolean onSquare(Square o) {
-        removeFrom(o);
+    protected boolean onSquare(Square square) {
+        removeFrom(square);
         ai.direction = TankAI.opposite(ai.direction);
         return true;
     }
 
-    protected boolean onMonster(Monster m) {
-        if ((m instanceof Helicopter) || (m instanceof EnPlane)) return false;
-        if (!(m instanceof Tank)) return super.onMonster(m);
-        removeFrom(m);
+    protected boolean onMonster(Monster monster) {
+        if ((monster instanceof Helicopter) || (monster instanceof EnPlane)) {
+            return false;
+        }
+        if (!(monster instanceof Tank)) {
+            return super.onMonster(monster);
+        }
+        removeFrom(monster);
         ai.direction = TankAI.opposite(ai.direction);
         return true;
     }

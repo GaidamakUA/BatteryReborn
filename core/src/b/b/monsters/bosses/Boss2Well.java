@@ -16,7 +16,7 @@ public class Boss2Well extends MonsterPart {
     private Boss2AI boss;
     private double newAngle = Math.PI;
     private double newRadius = 20;
-    private double aSpeed = 0;
+    private double angleSpeed = 0;
     private double rSpeed = 0;
 
     protected Boss2Well(World world, Boss2AI pboss, Boss2Well pparent,
@@ -58,19 +58,19 @@ public class Boss2Well extends MonsterPart {
     }
 
     public final void newFrame() {
-        double maxASpeed = Config.Monsters.Boss2.wellChaoticASpeed;
-        aSpeed += (Utils.rndBool() ? 1 : -1) * (maxASpeed / 10);
-        if (aSpeed > maxASpeed) {
-            aSpeed = maxASpeed;
-        } else if (aSpeed < -maxASpeed) {
-            aSpeed = -maxASpeed;
+        double maxASpeed = Config.Monsters.Boss2.wellChaoticAngleSpeed;
+        angleSpeed += (Utils.rndBool() ? 1 : -1) * (maxASpeed / 10);
+        if (angleSpeed > maxASpeed) {
+            angleSpeed = maxASpeed;
+        } else if (angleSpeed < -maxASpeed) {
+            angleSpeed = -maxASpeed;
         }
-        newAngle = Utils.angle(angle + aSpeed);
+        newAngle = Utils.angle(angle + angleSpeed);
         if (newAngle < Utils.hpi && Utils.rnd() < 0.3) {
-            newAngle += aSpeed;
+            newAngle += angleSpeed;
         }
         if (newAngle > Utils.pi34 && Utils.rnd() < 0.3) {
-            newAngle -= aSpeed;
+            newAngle -= angleSpeed;
         }
         double maxSpeed = Config.Monsters.Boss2.wellChaoticSpeed;
         if (rSpeed > maxSpeed) {

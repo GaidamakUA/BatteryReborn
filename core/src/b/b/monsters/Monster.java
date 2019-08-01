@@ -21,7 +21,7 @@ public abstract class Monster extends Drawable implements Changeable {
     protected Sprite sprite;
     protected double dist;
     @Nullable
-    public Mover mover;
+    protected Mover mover;
 
     public Monster(World world, double x, double y, Sprite sprite, double maxLife, ZLayer zLayer) {
         this(x, y, sprite.width, sprite.height, true, zLayer, maxLife,
@@ -73,13 +73,13 @@ public abstract class Monster extends Drawable implements Changeable {
      */
     protected abstract void move();
 
-    public void dmg(double dmg, Object cause) {
-        dmg(dmg, time(), cause);
+    public void damage(double dmg, Object cause) {
+        damage(dmg, time(), cause);
     }
 
-    protected void dmg(double dmg, double time, Object cause) {
+    protected void damage(double damage, double time, Object cause) {
         if (!afterDmg() && life > 0) {
-            life -= dmg;
+            life -= damage;
             if (!(this instanceof Player) && world.btr.player.equals(cause)) {
                 world.btr.player.incScores();
             }
@@ -100,7 +100,7 @@ public abstract class Monster extends Drawable implements Changeable {
         return time() - lastDmgTime < Config.Monsters.afterDmgTime;
     }
 
-    public boolean afterWrongDmg() {
+    protected boolean afterWrongDmg() {
         return time() - wrongDmgTime < Config.Monsters.wrongDmgTime;
     }
 
@@ -117,11 +117,6 @@ public abstract class Monster extends Drawable implements Changeable {
         }
     }
 
-    public void draw(int xScreen, int yScreen, int xScreenBorder,
-                     int yScreenBorder) {
-        throw new RuntimeException("Should not be");
-    }
-
     /**
      * Object should be removed from map before the method call.
      * The method should not add it to map.
@@ -135,8 +130,7 @@ public abstract class Monster extends Drawable implements Changeable {
         List<Drawable> objs = world.get(this);
         for (Drawable o : objs) {
             if (o.isShape) {
-                if (!(o instanceof Monster) ||
-                        ((o instanceof Monster) && (((Monster) o).life > 0))) {
+                if (!(o instanceof Monster) || ((Monster) o).life > 0) {
                     if (collision(o)) {
                         return true;
                     }
@@ -151,7 +145,7 @@ public abstract class Monster extends Drawable implements Changeable {
      */
     protected boolean checkScreenCollision() {
         if (yStart() > screen.yEnd()) {
-            dmg(maxLife, null);
+            damage(maxLife, null);
             return true;
         }
         return false;
@@ -164,60 +158,52 @@ public abstract class Monster extends Drawable implements Changeable {
     }
 
     /**
-     * @param o is not this. Be sure.
+     * @param drawable is not this. Be sure.
      * @return true if something removed
      */
-    protected boolean collision(Drawable o) {
-        if (((xStart() >= o.xStart() && xStart() < o.xEnd()) ||
-                (o.xStart() >= xStart() && o.xStart() < xEnd())) &&
-                ((yStart() >= o.yStart() && yStart() < o.yEnd()) ||
-                        (o.yStart() >= yStart() && o.yStart() < yEnd()))) {
-            if (o instanceof Square) {
-                return onSquare((Square) o);
-            } else if (o instanceof Item) {
-                return onItem((Item) o);
-            } else if (o instanceof Bullet) {
-                return onBullet((Bullet) o);
-            } else if (o instanceof Monster) {
-                return onMonster((Monster) o);
+    protected boolean collision(Drawable drawable) {
+        if (((xStart() >= drawable.xStart() && xStart() < drawable.xEnd()) ||
+                (drawable.xStart() >= xStart() && drawable.xStart() < xEnd())) &&
+                ((yStart() >= drawable.yStart() && yStart() < drawable.yEnd()) ||
+                        (drawable.yStart() >= yStart() && drawable.yStart() < yEnd()))) {
+            if (drawable instanceof Square) {
+                return onSquare((Square) drawable);
+            } else if (drawable instanceof Item) {
+                return onItem((Item) drawable);
+            } else if (drawable instanceof Bullet) {
+                return onBullet((Bullet) drawable);
+            } else if (drawable instanceof Monster) {
+                return onMonster((Monster) drawable);
             }
             throw new RuntimeException("Unknown collision: " + getClass().getName());
         }
         return false;
     }
 
-    protected boolean onSquare(Square o) {
-        if (o instanceof Water) {
-            return onWater((Water) o);
+    protected boolean onSquare(Square square) {
+        if (square instanceof Water) {
+            return false;
         }
-        dmg(Config.Damages.square, null);
-        removeFrom(o);
+        damage(Config.Damages.square, null);
+        removeFrom(square);
         return true;
     }
 
-    protected boolean onWater(Water w) {
-        return false;
-    }
-
-    protected boolean onBullet(Bullet b) {
-        if ((b.owner != this) && (b != this)) {
-            dmg(Config.Damages.bullet, b.owner);
-            b.dmg(1, this);
+    protected boolean onBullet(Bullet bullet) {
+        if ((bullet.owner != this) && (bullet != this)) {
+            damage(Config.Damages.bullet, bullet.owner);
+            bullet.damage(1, this);
         }
         return false;
     }
 
-    protected boolean onMonster(Monster m) {
-        if (m instanceof InvisibleMonster) {
+    protected boolean onMonster(Monster monster) {
+        if (monster instanceof InvisibleMonster) {
             return false;
         }
-        dmg(Config.Damages.monster, m);
-        m.dmg(Config.Damages.monster, this);
-        if (!afterDmg() && !m.afterDmg()) {
-            return true;
-        } else {
-            return false;
-        }
+        damage(Config.Damages.monster, monster);
+        monster.damage(Config.Damages.monster, this);
+        return !afterDmg() && !monster.afterDmg();
     }
 
     protected boolean onItem(Item i) {
@@ -227,22 +213,22 @@ public abstract class Monster extends Drawable implements Changeable {
     /**
      * Rectangles should be overlapped
      */
-    protected void removeFrom(Drawable o) {
-        double xCenterDist = x - o.x;
-        double yCenterDist = y - o.y;
-        double xDist = halfWidth + o.halfWidth;
-        double yDist = halfHeight + o.halfHeight;
+    protected void removeFrom(Drawable drawable) {
+        double xCenterDist = x - drawable.x;
+        double yCenterDist = y - drawable.y;
+        double xDist = halfWidth + drawable.halfWidth;
+        double yDist = halfHeight + drawable.halfHeight;
         if (xDist - Math.abs(xCenterDist) < yDist - Math.abs(yCenterDist)) {
             if (xCenterDist < 0) {
-                x = o.x - xDist;
+                x = drawable.x - xDist;
             } else {
-                x = o.x + xDist;
+                x = drawable.x + xDist;
             }
         } else {
             if (yCenterDist < 0) {
-                y = o.y - yDist;
+                y = drawable.y - yDist;
             } else {
-                y = o.y + yDist;
+                y = drawable.y + yDist;
             }
         }
     }

@@ -34,23 +34,23 @@ public class CannonBall extends Monster {
         world.objectsToRemove.add(this);
     }
 
-    protected boolean onSquare(Square o) {
-        if (o instanceof Water || o instanceof Cannon) {
+    protected boolean onSquare(Square square) {
+        if (square instanceof Water || square instanceof Cannon) {
             return false;
         }
-        dmg(1, false);
+        damage(1, false);
         return false;
     }
 
-    protected boolean onBullet(Bullet b) {
-        dmg(1, true);
-        b.dmg(1, true);
+    protected boolean onBullet(Bullet bullet) {
+        damage(1, true);
+        bullet.damage(1, true);
         return false;
     }
 
-    protected boolean onMonster(Monster m) {
-        dmg(1, true);
-        m.dmg(Config.Damages.cannonBall, true);
+    protected boolean onMonster(Monster monster) {
+        damage(1, true);
+        monster.damage(Config.Damages.cannonBall, true);
         return false;
     }
 
@@ -59,7 +59,9 @@ public class CannonBall extends Monster {
     }
 
     protected boolean checkScreenCollision() {
-        if (outOfScreen()) dmg(1, false);
+        if (outOfScreen()) {
+            damage(1, false);
+        }
         return false;
     }
 }

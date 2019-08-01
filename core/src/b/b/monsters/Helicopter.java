@@ -43,9 +43,11 @@ public class Helicopter extends Monster {
         }
     }
 
-    protected boolean onSquare(Square o) {
-        if (o instanceof Water) return false;
-        removeFrom(o);
+    protected boolean onSquare(Square square) {
+        if (square instanceof Water) {
+            return false;
+        }
+        removeFrom(square);
         mover.stop();
         if (dir == 1) dir = 3;
         else dir = 1;
@@ -69,12 +71,16 @@ public class Helicopter extends Monster {
         return false;
     }
 
-    protected boolean onMonster(Monster m) {
-        if (m instanceof Tank) return false;
-        if (!(m instanceof Helicopter)) return super.onMonster(m);
-        removeFrom(m);
+    protected boolean onMonster(Monster monster) {
+        if (monster instanceof Tank) {
+            return false;
+        }
+        if (!(monster instanceof Helicopter)) {
+            return super.onMonster(monster);
+        }
+        removeFrom(monster);
         mover.stop();
-        m.mover.stop();
+        monster.mover.stop();
         if (dir == 1) dir = 3;
         else dir = 1;
         Sprite s = sprite;

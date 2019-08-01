@@ -30,18 +30,22 @@ public class EnPlane extends Monster {
         super.draw();
     }
 
-    protected boolean onMonster(Monster m) {
-        if (m instanceof Tank) return false;
-        if (m instanceof EnPlane) {
-            removeFrom(m);
+    protected boolean onMonster(Monster monster) {
+        if (monster instanceof Tank) {
+            return false;
+        }
+        if (monster instanceof EnPlane) {
+            removeFrom(monster);
             return true;
         }
-        return super.onMonster(m);
+        return super.onMonster(monster);
     }
 
-    protected boolean onSquare(Square o) {
-        if (o instanceof Water) return false;
-        removeFrom(o);
+    protected boolean onSquare(Square square) {
+        if (square instanceof Water) {
+            return false;
+        }
+        removeFrom(square);
         return true;
     }
 }

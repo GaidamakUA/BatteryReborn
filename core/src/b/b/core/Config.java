@@ -102,7 +102,7 @@ public class Config {
             public static final int wellLife = 1;
             public static final double gunPartSpeed = 0.0103;
             public static final double wellChaoticSpeed = 0.0103;
-            public static final double wellChaoticASpeed = 0.0107;
+            public static final double wellChaoticAngleSpeed = 0.0107;
             public static final double wellMaxRadius = 35;
             public static final double wellYShift = 27.5;
             public static final int rewardCoins = 20;

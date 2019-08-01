@@ -23,15 +23,15 @@ public abstract class Item extends Monster {
         world.objectsToRemove.add(this);
     }
 
-    public boolean onMonster(Monster m) {
+    public boolean onMonster(Monster monster) {
         return false;
     }
 
-    protected boolean onSquare(Square o) {
+    protected boolean onSquare(Square square) {
         return false;
     }
 
-    protected boolean onBullet(Bullet b) {
+    protected boolean onBullet(Bullet bullet) {
         return false;
     }
 

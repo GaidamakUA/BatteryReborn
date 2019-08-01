@@ -124,7 +124,7 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
         world.addToMap(gun);
     }
 
-    protected void dmg(double dmg, double time, Object cause) {
+    protected void damage(double damage, double time, Object cause) {
     }
 
     public void draw() {
@@ -191,7 +191,7 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
                 for (int i = 0; i < 5; i++) {
                     GunMonster gun = gunMonsters.get(i);
                     if (gun.life > 0) {
-                        gun.dmg(100, world.btr.player);
+                        gun.damage(100, world.btr.player);
                     }
                 }
             }
@@ -200,7 +200,7 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
                 for (int i = 5; i < 10; i++) {
                     GunMonster gun = gunMonsters.get(i);
                     if (gun.life > 0) {
-                        gun.dmg(100, world.btr.player);
+                        gun.damage(100, world.btr.player);
                         world.objectsToRemove.add(gun);
                         world.removeFromMap(gun);
                     }
@@ -237,7 +237,7 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
                 for (GunMonster gun : gunMonsters) {
                     world.objectsToRemove.add(gun);
                 }
-                super.dmg(1, time(), world.btr.player);
+                super.damage(1, time(), world.btr.player);
                 world.btr.timers.add(new Pair(new Double(time() +
                         Config.Intervals.afterBossPeriod), new Action() {
                     public void act(Battery btr) {
@@ -277,7 +277,7 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
     }
 
     private void dmg(Boss2Well well) {
-        well.dmg(100, world.btr.player);
+        well.damage(100, world.btr.player);
         removeFromWorld(well);
         if (well.child != null) {
             dmg(well.child);

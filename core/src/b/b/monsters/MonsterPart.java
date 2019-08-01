@@ -24,9 +24,9 @@ public class MonsterPart extends Monster {
         super.draw();
     }
 
-    protected void dmg(double dmg, double time, Object cause) {
+    protected void damage(double damage, double time, Object cause) {
         if (!afterDmg() && life > 0 && !ai.equals(cause)) {
-            life -= dmg;
+            life -= damage;
             if (world.btr.player.equals(cause)) {
                 world.btr.player.incScores();
             }
@@ -48,19 +48,19 @@ public class MonsterPart extends Monster {
         }
     }
 
-    protected boolean onMonster(Monster m) {
-        if (m == world.btr.player) {
-            return super.onMonster(m);
+    protected boolean onMonster(Monster monster) {
+        if (monster == world.btr.player) {
+            return super.onMonster(monster);
         } else {
             return false;
         }
     }
 
-    protected boolean onBullet(Bullet b) {
-        if (b.owner == ai) {
+    protected boolean onBullet(Bullet bullet) {
+        if (bullet.owner == ai) {
             return false;
         } else {
-            return super.onBullet(b);
+            return super.onBullet(bullet);
         }
     }
 }
