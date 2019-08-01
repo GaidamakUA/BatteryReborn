@@ -3,7 +3,7 @@ package b.gfx;
 import java.util.Arrays;
 
 public class BufGfx {
-    public static final int transp = 0xffffffff;
+    public static final int WHITE_COLOR = 0xffffffff;
 
     public int[] pixels;
     public int w;
@@ -193,7 +193,7 @@ public class BufGfx {
             int offset = yy * w + x;
             for (int xx = x; xx < xBorder; xx++) {
                 int c = p[pixel++];
-                if (c != transp) {
+                if (c != WHITE_COLOR) {
                     pixels[offset++] = c;
                 } else {
                     offset++;
@@ -228,7 +228,7 @@ public class BufGfx {
             int offset = yy * w + x;
             for (int xx = x; xx < xBorder; xx++) {
                 int c = p[pixel++];
-                if ((c != transp) && (xx >= xStart && xx < xxBorder && yy >= yStart &&
+                if ((c != WHITE_COLOR) && (xx >= xStart && xx < xxBorder && yy >= yStart &&
                         yy < yyBorder)) {
                     pixels[offset++] = c;
                 } else {
@@ -251,7 +251,7 @@ public class BufGfx {
             int offset = yy * w + x;
             for (int xx = x; xx < xBorder; xx++) {
                 int c = p[pixel++];
-                if ((c != transp) && (xx >= xStart && xx < xxBorder && yy >= yStart &&
+                if ((c != WHITE_COLOR) && (xx >= xStart && xx < xxBorder && yy >= yStart &&
                         yy < yyBorder)) {
                     pixels[offset] = C.mix(pixels[offset], c, solid);
                 }
@@ -274,7 +274,7 @@ public class BufGfx {
             for (int xx = x; xx < xBorder; xx++) {
                 int c = p[pixel++];
                 if (xx >= xStart && xx < xxBorder && yy >= yStart && yy < yyBorder) {
-                    if (c != transp) {
+                    if (c != WHITE_COLOR) {
                         if (c == 0xff000000) {
                             pixels[offset++] = 0xff000000;
                         } else {
@@ -304,7 +304,7 @@ public class BufGfx {
             for (int xx = x; xx < xBorder; xx++) {
                 int c = p[pixel++];
                 if (xx >= xStart && xx < xxBorder && yy >= yStart && yy < yyBorder) {
-                    if (c != transp) {
+                    if (c != WHITE_COLOR) {
                         pixels[offset++] = 0xff000000;
                     } else {
                         offset++;
