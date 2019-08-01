@@ -1,5 +1,7 @@
 package b.b.monsters.items;
 
+import b.b.core.World;
+import b.b.monsters.Monster;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
@@ -7,11 +9,8 @@ import com.badlogic.gdx.utils.TimeUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import b.b.core.World;
-import b.b.monsters.Monster;
-
 public class Explosion implements DrawableLibGDX {
-    private static final double DURATION = 370;
+    private static final float DURATION = 370;
     private static final int PARTICLES_COUNT = 30;
 
     private final World world;
@@ -40,9 +39,6 @@ public class Explosion implements DrawableLibGDX {
 
     @Override
     public void draw(SpriteBatch batch) {
-        for (ExplosionParticle e : list) {
-            e.move();
-        }
         if (TimeUtils.timeSinceMillis(time) > DURATION) {
             world.level7.remove(this);
         }
