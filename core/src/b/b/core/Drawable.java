@@ -79,11 +79,7 @@ public abstract class Drawable implements Comparable {
         return xScreenStart() + width;
     }
 
-    protected int yScreenBorder() {
-        return yScreenStart() + height;
-    }
-
     public enum ZLayer {
-        ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN
+        ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX
     }
 }
