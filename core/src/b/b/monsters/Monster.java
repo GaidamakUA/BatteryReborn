@@ -1,22 +1,16 @@
 package b.b.monsters;
 
-import com.badlogic.gdx.math.Vector2;
-
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
-
-import b.b.core.Changeable;
-import b.b.core.Config;
-import b.b.core.Drawable;
-import b.b.core.Square;
-import b.b.core.World;
+import b.b.core.*;
 import b.b.core.objs.Water;
 import b.b.monsters.items.Coin;
 import b.b.monsters.items.Explosion;
 import b.b.monsters.items.Item;
 import b.gfx.BufGfx;
 import b.gfx.Sprite;
+import com.badlogic.gdx.math.Vector2;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public abstract class Monster extends Drawable implements Changeable {
     public double life;
@@ -70,7 +64,7 @@ public abstract class Monster extends Drawable implements Changeable {
         world.objectsToRemove.add(this);
         world.objectsToAdd.add(new Coin(x, y, world));
         if (!outOfScreen()) {
-            world.level7.add(new Explosion(x, y, world, this));
+            world.level7.add(new Explosion(new Vector2((float) x, (float) y), world, this));
         }
     }
 
@@ -259,7 +253,7 @@ public abstract class Monster extends Drawable implements Changeable {
 
     public Vector2 getSpeed() {
         if (mover != null) {
-            return new Vector2((float) mover.xSpeed, (float) mover.ySpeed);
+            return new Vector2((float) mover.xSpeed, (float) mover.ySpeed).scl(1000);
         } else {
             return new Vector2();
         }

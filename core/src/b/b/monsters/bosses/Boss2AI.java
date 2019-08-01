@@ -1,24 +1,21 @@
 package b.b.monsters.bosses;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import b.b.Battery;
 import b.b.core.Action;
 import b.b.core.Config;
 import b.b.core.World;
 import b.b.gfx.Gfx;
-import b.b.monsters.ComplexAI;
-import b.b.monsters.InvisibleMonster;
-import b.b.monsters.Monster;
-import b.b.monsters.MonsterPart;
-import b.b.monsters.Mover;
+import b.b.monsters.*;
 import b.b.monsters.items.Coin;
 import b.b.monsters.items.Explosion;
 import b.gfx.BufGfx;
 import b.gfx.Sprite;
 import b.util.Pair;
+import com.badlogic.gdx.math.Vector2;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Boss2AI extends InvisibleMonster implements ComplexAI {
     public static Boss2Well wellLeft = null;
@@ -247,7 +244,7 @@ public class Boss2AI extends InvisibleMonster implements ComplexAI {
                         btr.timeWhenLevelCompleted = btr.time.time;
                     }
                 }));
-                world.level7.add(new Explosion(x, y, world, this, 4));
+                world.level7.add(new Explosion(new Vector2((float) x, (float) y), world, this, 4));
             } else {
                 if (left) {
                     mover.left();

@@ -4,6 +4,7 @@ import b.b.core.Config;
 import b.b.core.World;
 import b.b.monsters.items.Explosion;
 import b.gfx.Sprite;
+import com.badlogic.gdx.math.Vector2;
 
 public class MonsterPart extends Monster {
     protected ComplexAI ai;
@@ -43,7 +44,7 @@ public class MonsterPart extends Monster {
         world.removeFromMap(this);
         world.objectsToRemove.add(this);
         if (!outOfScreen()) {
-            world.level7.add(new Explosion(x, y, world, this));
+            world.level7.add(new Explosion(new Vector2((float) x, (float) y), world, this));
         }
     }
 

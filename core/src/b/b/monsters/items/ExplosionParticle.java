@@ -14,16 +14,15 @@ public class ExplosionParticle implements DrawableLibGDX {
     private final Vector2 speed;
     private final Vector2 position;
 
-    public ExplosionParticle(float x, float y, World world, float xsp, float ysp,
-                             Explosion explosion) {
-        position = new Vector2(x, y);
+    public ExplosionParticle(Vector2 position, World world, Vector2 monsterSpeed, Explosion explosion) {
+        this.position = position.cpy();
         this.world = world;
         this.explosion = explosion;
         float speedValue = (Utils.rnd(0.4) + 0.6f) * MAX_SPEED;
         speed = new Vector2(speedValue, 0);
         float rotationAngle = 360 * Utils.rnd();
         speed.rotate(rotationAngle);
-        speed.add(xsp * 600f, ysp * 600f);
+        speed.add(monsterSpeed.x * 0.6f, monsterSpeed.y * 0.6f);
         Vector2 startingDisplacement = new Vector2(3, 0);
         startingDisplacement.rotate(rotationAngle);
         position.add(startingDisplacement);
@@ -35,11 +34,8 @@ public class ExplosionParticle implements DrawableLibGDX {
         if (explosion.secondaryExplosions > 0 && Utils.rnd() > 0.999) {
             int k = explosion.secondaryExplosions / 2;
             explosion.secondaryExplosions -= k;
-            world.level7.add(new Explosion(position.x, position.y, world, speed, k));
+            world.level7.add(new Explosion(position, world, speed, k));
         }
-    }
-
-    public void draw() {
     }
 
     @Override

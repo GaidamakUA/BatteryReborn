@@ -18,21 +18,19 @@ public class Explosion implements DrawableLibGDX {
     private long time;
     protected int secondaryExplosions;
 
-    public Explosion(double x, double y, World world, Monster monster) {
-        this(x, y, world, monster, 1);
+    public Explosion(Vector2 position, World world, Monster monster) {
+        this(position, world, monster, 1);
     }
 
-    public Explosion(double x, double y, World world, Monster monster, int secondaryExplosions) {
-        this(x, y, world, monster.getSpeed(), secondaryExplosions);
+    public Explosion(Vector2 position, World world, Monster monster, int secondaryExplosions) {
+        this(position, world, monster.getSpeed(), secondaryExplosions);
     }
 
-    public Explosion(double x, double y, World world, Vector2 initialSpeed, int secondaryExplosions) {
+    public Explosion(Vector2 position, World world, Vector2 initialSpeed, int secondaryExplosions) {
         this.world = world;
         this.secondaryExplosions = secondaryExplosions - 1;
-        double xSpeed = initialSpeed.x;
-        double ySpeed = initialSpeed.y;
         for (int i = 0; i < PARTICLES_COUNT; i++) {
-            list.add(new ExplosionParticle((float) x, (float) y, world, (float) xSpeed, (float) ySpeed, this));
+            list.add(new ExplosionParticle(position, world, initialSpeed, this));
         }
         time = TimeUtils.millis();
     }
