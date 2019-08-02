@@ -34,7 +34,7 @@ public class Sprite {
 
     public Sprite(String name, BufGfx buf) {
         this.name = name;
-        setWH(buf.w, buf.h);
+        setWH(buf.width, buf.height);
         pixels = Arrays.copyOf(buf.pixels, buf.pixels.length);
     }
 

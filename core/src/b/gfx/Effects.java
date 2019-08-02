@@ -1,8 +1,8 @@
 package b.gfx;
 
-import b.b.core.Config;
-
 import java.util.Random;
+
+import b.b.core.Config;
 
 public class Effects {
     private BufGfx b;
@@ -13,7 +13,7 @@ public class Effects {
 
     public final void diagonal(double part, int length, int c) {
         int color = ColorUtils.light(c, 0.5);
-        int start = (int) (part * (length + length + b.w)) - length;
+        int start = (int) (part * (length + length + b.width)) - length;
         int border = start + length;
         for (int x = start; x < border; x++) {
             hline(x, c, color);
@@ -21,22 +21,22 @@ public class Effects {
     }
 
     public final void flipVertical() {
-        int[] res = new int[b.h * b.w];
-        for (int yy = 0; yy < b.h; yy++) {
-            System.arraycopy(b.pixels, b.w * yy, res, (b.h - 1) * b.w - (yy * b.w), b.w);
+        int[] res = new int[b.height * b.width];
+        for (int yy = 0; yy < b.height; yy++) {
+            System.arraycopy(b.pixels, b.width * yy, res, (b.height - 1) * b.width - (yy * b.width), b.width);
         }
-        System.arraycopy(res, 0, b.pixels, 0, b.w * b.h);
+        System.arraycopy(res, 0, b.pixels, 0, b.width * b.height);
     }
 
     private final void hline(int x, int c, int color) {
         int[] p = b.pixels;
-        if (x >= 0 && x < b.w) {
+        if (x >= 0 && x < b.width) {
             int index = x;
-            for (int y = 0; y < b.h; y++) {
+            for (int y = 0; y < b.height; y++) {
                 if (p[index] == c) {
                     p[index] = color;
                 }
-                index += b.w;
+                index += b.width;
             }
         }
     }

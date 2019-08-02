@@ -61,24 +61,24 @@ public class TankGfx {
         }
         int xStart1 = tankModel.xScreenStart();
         int yStart1 = tankModel.yScreenStart();
-        int xStart2 = tankModel.xScreenStart() + tankModel.sprite.width - cater.w;
+        int xStart2 = tankModel.xScreenStart() + tankModel.sprite.width - cater.width;
         int yStart2 = tankModel.yScreenStart();
         if (tankModel.ai.direction == 1) {
             cater.rot90NotSquare();
             xStart2 = tankModel.xScreenStart();
-            yStart2 = tankModel.yScreenStart() + tankModel.sprite.height - cater.h;
+            yStart2 = tankModel.yScreenStart() + tankModel.sprite.height - cater.height;
         } else if (tankModel.ai.direction == 2) {
             cater.flipVertical();
         } else if (tankModel.ai.direction == 3) {
             cater.flipVertical();
             cater.rot90NotSquare();
             xStart2 = tankModel.xScreenStart();
-            yStart2 = tankModel.yScreenStart() + tankModel.sprite.height - cater.h;
+            yStart2 = tankModel.yScreenStart() + tankModel.sprite.height - cater.height;
         }
         if (tankModel.afterDmg()) {
             if (tankModel.afterWrongDmg()) {
-                b.drawTransparentBlackRangeCheck(cater.pixels, cater.w, cater.h, xStart1, yStart1);
-                b.drawTransparentBlackRangeCheck(cater.pixels, cater.w, cater.h, xStart2, yStart2);
+                b.drawTransparentBlackRangeCheck(cater.pixels, cater.width, cater.height, xStart1, yStart1);
+                b.drawTransparentBlackRangeCheck(cater.pixels, cater.width, cater.height, xStart2, yStart2);
             } else {
                 b.drawTransparentWhiteRangeCheck(cater, xStart1, yStart1);
                 b.drawTransparentWhiteRangeCheck(cater, xStart2, yStart2);

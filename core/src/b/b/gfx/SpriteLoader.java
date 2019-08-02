@@ -231,19 +231,19 @@ public class SpriteLoader {
         Sprite s = new Sprite(name + "1", sprite, false);
         BufGfx b = new BufGfx(s);
         b.rot90();
-        s.setWH(b.w, b.h);
+        s.setWH(b.width, b.height);
         putSprite(name + "1", s);
 
         s = new Sprite(name + "2", s, false);
         b = new BufGfx(s);
         b.rot90();
-        s.setWH(b.w, b.h);
+        s.setWH(b.width, b.height);
         putSprite(name + "2", s);
 
         s = new Sprite(name + "3", s, false);
         b = new BufGfx(s);
         b.rot90();
-        s.setWH(b.w, b.h);
+        s.setWH(b.width, b.height);
         putSprite(name + "3", s);
     }
 

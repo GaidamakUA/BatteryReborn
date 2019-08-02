@@ -6,43 +6,43 @@ public class BufGfx {
     public static final int WHITE_COLOR = 0xffffffff;
 
     public int[] pixels;
-    public int w;
-    public int h;
+    public int width;
+    public int height;
 
-    public BufGfx(int w, int h) {
-        pixels = new int[h * w];
-        this.w = w;
-        this.h = h;
+    public BufGfx(int width, int height) {
+        pixels = new int[height * width];
+        this.width = width;
+        this.height = height;
     }
 
-    public BufGfx(int[] pixels, int w, int h) {
+    public BufGfx(int[] pixels, int width, int height) {
         this.pixels = pixels;
-        this.w = w;
-        this.h = h;
+        this.width = width;
+        this.height = height;
     }
 
     public BufGfx(Sprite sprite) {
         pixels = sprite.pixels;
-        w = sprite.width;
-        h = sprite.height;
+        width = sprite.width;
+        height = sprite.height;
     }
 
     public BufGfx(Sprite sprite, boolean anotherbufferplease) {
-        w = sprite.width;
-        h = sprite.height;
+        width = sprite.width;
+        height = sprite.height;
         if (anotherbufferplease) {
-            pixels = new int[w * h];
-            System.arraycopy(sprite.pixels, 0, pixels, 0, h * w);
+            pixels = new int[width * height];
+            System.arraycopy(sprite.pixels, 0, pixels, 0, height * width);
         } else {
             pixels = sprite.pixels;
         }
     }
 
     public BufGfx(Sprite sprite, int[] buf) {
-        w = sprite.width;
-        h = sprite.height;
+        width = sprite.width;
+        height = sprite.height;
         pixels = buf;
-        System.arraycopy(sprite.pixels, 0, pixels, 0, h * w);
+        System.arraycopy(sprite.pixels, 0, pixels, 0, height * width);
     }
 
     public Effects effects() {
@@ -50,7 +50,7 @@ public class BufGfx {
     }
 
     public final void replaceColor(int what, int with) {
-        for (int i = w * h - 1; i >= 0; i--) {
+        for (int i = width * height - 1; i >= 0; i--) {
             if (pixels[i] == what) pixels[i] = with;
         }
     }
@@ -60,7 +60,7 @@ public class BufGfx {
     }
 
     public final void drawRangeCheck(BufGfx buf, int x, int y) {
-        drawRangeCheck(buf.pixels, buf.w, buf.h, x, y);
+        drawRangeCheck(buf.pixels, buf.width, buf.height, x, y);
     }
 
     public final void drawTransparent(Sprite sprite, int x, int y) {
@@ -88,7 +88,7 @@ public class BufGfx {
     }
 
     public final void drawTransparentWhiteRangeCheck(BufGfx buf, int x, int y) {
-        drawTransparentWhiteRangeCheck(buf.pixels, buf.w, buf.h, x, y);
+        drawTransparentWhiteRangeCheck(buf.pixels, buf.width, buf.height, x, y);
     }
 
     public final void drawRangeCheck(Sprite sprite, int x, int y) {
@@ -96,11 +96,11 @@ public class BufGfx {
     }
 
     public final void flipVertical() {
-        int yBorder = h / 2;
+        int yBorder = height / 2;
         int offset = 0;
         for (int y = 0; y < yBorder; y++) {
-            int offset2 = (h - y - 1) * w;
-            for (int x = 0; x < w; x++) {
+            int offset2 = (height - y - 1) * width;
+            for (int x = 0; x < width; x++) {
                 int c = pixels[offset];
                 pixels[offset++] = pixels[offset2];
                 pixels[offset2++] = c;
@@ -109,15 +109,15 @@ public class BufGfx {
     }
 
     public final void rot90() {
-        if (w == h) {
-            int p[] = new int[h * w];
+        if (width == height) {
+            int p[] = new int[height * width];
             int offset = 0;
-            for (int y = 0; y < h; y++) {
-                for (int x = 0; x < w; x++) {
-                    p[x * w + w - y - 1] = pixels[offset++];
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
+                    p[x * width + width - y - 1] = pixels[offset++];
                 }
             }
-            System.arraycopy(p, 0, pixels, 0, h * w);
+            System.arraycopy(p, 0, pixels, 0, height * width);
         } else {
             rot90NotSquare();
         }
@@ -127,17 +127,17 @@ public class BufGfx {
      * Changes b (reference)
      */
     public final void rot90NotSquare() {
-        int[] p = new int[h * w];
+        int[] p = new int[height * width];
         int offset = 0;
-        for (int y = 0; y < h; y++) {
-            for (int x = 0; x < w; x++) {
-                p[x * h + y] = pixels[offset++];
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                p[x * height + y] = pixels[offset++];
             }
         }
-        System.arraycopy(p, 0, pixels, 0, h * w);
-        int exW = w;
-        w = h;
-        h = exW;
+        System.arraycopy(p, 0, pixels, 0, height * width);
+        int exW = width;
+        width = height;
+        height = exW;
     }
 
     private void drawRangeCheck(int[] p, int width, int height, int x, int y) {
@@ -145,11 +145,11 @@ public class BufGfx {
         int yStart = y < 0 ? 0 : y;
         int xBorder = x + width;
         int yBorder = y + height;
-        int xxBorder = xBorder > w ? w : xBorder;
-        int yyBorder = yBorder > h ? h : yBorder;
+        int xxBorder = xBorder > this.width ? this.width : xBorder;
+        int yyBorder = yBorder > this.height ? this.height : yBorder;
         int pixel = 0;
         for (int yy = y; yy < yBorder; yy++) {
-            int offset = yy * w + x;
+            int offset = yy * this.width + x;
             for (int xx = x; xx < xBorder; xx++) {
                 if (xx >= xStart && xx < xxBorder && yy >= yStart && yy < yyBorder) {
                     pixels[offset++] = p[pixel++];
@@ -166,7 +166,7 @@ public class BufGfx {
         int yyBorder = y + h;
         int pixel = 0;
         for (int yy = y; yy < yyBorder; yy++) {
-            int offset = yy * this.w + x;
+            int offset = yy * this.width + x;
             for (int xx = x; xx < xxBorder; xx++) pixels[offset++] = buf[pixel++];
         }
     }
@@ -176,7 +176,7 @@ public class BufGfx {
         int yBorder = y + height;
         int pixel = 0;
         for (int yy = y; yy < yBorder; yy++) {
-            int offset = yy * w + x;
+            int offset = yy * this.width + x;
             for (int xx = x; xx < xBorder; xx++) {
                 int c = p[pixel++];
                 if (c != WHITE_COLOR) {
@@ -193,7 +193,7 @@ public class BufGfx {
         int xBorder = x + width;
         int yBorder = y + height;
         for (int yy = y; yy < yBorder; yy++) {
-            int offset = yy * w + x;
+            int offset = yy * this.width + x;
             for (int xx = x; xx < xBorder; xx++) {
                 pixels[offset] = ColorUtils.dark(pixels[offset], shadow);
                 offset++;
@@ -207,11 +207,11 @@ public class BufGfx {
         int yStart = y < 0 ? 0 : y;
         int xBorder = x + width;
         int yBorder = y + height;
-        int xxBorder = xBorder > w ? w : xBorder;
-        int yyBorder = yBorder > h ? h : yBorder;
+        int xxBorder = xBorder > this.width ? this.width : xBorder;
+        int yyBorder = yBorder > this.height ? this.height : yBorder;
         int pixel = 0;
         for (int yy = y; yy < yBorder; yy++) {
-            int offset = yy * w + x;
+            int offset = yy * this.width + x;
             for (int xx = x; xx < xBorder; xx++) {
                 int c = p[pixel++];
                 if ((c != WHITE_COLOR) && (xx >= xStart && xx < xxBorder && yy >= yStart &&
@@ -230,11 +230,11 @@ public class BufGfx {
         int yStart = y < 0 ? 0 : y;
         int xBorder = x + width;
         int yBorder = y + height;
-        int xxBorder = xBorder > w ? w : xBorder;
-        int yyBorder = yBorder > h ? h : yBorder;
+        int xxBorder = xBorder > this.width ? this.width : xBorder;
+        int yyBorder = yBorder > this.height ? this.height : yBorder;
         int pixel = 0;
         for (int yy = y; yy < yBorder; yy++) {
-            int offset = yy * w + x;
+            int offset = yy * this.width + x;
             for (int xx = x; xx < xBorder; xx++) {
                 int c = p[pixel++];
                 if ((c != WHITE_COLOR) && (xx >= xStart && xx < xxBorder && yy >= yStart &&
@@ -252,11 +252,11 @@ public class BufGfx {
         int yStart = y < 0 ? 0 : y;
         int xBorder = x + width;
         int yBorder = y + height;
-        int xxBorder = xBorder > w ? w : xBorder;
-        int yyBorder = yBorder > h ? h : yBorder;
+        int xxBorder = xBorder > this.width ? this.width : xBorder;
+        int yyBorder = yBorder > this.height ? this.height : yBorder;
         int pixel = 0;
         for (int yy = y; yy < yBorder; yy++) {
-            int offset = yy * w + x;
+            int offset = yy * this.width + x;
             for (int xx = x; xx < xBorder; xx++) {
                 int c = p[pixel++];
                 if (xx >= xStart && xx < xxBorder && yy >= yStart && yy < yyBorder) {
@@ -282,11 +282,11 @@ public class BufGfx {
         int yStart = y < 0 ? 0 : y;
         int xBorder = x + width;
         int yBorder = y + height;
-        int xxBorder = xBorder > w ? w : xBorder;
-        int yyBorder = yBorder > h ? h : yBorder;
+        int xxBorder = xBorder > this.width ? this.width : xBorder;
+        int yyBorder = yBorder > this.height ? this.height : yBorder;
         int pixel = 0;
         for (int yy = y; yy < yBorder; yy++) {
-            int offset = yy * w + x;
+            int offset = yy * this.width + x;
             for (int xx = x; xx < xBorder; xx++) {
                 int c = p[pixel++];
                 if (xx >= xStart && xx < xxBorder && yy >= yStart && yy < yyBorder) {
@@ -303,7 +303,7 @@ public class BufGfx {
     }
 
     public final void drawAtCenter(Sprite s) {
-        draw(s.pixels, s.width, s.height, (w - s.width) / 2, (h - s.height) / 2);
+        draw(s.pixels, s.width, s.height, (width - s.width) / 2, (height - s.height) / 2);
     }
 
     public final void rect(int startX, int startY, int width, int height, int c) {
@@ -314,25 +314,25 @@ public class BufGfx {
     }
 
     public final void filledRect(int startX, int startY, int width, int height, int c) {
-        int offset = startY * w + startX;
+        int offset = startY * this.width + startX;
         int yBorder = startY + height;
         for (int y = startY; y < yBorder; y++) {
             Arrays.fill(pixels, offset, offset + width, c);
-            offset += w;
+            offset += this.width;
         }
     }
 
     public final void horizontalLine(int x, int y, int width, int c) {
-        int start = y * w + x;
+        int start = y * this.width + x;
         Arrays.fill(pixels, start, start + width, c);
     }
 
     private void verticalLine(int x, int y, int height, int c) {
         int yBorder = y + height;
-        int offset = y * w + x;
+        int offset = y * width + x;
         for (int i = y; i < yBorder; i++) {
             pixels[offset] = c;
-            offset += w;
+            offset += width;
         }
     }
 }

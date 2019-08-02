@@ -43,7 +43,7 @@ public class RunningDiagonals {
         if (xxBorder > xBorder) {
             xxBorder = xBorder;
         }
-        int offset = y * b.w + x;
+        int offset = y * b.width + x;
         for (; x < xxBorder; x++) {
             int c = p[offset];
             if (c == 0xff800000 || c == 0xff954000 || c == 0xffd982) p[offset] = 0xffffff99;

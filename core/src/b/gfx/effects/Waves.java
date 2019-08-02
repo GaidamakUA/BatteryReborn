@@ -52,27 +52,27 @@ public class Waves {
             }
             if (shift < 0) {
                 int yyStart = yStart - waveHeight - shift - 1;
-                int offset = yyStart * b.w + x;
-                int offsetShift = shift * b.w;
+                int offset = yyStart * b.width + x;
+                int offsetShift = shift * b.width;
                 int yBorder = yStart + height + waveHeight;
                 for (int y = yyStart; y < yBorder; y++) {
                     try {
                         buf[offset + offsetShift] = buf[offset];
                     } catch (Exception ignored) {
                     }
-                    offset += b.w;
+                    offset += b.width;
                 }
             } else if (shift > 0) {
                 int yyStart = yStart + height + waveHeight - shift;
-                int offset = yyStart * b.w + x;
-                int offsetShift = shift * b.w;
+                int offset = yyStart * b.width + x;
+                int offsetShift = shift * b.width;
                 int yBorder = yStart - waveHeight - shift;
                 for (int y = yyStart; y > yBorder; y--) {
                     try {
                         buf[offset + offsetShift] = buf[offset];
                     } catch (Exception ignored) {
                     }
-                    offset -= b.w;
+                    offset -= b.width;
                 }
             }
         }
@@ -94,7 +94,7 @@ public class Waves {
             }
             if (shift < 0) {
                 int xxStart = xStart - waveHeight - shift - 1;
-                int offset = y * b.w + xxStart;
+                int offset = y * b.width + xxStart;
                 int xBorder = xStart + width + waveHeight;
                 for (int x = xxStart; x < xBorder; x++) {
                     try {
@@ -104,7 +104,7 @@ public class Waves {
                 }
             } else if (shift > 0) {
                 int xxStart = xStart + width + waveHeight - shift;
-                int offset = y * b.w + xxStart;
+                int offset = y * b.width + xxStart;
                 int xBorder = xStart - waveHeight - shift;
                 for (int x = xxStart; x > xBorder; x--) {
                     try {

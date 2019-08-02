@@ -1,12 +1,12 @@
 package b.b.gfx;
 
+import java.util.Arrays;
+
 import b.gfx.Sprite;
 import b.gfx.effects.Appearing;
 import b.gfx.effects.RunningDiagonals;
 import b.gfx.effects.Waves;
 import b.util.Utils;
-
-import java.util.Arrays;
 
 /**
  * Starts at time: 0
@@ -29,8 +29,8 @@ public class Intro {
     public Intro(Gfx gfx) {
         this.gfx = gfx;
         logo = gfx.getSprite("battery");
-        int xStart = gfx.bufGfx.w / 2 - (logo.width / 2) - WAVE_HEIGHT - 1;
-        int yStart = gfx.bufGfx.h / 2 - (logo.height / 2) - WAVE_HEIGHT - 1;
+        int xStart = gfx.bufGfx.width / 2 - (logo.width / 2) - WAVE_HEIGHT - 1;
+        int yStart = gfx.bufGfx.height / 2 - (logo.height / 2) - WAVE_HEIGHT - 1;
         int width = WAVE_HEIGHT * 2 + logo.width + 2;
         int height = WAVE_HEIGHT * 2 + logo.height + 2;
         waves = new Waves(gfx.bufGfx, xStart + WAVE_HEIGHT, yStart + WAVE_HEIGHT,

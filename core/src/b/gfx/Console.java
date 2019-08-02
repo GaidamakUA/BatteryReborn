@@ -11,8 +11,8 @@ public class Console {
 
     public Console(Font77 font) {
         this.font = font;
-        w = font.bufGfx.w;
-        h = font.bufGfx.h;
+        w = font.bufGfx.width;
+        h = font.bufGfx.height;
         strings = new ArrayList<String>();
     }
 

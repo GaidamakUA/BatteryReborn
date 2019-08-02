@@ -72,7 +72,7 @@ public class Appearing {
         int mapIndex = 0;
         if (tiled) mapIndex = ((int) (timeK * 4)) * w;
         for (int y = yStart; y < yBorder; y++) {
-            int offset = y * g.w + xStart;
+            int offset = y * g.width + xStart;
             for (int x = xStart; x < xBorder; x++) {
                 int c;
                 c = b[offset];
