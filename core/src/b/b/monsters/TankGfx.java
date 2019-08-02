@@ -53,39 +53,39 @@ public class TankGfx {
     }
 
     private final void drawCatters(BufGfx b) {
-        BufGfx cater = new BufGfx(caterpillar, true);
+        Sprite caterpillarCopy = caterpillar.copy();
         int start = 3 - Utils.rem((int) tankModel.dist, 4);
         int width = caterpillar.width - 2;
         for (int y = start; y < caterpillar.height; y += 4) {
-            cater.horizontalLine(1, y, width, 0xff000000);
+            caterpillarCopy.horizontalLine(1, y, width, 0xff000000);
         }
         int xStart1 = tankModel.xScreenStart();
         int yStart1 = tankModel.yScreenStart();
-        int xStart2 = tankModel.xScreenStart() + tankModel.sprite.width - cater.width;
+        int xStart2 = tankModel.xScreenStart() + tankModel.sprite.width - caterpillarCopy.width;
         int yStart2 = tankModel.yScreenStart();
         if (tankModel.ai.direction == 1) {
-            cater.rot90NotSquare();
+            caterpillarCopy.rot90NotSquare();
             xStart2 = tankModel.xScreenStart();
-            yStart2 = tankModel.yScreenStart() + tankModel.sprite.height - cater.height;
+            yStart2 = tankModel.yScreenStart() + tankModel.sprite.height - caterpillarCopy.height;
         } else if (tankModel.ai.direction == 2) {
-            cater.flipVertical();
+            caterpillarCopy.flipVertical();
         } else if (tankModel.ai.direction == 3) {
-            cater.flipVertical();
-            cater.rot90NotSquare();
+            caterpillarCopy.flipVertical();
+            caterpillarCopy.rot90NotSquare();
             xStart2 = tankModel.xScreenStart();
-            yStart2 = tankModel.yScreenStart() + tankModel.sprite.height - cater.height;
+            yStart2 = tankModel.yScreenStart() + tankModel.sprite.height - caterpillarCopy.height;
         }
         if (tankModel.afterDmg()) {
             if (tankModel.afterWrongDmg()) {
-                b.drawTransparentBlackRangeCheck(cater.pixels, cater.width, cater.height, xStart1, yStart1);
-                b.drawTransparentBlackRangeCheck(cater.pixels, cater.width, cater.height, xStart2, yStart2);
+                b.drawTransparentBlackRangeCheck(caterpillarCopy.pixels, caterpillarCopy.width, caterpillarCopy.height, xStart1, yStart1);
+                b.drawTransparentBlackRangeCheck(caterpillarCopy.pixels, caterpillarCopy.width, caterpillarCopy.height, xStart2, yStart2);
             } else {
-                b.drawTransparentWhiteRangeCheck(cater, xStart1, yStart1);
-                b.drawTransparentWhiteRangeCheck(cater, xStart2, yStart2);
+                b.drawTransparentWhiteRangeCheck(caterpillarCopy, xStart1, yStart1);
+                b.drawTransparentWhiteRangeCheck(caterpillarCopy, xStart2, yStart2);
             }
         } else {
-            b.drawRangeCheck(cater, xStart1, yStart1);
-            b.drawRangeCheck(cater, xStart2, yStart2);
+            b.drawRangeCheck(caterpillarCopy, xStart1, yStart1);
+            b.drawRangeCheck(caterpillarCopy, xStart2, yStart2);
         }
     }
 }

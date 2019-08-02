@@ -97,4 +97,62 @@ public class Sprite {
             }
         }
     }
+
+    public final void rot90() {
+        if (width == height) {
+            int p[] = new int[height * width];
+            int offset = 0;
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
+                    p[x * width + width - y - 1] = pixels[offset++];
+                }
+            }
+            System.arraycopy(p, 0, pixels, 0, height * width);
+        } else {
+            rot90NotSquare();
+        }
+    }
+
+    /**
+     * Changes b (reference)
+     */
+    public final void rot90NotSquare() {
+        int[] p = new int[height * width];
+        int offset = 0;
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                p[x * height + y] = pixels[offset++];
+            }
+        }
+        System.arraycopy(p, 0, pixels, 0, height * width);
+        int exW = width;
+        width = height;
+        height = exW;
+    }
+
+    public final void horizontalLine(int x, int y, int width, int c) {
+        int start = y * this.width + x;
+        Arrays.fill(pixels, start, start + width, c);
+    }
+
+    public final void flipVertical() {
+        int yBorder = height / 2;
+        int offset = 0;
+        for (int y = 0; y < yBorder; y++) {
+            int offset2 = (height - y - 1) * width;
+            for (int x = 0; x < width; x++) {
+                int c = pixels[offset];
+                pixels[offset++] = pixels[offset2];
+                pixels[offset2++] = c;
+            }
+        }
+    }
+
+    public final void replaceColor(int what, int with) {
+        for (int i = width * height - 1; i >= 0; i--) {
+            if (pixels[i] == what) {
+                pixels[i] = with;
+            }
+        }
+    }
 }

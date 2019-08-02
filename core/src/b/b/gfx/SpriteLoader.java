@@ -101,18 +101,17 @@ public class SpriteLoader {
     }
 
     private void addCyanBricks() {
-        Set<String> sprites = (Set<String>) gfx.sprites.keySet();
-        Set<Sprite> toAdd = new HashSet();
+        Set<String> sprites = gfx.sprites.keySet();
+        Set<Sprite> toAdd = new HashSet<Sprite>();
         for (String name : sprites) {
             if (name.startsWith("brick")) {
-                Sprite s = gfx.getSprite(name);
-                BufGfx b = new BufGfx(s);
-                b.replaceColor(0xffff0000, 0xff800000);
-                b = new BufGfx(s, true);
-                b.replaceColor(0xffff0000, 0xff808040);
-                b.replaceColor(0xff800000, 0xff808040);
-                s = new Sprite("c_" + name, b);
-                toAdd.add(s);
+                Sprite sprite = gfx.getSprite(name);
+                sprite.replaceColor(0xffff0000, 0xff800000);
+                Sprite newSprite = sprite.copy();
+                newSprite.replaceColor(0xffff0000, 0xff808040);
+                newSprite.replaceColor(0xff800000, 0xff808040);
+                newSprite.setName("c_" + name);
+                toAdd.add(newSprite);
             }
         }
         for (Sprite sprite : toAdd) {
@@ -126,7 +125,7 @@ public class SpriteLoader {
         b.draw(sp, 0, 0);
         sp.flipHorizontal();
         b.draw(sp, w, 0);
-        new BufGfx(sp).flipVertical();
+        sp.flipVertical();
         b.draw(sp, w, w);
         sp.flipHorizontal();
         b.draw(sp, 0, w);
@@ -210,16 +209,16 @@ public class SpriteLoader {
         putSprite(name + "0", sprite);
 
         Sprite s = new Sprite(name + "1", sprite, false);
-        new BufGfx(s).rot90();
+        s.rot90();
         putSprite(name + "1", s);
 
         s = new Sprite(name + "2", s, false);
-        BufGfx killme = new BufGfx(s);
+        Sprite killme = s;
         killme.rot90();
         putSprite(name + "2", s);
 
         s = new Sprite(name + "3", s, false);
-        killme = new BufGfx(s);
+        killme = s;
         killme.rot90();
         putSprite(name + "3", s);
     }
@@ -229,21 +228,15 @@ public class SpriteLoader {
         putSprite(name + "0", sprite);
 
         Sprite s = new Sprite(name + "1", sprite, false);
-        BufGfx b = new BufGfx(s);
-        b.rot90();
-        s.setWH(b.width, b.height);
+        s.rot90();
         putSprite(name + "1", s);
 
         s = new Sprite(name + "2", s, false);
-        b = new BufGfx(s);
-        b.rot90();
-        s.setWH(b.width, b.height);
+        s.rot90();
         putSprite(name + "2", s);
 
         s = new Sprite(name + "3", s, false);
-        b = new BufGfx(s);
-        b.rot90();
-        s.setWH(b.width, b.height);
+        s.rot90();
         putSprite(name + "3", s);
     }
 
@@ -252,7 +245,7 @@ public class SpriteLoader {
                 Config.squareSize);
         putSprite(name + "|", s);
         s = new Sprite(name + "-", s, false);
-        new BufGfx(s).rot90();
+        s.rot90();
         putSprite(name + "-", s);
     }
 
