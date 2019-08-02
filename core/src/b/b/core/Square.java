@@ -45,7 +45,7 @@ public class Square extends Drawable {
     }
 
     public void draw2(int[] to) {
-        int[] p = sprite.pixels;
+        int[] localPixels = sprite.pixels;
         if (Config.Gfx.dirtOn) {
             String sn = sprite.name();
             if (sn.startsWith("brick") ||
@@ -54,13 +54,13 @@ public class Square extends Drawable {
                     sn.startsWith("c_brick")) {
                 BufGfx buf = new BufGfx(sprite, util);
                 buf.effects().dirt(randomSeed);
-                p = buf.pixels;
+                localPixels = buf.pixels;
             } else if (sn.equals("ground") && Config.Gfx.dirtGround) {
                 new BufGfx(sprite, util).effects().dirt(0xffb5b5b5, randomSeed, Config.Gfx.groundDirtK);
-                p = util;
+                localPixels = util;
             } else if (sn.startsWith("border")) {
                 BufGfx buf = new BufGfx(sprite, util);
-                p = buf.pixels;
+                localPixels = buf.pixels;
                 int offset = Config.squareSize * Config.squareSize - 1;
                 int c;
                 double yy = yStart() + Config.squareSize;
@@ -70,12 +70,12 @@ public class Square extends Drawable {
                     double xx = xStart() + Config.squareSize;
                     for (int x = Config.squareSize - 1; x >= 0; x--) {
                         xx--;
-                        c = p[offset];
+                        c = localPixels[offset];
                         if (c == 0xff004080) {
                             double z = ((Math.sin(xx / 11) + Math.sin(xx / 2) + yK + Math.sin((xx + yy) / 17) + Math.cos((xx - yy) / 19))
                                     / 12 + 0.5);
                             if (z > 0.3 && z < 0.7) {
-                                p[offset] = ColorUtils.dark(c, (Math.abs((z - 0.5)) * 5) * Config.Gfx.dirtK + Config.Gfx.restDirtK);
+                                localPixels[offset] = ColorUtils.dark(c, (Math.abs((z - 0.5)) * 5) * Config.Gfx.dirtK + Config.Gfx.restDirtK);
                             }
                         }
                         offset--;
@@ -95,7 +95,7 @@ public class Square extends Drawable {
                 int xxx = Utils.rem((int) x, sprite.width);
                 for (int xx = 0; xx < 30; xx++) {
                     if (warfloor) {
-                        to[offset++] = p[yyy * sprite.width + xxx];
+                        to[offset++] = localPixels[yyy * sprite.width + xxx];
                     }
                     xxx = Utils.rem(xxx + 1, sprite.width);
                 }
@@ -105,7 +105,7 @@ public class Square extends Drawable {
             ((YellowBorder) this).draw2(to, sprite);
         } else {
             for (int i = 0; i < 30; i++) {
-                System.arraycopy(p, 870 - (i * 30), to, i * 30, 30);
+                System.arraycopy(localPixels, 870 - (i * 30), to, i * 30, 30);
             }
         }
     }
