@@ -119,15 +119,15 @@ public class BufGfx {
             }
             System.arraycopy(p, 0, pixels, 0, h * w);
         } else {
-            rot90NotSquare(null);
+            rot90NotSquare();
         }
     }
 
     /**
      * Changes b (reference)
      */
-    public final void rot90NotSquare(Sprite s) {
-        int p[] = new int[h * w];
+    public final void rot90NotSquare() {
+        int[] p = new int[h * w];
         int offset = 0;
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
@@ -138,7 +138,6 @@ public class BufGfx {
         int exW = w;
         w = h;
         h = exW;
-        if (s != null) s.setWH(w, h);
     }
 
     private void drawRangeCheck(int[] p, int width, int height, int x, int y) {

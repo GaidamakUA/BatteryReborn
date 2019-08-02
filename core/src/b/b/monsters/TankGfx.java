@@ -64,14 +64,14 @@ public class TankGfx {
         int xStart2 = tankModel.xScreenStart() + tankModel.sprite.width - cater.w;
         int yStart2 = tankModel.yScreenStart();
         if (tankModel.ai.direction == 1) {
-            cater.rot90NotSquare(null);
+            cater.rot90NotSquare();
             xStart2 = tankModel.xScreenStart();
             yStart2 = tankModel.yScreenStart() + tankModel.sprite.height - cater.h;
         } else if (tankModel.ai.direction == 2) {
             cater.flipVertical();
         } else if (tankModel.ai.direction == 3) {
             cater.flipVertical();
-            cater.rot90NotSquare(null);
+            cater.rot90NotSquare();
             xStart2 = tankModel.xScreenStart();
             yStart2 = tankModel.yScreenStart() + tankModel.sprite.height - cater.h;
         }
