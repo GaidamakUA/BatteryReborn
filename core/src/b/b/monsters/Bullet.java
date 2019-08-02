@@ -5,14 +5,12 @@ import b.b.core.Square;
 import b.b.core.World;
 import b.b.core.objs.Water;
 import b.b.monsters.items.Item;
-import b.gfx.Screen;
 
 public class Bullet extends Monster {
     private int dir;
     public Object owner;
 
-    public Bullet(double speed, double x, double y, int dir, World world,
-                  Screen screen, Object owner) {
+    public Bullet(double speed, double x, double y, int dir, World world, Object owner) {
         super(world, x, y, world.gfx.getSprite("bullet" + dir), 0.000001, ZLayer.FIVE);
         this.owner = owner;
         this.dir = dir;

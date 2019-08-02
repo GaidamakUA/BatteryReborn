@@ -63,16 +63,26 @@ public class Player extends Monster {
     }
 
     protected void move() {
-        if (kbd.left()) mover.left();
-        if (kbd.right()) mover.right();
-        if (kbd.up()) mover.up();
-        if (kbd.down()) mover.down();
+        if (kbd.left()) {
+            mover.left();
+        }
+        if (kbd.right()) {
+            mover.right();
+        }
+        if (kbd.up()) {
+            mover.up();
+        }
+        if (kbd.down()) {
+            mover.down();
+        }
         if (kbd.f1() && extras.immortalities > 0) {
             extras.immortalityStart = world.btr.time.time;
             extras.immortalities--;
         }
         mover.move();
-        if (kbd.ctrl() || kbd.space()) shoot();
+        if (kbd.ctrl() || kbd.space()) {
+            shoot();
+        }
     }
 
     protected void justDied() {
@@ -94,7 +104,9 @@ public class Player extends Monster {
         BufGfx b = world.gfx.bufGfx;
         if (extras.immortal(world.btr.time.time)) {
             b.drawTransparent(world.gfx.getSprite("immune"), xScreenStart(), yScreenStart());
-        } else super.draw();
+        } else {
+            super.draw();
+        }
     }
 
     protected void damage(double damage, double time, Object cause) {
@@ -135,7 +147,7 @@ public class Player extends Monster {
                 (bullets > 0)) {
             bullets--;
             Bullet bullet = new Bullet(Config.Monsters.Bullet.speed, x, yStart() -
-                    Config.Monsters.Bullet.startShift, 0, world, screen, this);
+                    Config.Monsters.Bullet.startShift, 0, world, this);
             bullet.y -= bullet.halfHeight;
             world.objectsToAdd.add(bullet);
             lastShotTime = time();
