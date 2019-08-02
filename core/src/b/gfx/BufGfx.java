@@ -95,19 +95,6 @@ public class BufGfx {
         drawRangeCheck(sprite.pixels, sprite.width, sprite.height, x, y);
     }
 
-    public final void flipHorizontal() {
-        int xBorder = w / 2;
-        for (int y = 0; y < h; y++) {
-            int offset = y * w;
-            int offset2 = y * w + w - 1;
-            for (int x = 0; x < xBorder; x++) {
-                int c = pixels[offset];
-                pixels[offset++] = pixels[offset2];
-                pixels[offset2--] = c;
-            }
-        }
-    }
-
     public final void flipVertical() {
         int yBorder = h / 2;
         int offset = 0;

@@ -1,11 +1,11 @@
 package b.b.gfx;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import b.b.core.Config;
 import b.gfx.BufGfx;
 import b.gfx.Sprite;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class SpriteLoader {
     private Gfx gfx;
@@ -124,11 +124,11 @@ public class SpriteLoader {
         BufGfx b = new BufGfx(w * 2, w * 2);
         Sprite sp = new Sprite(name + ".png", w, w);
         b.draw(sp, 0, 0);
-        new BufGfx(sp).flipHorizontal();
+        sp.flipHorizontal();
         b.draw(sp, w, 0);
         new BufGfx(sp).flipVertical();
         b.draw(sp, w, w);
-        new BufGfx(sp).flipHorizontal();
+        sp.flipHorizontal();
         b.draw(sp, 0, w);
         Sprite s = new Sprite(name, b);
         gfx.putSprite(s);
@@ -144,12 +144,11 @@ public class SpriteLoader {
         Sprite heli = new Sprite("heli.png", 49, 43);
         putSprite("heli", heli);
         Sprite heliLeft = new Sprite("heliLeft", heli, false);
-        new BufGfx(heliLeft).flipHorizontal();
+        heliLeft.flipHorizontal();
         putSprite("heliLeft", heliLeft);
         for (int i = 0; i < 4; i++) addSprite("heli_blades" + i, 43);
         addSprite("tank_base", 46);
         addSprite4Dir("tank_turret", 46);
-        Sprite expl = addSprite("expl", 15);
     }
 
     private void initBosses() {
@@ -178,7 +177,7 @@ public class SpriteLoader {
         Sprite left = new Sprite(file, w, h);
         putSprite(name, left);
         Sprite right = new Sprite(flip, left, true);
-        new BufGfx(right).flipHorizontal();
+        right.flipHorizontal();
         putSprite(flip, right);
     }
 

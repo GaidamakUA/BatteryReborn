@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 
 public class Sprite {
     private String name;
@@ -34,8 +35,7 @@ public class Sprite {
     public Sprite(String name, BufGfx buf) {
         this.name = name;
         setWH(buf.w, buf.h);
-        pixels = new int[width * height];
-        System.arraycopy(buf.pixels, 0, pixels, 0, width * height);
+        pixels = Arrays.copyOf(buf.pixels, buf.pixels.length);
     }
 
     static int[] createPixelArrayFromBytes(int width, int height, byte[] managedData) {
@@ -72,5 +72,18 @@ public class Sprite {
 
     public String toString() {
         return name;
+    }
+
+    public final void flipHorizontal() {
+        int xBorder = width / 2;
+        for (int y = 0; y < height; y++) {
+            int offset = y * width;
+            int offset2 = y * width + width - 1;
+            for (int x = 0; x < xBorder; x++) {
+                int c = pixels[offset];
+                pixels[offset++] = pixels[offset2];
+                pixels[offset2--] = c;
+            }
+        }
     }
 }
