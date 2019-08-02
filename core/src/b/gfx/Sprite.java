@@ -38,6 +38,12 @@ public class Sprite {
         pixels = Arrays.copyOf(buf.pixels, buf.pixels.length);
     }
 
+    private Sprite(String name, int width, int height, int[] pixels) {
+        this.name = name;
+        this.pixels = pixels;
+        setWH(width, height);
+    }
+
     static int[] createPixelArrayFromBytes(int width, int height, byte[] managedData) {
         int[] pixels = new int[width * height];
         for (int i = 0; i < pixels.length; i++) {
@@ -72,6 +78,11 @@ public class Sprite {
 
     public String toString() {
         return name;
+    }
+
+    public Sprite copy() {
+        int[] pixelsCopy = Arrays.copyOf(pixels, pixels.length);
+        return new Sprite(name, width, height, pixelsCopy);
     }
 
     public final void flipHorizontal() {
