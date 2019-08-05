@@ -15,3 +15,6 @@ It needs to be rewritten from servlet to LibGDX drawing.
 
 ## Thanks
 Maxim Markaitis for creating original game, which you can find at https://sourceforge.net/projects/battery/
+
+## License
+Original work was distribute under Open Software License, Common Public License 1.0. But those licenses are outdated. As far as I know there were no court cases. I don't see any way to contact Maxim Markaitis. So, I think it's resonable to change License in favour of more modern one **Eclipse Public License v2**
