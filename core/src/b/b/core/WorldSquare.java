@@ -1,11 +1,11 @@
 package b.b.core;
 
+import b.b.Battery;
+import b.gfx.BufGfx;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import b.b.Battery;
-import b.gfx.BufGfx;
 
 public class WorldSquare {
     private Battery btr;
@@ -23,7 +23,7 @@ public class WorldSquare {
 
     public void draw() {
         boolean drawn = false;
-        if (buf == null || (buf != null && buf.width != 0)) {
+        if (buf == null || buf.width != 0) {
             buf = new BufGfx(30, 30);
             Collections.sort(objects);
             for (Drawable d : objects) {
