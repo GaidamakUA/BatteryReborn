@@ -23,10 +23,8 @@ public class Battery extends BatteryGame {
     public Player player;
     public Screen screen;
     public Time77 time;
-    public Logger logger;
     public Keyboard77 kbd;
     public Gfx gfx;
-    public volatile String loading;
     /* Double - activation time; Action */
     public java.util.List<Pair> timers;
     private final Color siftwareRendererColor = new Color();
@@ -56,17 +54,13 @@ public class Battery extends BatteryGame {
 
 
     public void initialize() {
-        loading = "core";
         activated = false;
         justStarted = true;
         timers = new ArrayList<Pair>();
         time = new Time77();
-        logger = new Logger(this);
-        logger.log("scores 0 ");
-        kbd = new Keyboard77(this);
-        loading = "config";
+        System.out.println("scores 0 ");
+        kbd = new Keyboard77();
         new ConfigLoader();
-        loading = "gfx";
         gfx = new Gfx(this);
         screen = new Screen(gfx.w, gfx.h);
         intro = new Intro(gfx);
@@ -75,7 +69,6 @@ public class Battery extends BatteryGame {
         world = null;
         player = null;
         lastFpsLog = 0;
-        loading = "rest";
         System.gc();
     }
 
@@ -94,28 +87,25 @@ public class Battery extends BatteryGame {
     @Override
     public void dispose() {
         super.dispose();
-        if (audio != null) audio.stop();
-        kbd.stop();
+        if (audio != null) {
+            audio.stop();
+        }
     }
 
     @Override
     public void paint() {
-        try {
-            while (time.step()) {
-                step();
-            }
-            time.nextFrame();
-            if (intro != null) {
-                intro.draw(time.time);
-            } else {
-                gfx.drawAll();
-            }
-            Shop.draw(this);
-            gfx.updateScreen();
-            gfx.newDraw();
-        } catch (Exception e) {
-            exception(e);
+        while (time.step()) {
+            step();
         }
+        time.nextFrame();
+        if (intro != null) {
+            intro.draw(time.time);
+        } else {
+            gfx.drawAll();
+        }
+        Shop.draw(this);
+        gfx.updateScreen();
+        gfx.newDraw();
     }
 
     private void step() {
@@ -128,10 +118,12 @@ public class Battery extends BatteryGame {
         serveTimers();
         if (time.time - lastFpsLog > Config.Intervals.fpsLogPeriod) {
             lastFpsLog = time.time;
-            logger.log("fps " + " " + time.fps + " " + Utils.sprecision(time.time));
+            System.out.println("fps " + " " + time.fps + " " + Utils.sprecision(time.time));
         }
         kbd.next();
-        if (!activated && kbd.anyKey()) activated = true;
+        if (!activated && kbd.anyKey()) {
+            activated = true;
+        }
         if (intro == null || time.time > intro.getStartTime() + intro.DURATION) {
             if (player == null) {
                 init2();
@@ -149,7 +141,7 @@ public class Battery extends BatteryGame {
                     if (player != null && player.life <= 0) {
                         init2();
                     } else {
-                        kbd.clear(this);//todo ne sdesj
+                        kbd.clear();//todo ne sdesj
                         Shop.on = true;
                         Shop.step(this);
                         return;
@@ -182,11 +174,13 @@ public class Battery extends BatteryGame {
     private void step2() {
         if (activated) {
             if (justStarted && time.time - timeWhenLevelLoaded >
-                    Config.Intervals.nextLevelDelay) justStarted = false;
+                    Config.Intervals.nextLevelDelay) {
+                justStarted = false;
+            }
             screen.setCameraY(screen.cameraY() - Config.cameraSpeed * Time77.STEP, world);
             if (screen.camY() < Config.squareSize) {
                 screen.setCameraY(screen.cameraY(), world);
-                logger.log("lvlcompl " + Utils.sprecision(time.time));
+                System.out.println("lvlcompl " + Utils.sprecision(time.time));
                 timeWhenLevelCompleted = time.time;
             } else {
                 if (!((time.time - timeWhenLevelCompleted >=
@@ -203,7 +197,9 @@ public class Battery extends BatteryGame {
     }
 
     private void actAll() {
-        for (Monster a : world.activeObjects) a.act();
+        for (Monster a : world.activeObjects) {
+            a.act();
+        }
         while (!world.objectsToAdd.isEmpty()) {
             world.activeObjects.addAll(world.objectsToAdd);
             ArrayList<Monster> monsters = new ArrayList<Monster>(world.objectsToAdd);
@@ -220,16 +216,6 @@ public class Battery extends BatteryGame {
         for (ChanSquare cs : world.notMonsters) {
             cs.act();
         }
-    }
-
-    public void exception(Exception e) {
-        if (!exception) {
-            try {
-                logger.log(Utils.toString(e));
-            } catch (Exception ignored) {
-            }
-        }
-        super.exception(e);
     }
 
     public void drawVideoBuffer(int[] pixels) {

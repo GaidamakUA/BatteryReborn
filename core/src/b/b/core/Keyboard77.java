@@ -1,17 +1,13 @@
 package b.b.core;
 
-import b.b.Battery;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 public class Keyboard77 {
-    private Battery bat;
-    private Logger logger;
 
     private Set<String> keys;
     private Set<String> downKeys;
@@ -25,12 +21,11 @@ public class Keyboard77 {
 
     private boolean f1;
 
-    public Keyboard77(Battery btr) {
-        clear(btr);
+    public Keyboard77() {
+        clear();
     }
 
-    synchronized public void clear(Battery btr) {
-        bat = btr;
+    synchronized public void clear() {
         keys = new HashSet<String>();
         downKeys = new HashSet<String>();
         mouse = new HashSet<String>();
@@ -63,27 +58,10 @@ public class Keyboard77 {
                 return mouse.size() > 0;
             }
         });
-        logger = btr.logger;
         f1 = true;
     }
 
-    synchronized public void stop() {
-        logger.stop();
-    }
-
     synchronized public void next() {
-        for (Iterator<String> it = keys.iterator(); it.hasNext(); ) {
-            String key = it.next();
-            if (!downKeys.contains(key)) {
-                logger.log("key " + (long) bat.time.time);
-            }
-        }
-        for (Iterator it = downKeys.iterator(); it.hasNext(); ) {
-            String key = (String) it.next();
-            if (!keys.contains(key)) {
-                logger.log("key " + (long) bat.time.time);
-            }
-        }
         keys.clear();
         keys.addAll(downKeys);
         if (!f1 && keys.contains("f1")) {

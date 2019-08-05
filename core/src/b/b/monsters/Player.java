@@ -54,12 +54,7 @@ public class Player extends Monster {
 
     public void incScores() {
         scores++;
-        world.btr.logger.log("scores " + scores + " " + Utils.sprecision(time()));
-    }
-
-    public void initXY() {
-        x = (double) world.width / 2 * Config.squareSize;
-        y = (world.height - 3) * Config.squareSize;
+        System.out.println("scores " + scores + " " + Utils.sprecision(time()));
     }
 
     protected void move() {
@@ -90,9 +85,9 @@ public class Player extends Monster {
         lives--;
         Battery btr = world.gfx.battery;
         btr.timeWhenLevelCompleted = time();
-        btr.logger.log("gameover " + Utils.sprecision(time()));
+        System.out.println("gameover " + Utils.sprecision(time()));
         if (lives == 0) {
-            btr.logger.log("GAMEOVER");
+            System.out.println("GAMEOVER");
         }
     }
 

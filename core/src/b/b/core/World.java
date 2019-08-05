@@ -1,12 +1,6 @@
 /* refactoring0 */
 package b.b.core;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import b.b.Battery;
 import b.b.core.loader.WorldLoader;
 import b.b.core.objs.ChanSquare;
@@ -16,6 +10,9 @@ import b.b.monsters.Player;
 import b.b.monsters.items.DrawableLibGDX;
 import b.gfx.Screen;
 
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArraySet;
+
 public class World {
     public Gfx gfx;
     public Battery btr;
@@ -24,7 +21,7 @@ public class World {
     public List<Monster> objectsToRemove;
     public List<Monster> objectsToAddInTime;
     public List<ChanSquare> notMonsters;
-    public Set<DrawableLibGDX> level7 = new HashSet<DrawableLibGDX>();
+    public Set<DrawableLibGDX> level7 = new CopyOnWriteArraySet<DrawableLibGDX>();
     public int nextId;
 
     public int width;

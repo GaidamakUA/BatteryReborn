@@ -56,10 +56,7 @@ public class Waves {
                 int offsetShift = shift * b.width;
                 int yBorder = yStart + height + waveHeight;
                 for (int y = yyStart; y < yBorder; y++) {
-                    try {
-                        buf[offset + offsetShift] = buf[offset];
-                    } catch (Exception ignored) {
-                    }
+                    buf[offset + offsetShift] = buf[offset];
                     offset += b.width;
                 }
             } else if (shift > 0) {
@@ -68,10 +65,7 @@ public class Waves {
                 int offsetShift = shift * b.width;
                 int yBorder = yStart - waveHeight - shift;
                 for (int y = yyStart; y > yBorder; y--) {
-                    try {
-                        buf[offset + offsetShift] = buf[offset];
-                    } catch (Exception ignored) {
-                    }
+                    buf[offset + offsetShift] = buf[offset];
                     offset -= b.width;
                 }
             }
@@ -97,20 +91,14 @@ public class Waves {
                 int offset = y * b.width + xxStart;
                 int xBorder = xStart + width + waveHeight;
                 for (int x = xxStart; x < xBorder; x++) {
-                    try {
-                        buf[offset + shift] = buf[offset++];
-                    } catch (Exception ignored) {
-                    }
+                    buf[offset + shift] = buf[offset++];
                 }
             } else if (shift > 0) {
                 int xxStart = xStart + width + waveHeight - shift;
                 int offset = y * b.width + xxStart;
                 int xBorder = xStart - waveHeight - shift;
                 for (int x = xxStart; x > xBorder; x--) {
-                    try {
-                        buf[offset + shift] = buf[offset--];
-                    } catch (Exception ignored) {
-                    }
+                    buf[offset + shift] = buf[offset--];
                 }
             }
         }

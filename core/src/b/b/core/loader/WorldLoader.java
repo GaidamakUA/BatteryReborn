@@ -42,8 +42,8 @@ public class WorldLoader {
         battery.timeWhenLevelLoaded = battery.time.time;
         battery.timeWhenLevelCompleted = 0;
         Utils.dropRandom();
-        battery.kbd.clear(battery);
-        battery.logger.log("lvl " + lvl);
+        battery.kbd.clear();
+        System.out.println("lvl " + lvl);
         System.gc();
     }
 
@@ -70,12 +70,12 @@ public class WorldLoader {
             scr.b = buf;
             if (!oldPlayer) {
                 gfx.battery.player = new Player(battery.kbd, world, 0, 3, 0, new PlayerExtras());
-                gfx.battery.logger.log("newgame " + Utils.sprecision(gfx.battery.time.time));
+                System.out.println("newgame " + Utils.sprecision(gfx.battery.time.time));
             } else {
                 Player p = gfx.battery.player;
                 gfx.battery.player = new Player(battery.kbd, world, p.getScores(), p.lives,
                         p.getCoins(), p.extras);
-                gfx.battery.logger.log("newlife " + Utils.sprecision(gfx.battery.time.time));
+                System.out.println("newlife " + Utils.sprecision(gfx.battery.time.time));
             }
         }
     }

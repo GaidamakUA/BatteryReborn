@@ -74,9 +74,9 @@ public class Gfx {
                 }
             }
             // TODO reimplement
-//            else if (!battery.hasFocus()) {
-//                console.displayString("CLICK MOUSE");
-//            }
+            //            else if (!battery.hasFocus()) {
+            //                console.displayString("CLICK MOUSE");
+            //            }
         }
         if (Config.debugMode) {
             String fps = "" + battery.time.fps;
@@ -179,13 +179,13 @@ public class Gfx {
     }
 
     public void updateScreen() {
-        if (battery.exception && Config.debugMode) {
-            font.p("ERROR", 3, 1);
-        }
         battery.drawVideoBuffer(bufGfx.pixels);
     }
 
     public void newDraw() {
+        if (battery.world == null) {
+            return;
+        }
         Collection<DrawableLibGDX> newDrawables = battery.world.level7;
         SpriteBatch batch = battery.batch;
         batch.begin();
